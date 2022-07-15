@@ -8,45 +8,19 @@
     </view>
 
     <u-gap height="10" bgColor="#f3f3f3"></u-gap>
-
-    <view>
-      <view class="order-header">
-        <text class="order-title">我的订单</text>
-        <view class="see-all">
-          <text>查看全部</text>
-          <u-icon name="arrow-right"></u-icon>
-        </view>
+      <u-notice-bar :text="noticeList" mode="closable" speed="100"  ></u-notice-bar>
+        <u-gap height="10" bgColor="#f3f3f3"></u-gap>
+     
+         <u-cell-group class="fun-list">
+           <view class="order-header">
+        <text class="order-title">我的工单</text>
       </view>
-
-      <view class="order-status-box">
-        <u-grid :border="false" :col="orderStatusList.length">
-          <u-grid-item v-for="(item, index) in orderStatusList" :key="index">
-            <u-icon :name="item.icon" :size="32"></u-icon>
-            <text class="grid-title">{{ item.title }}</text>
-          </u-grid-item>
-        </u-grid>
-      </view>
-    </view>
-
-    <u-gap height="10" bgColor="#f3f3f3"></u-gap>
-
-    <view class="stat-box">
-      <u-grid :border="false" col="3"
-        ><u-grid-item v-for="(item, index) in statList" :key="index">
-          <text class="grid-value">{{ item.value }}</text>
-          <text class="grid-title">{{ item.title }}</text>
-        </u-grid-item>
-      </u-grid>
-    </view>
-
-    <u-gap height="10" bgColor="#f3f3f3"></u-gap>
-
-    <u-cell-group class="fun-list">
-      <u-cell class="fun-item" :border="false" icon="gift" title="分销中心" isLink></u-cell>
-      <u-cell class="fun-item" :border="false" icon="tags" title="领券中心" isLink></u-cell>
-      <u-cell class="fun-item" :border="false" icon="coupon" title="我的优惠券" isLink></u-cell>
-      <u-cell class="fun-item" :border="false" icon="map" title="收货地址" @click="loginOrJump('/pages/address/list')" isLink></u-cell>
+      <u-cell class="fun-item" :border="false" icon="clock" title="我的待办" isLink></u-cell>
+      <u-cell class="fun-item" :border="false" icon="checkmark-circle" title="我的已办" isLink></u-cell>
+      <u-cell class="fun-item" :border="false" icon="email" title="我管理的" isLink></u-cell>
+      <u-cell class="fun-item" :border="false" icon="chat" title="消息中心" @click="loginOrJump('/pages/address/list')" isLink></u-cell>
     </u-cell-group>
+ 
 
     <view v-if="hasLogin" class="logout-btn">
       <u-button type="error" color="#ea322b" text="退出登录" @click="logout"></u-button>
@@ -58,6 +32,7 @@
 export default {
   data() {
     return {
+      noticeList:'您有一个新的工单待接收，请及时处理',
       orderStatusList: [
         { icon: 'rmb-circle', title: '待支付' },
         { icon: 'car', title: '代发货' },
@@ -129,8 +104,13 @@ export default {
   border-bottom: $custom-border-style;
 
   .order-title {
-    color: #333333;
-    font-size: 34rpx;
+    width: 60px;
+height: 21px;
+font-size: 15px;
+font-family: PingFangSC-Semibold, PingFang SC;
+font-weight: 600;
+color: #333333;
+line-height: 21px;
   }
   .see-all {
     height: 40rpx;
@@ -162,6 +142,10 @@ export default {
 
 .fun-list {
   .fun-item {
+font-size: 14px;
+font-weight: 400;
+color: #000000;
+line-height: 14px;
     padding-top: 10rpx;
     padding-bottom: 10rpx;
     border-bottom: $custom-border-style;

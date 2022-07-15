@@ -7,34 +7,36 @@
            rightIcon="search"
         > 
         </u-navbar>
-        <view class="division"></view>
-        <u-search shape="round"></u-search>
-           <view class="division"></view>
+      <u-gap height="40"></u-gap>
         <u-sticky bgColor="#fff">
-    <u-tabs :list="list1"></u-tabs>
-     <view class="division"></view>
+         <u-tabs :list="list1" :scrollable="false"></u-tabs>
+          </u-sticky>
+          <u-gap height="10"></u-gap>
+        <u-search :show-action="false" ></u-search> 
+   <u-gap height="10"></u-gap>
       <u-list>
         <u-list-item
 			  v-for="(item,index) in listData" :key="index" 
 			>
+      <u-row>
       <u-col span="12" >
         	<view class="time"> {{item.published_at }} </view>
       </u-col>
-     
+      </u-row>
+      <u-badge :type="type" style="width:10px;" max="99" :value="item.value"></u-badge> 
     <u-cell
      :title="item.title" 
-     :label="item.author_name"  
+     :label="item.author_name" 
+     class="fun-item"
     >  
    	<!-- <u-icon slot="icon"  name="search" class="style"></u-icon> -->
      <template slot="value">
 			<span class="right-top">{{item.id}}</span>
       	<span class="right-bottom">{{item.name}}</span>
 		</template></u-cell>
- 
-
         </u-list-item>  
           </u-list>
-  </u-sticky>
+ 
 	</view>
 </template>
 
@@ -50,6 +52,7 @@
                     name: '未读',
                 }],
                  listData: [{
+                  value:'P1',
                         id: "S20220531199",                       
                         title: "01-财务账号问题",
                         author_name: "二线人员王明已处理",
@@ -57,6 +60,7 @@
                         published_at: "2022-07-22 08:19"
                     },
                     {
+                       value:'P2',
                         id: "S20220531199",                       
                         title: "02-财务账号问题",
                         author_name: "二线人员王明已处理",
@@ -64,6 +68,7 @@
                         published_at: "2022-07-23 08:19"
                     },
                     {
+                       value:'P3',
                         id: "S20220531199",                       
                         title: "03-财务账号问题",
                         author_name: "二线人员王明已处理",
@@ -71,6 +76,7 @@
                         published_at: "2022-07-24 08:19"
                     },
                     {
+                       value:'P4',
                          id: "S20220531199",                       
                         title: "04-财务账号问题",
                         author_name: "二线人员王明已处理",
@@ -100,14 +106,6 @@
 	.container {
 		padding-bottom: 80px;
 	}
-  .division {
-    height: 10px;
-  }
-// .style{
-//   position:absolute;
-//    top:30px ;
-//   left:0px;
-// }
      .right-top{
       margin-top:-20px;
       margin-right: -70px;
@@ -127,5 +125,10 @@ font-family: PingFangSC-Regular, PingFang SC;
 font-weight: 400;
 color: #AFB1B5;
 line-height: 17px;
+     }
+     .fun-item{
+       padding-top: 20rpx;
+        padding-bottom: 20px;
+        border-bottom: none;
      }
 </style>

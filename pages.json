@@ -100,22 +100,22 @@
 		"list": [
 			{
 				"pagePath": "pages/index/index",
-				"text": "首页",
+				"text": "自助工单",
 				"iconPath": "/static/images/tabbar/index.png",
 				"selectedIconPath": "/static/images/tabbar/index-active.png"
 			},
-			{
-				"pagePath": "pages/category/category",
-				"text": "分类",
-				"iconPath": "/static/images/tabbar/category.png",
-				"selectedIconPath": "/static/images/tabbar/category-active.png"
-			},
-			{
-				"pagePath": "pages/cart/cart",
-				"text": "购物车",
-				"iconPath": "/static/images/tabbar/cart.png",
-				"selectedIconPath": "/static/images/tabbar/cart-active.png"
-			},
+			// {
+			// 	"pagePath": "pages/category/category",
+			// 	"text": "分类",
+			// 	"iconPath": "/static/images/tabbar/category.png",
+			// 	"selectedIconPath": "/static/images/tabbar/category-active.png"
+			// },
+			// {
+			// 	"pagePath": "pages/cart/cart",
+			// 	"text": "购物车",
+			// 	"iconPath": "/static/images/tabbar/cart.png",
+			// 	"selectedIconPath": "/static/images/tabbar/cart-active.png"
+			// },
 			{
 				"pagePath": "pages/user/user",
 				"text": "我的",
