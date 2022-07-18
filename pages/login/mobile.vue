@@ -16,7 +16,7 @@
       <!-- 登录表单 -->
       <u--form labelPosition="left" :model="formData" :rules="rules" ref="form">
         <u-form-item label="手机号" prop="mobile" labelWidth="60" borderBottom ref="item-mobile">
-          <u-input type="number" maxlength="11" v-model="formData.mobile" clearable placeholder="请填写手机号" border="none"></u-input>
+          <u-input  v-model="formData.username" clearable placeholder="请填写手机号" border="none"></u-input>
         </u-form-item>
 
         <u-gap height="20"></u-gap>
@@ -37,7 +37,7 @@
         </u-form-item>
 
         <view class="btn-group">
-          <u-button class="auth-btn" type="primary" customStyle="margin-top: 50px" @click="handleSubmit">立即登录</u-button>
+          <u-button class="auth-btn" type="primary" customStyle="margin-top: 50px" @click="mobileLogin">立即登录</u-button>
         </view>
       </u--form>
     </view>
@@ -56,30 +56,29 @@ export default {
       codeDisabled: false,
       codeTips: '',
       formData: {
-        mobile: '',
+       username: '',
         password: '',
-        code: ''
       },
       rules: {
-        mobile: [
-          {
-            type: 'integer',
-            required: true,
-            message: '请填写手机号',
-            trigger: ['blur', 'change']
-          },
-          {
-            // 自定义验证函数，见上说明
-            validator: (rule, value, callback) => {
-              // 上面有说，返回true表示校验通过，返回false表示不通过
-              // uni.$u.test.mobile()就是返回true或者false的
-              return uni.$u.test.mobile(value)
-            },
-            message: '手机号码不正确',
-            // 触发器可以同时用blur和change
-            trigger: ['change', 'blur']
-          }
-        ],
+        // mobile: [
+        //   {
+        //     type: 'integer',
+        //     required: true,
+        //     message: '请填写手机号',
+        //     trigger: ['blur', 'change']
+        //   },
+        //   {
+        //     // 自定义验证函数，见上说明
+        //     validator: (rule, value, callback) => {
+        //       // 上面有说，返回true表示校验通过，返回false表示不通过
+        //       // uni.$u.test.mobile()就是返回true或者false的
+        //       return uni.$u.test.mobile(value)
+        //     },
+        //     message: '手机号码不正确',
+        //     // 触发器可以同时用blur和change
+        //     trigger: ['change', 'blur']
+        //   }
+        // ],
         password: {
           type: 'string',
           min: 4,
@@ -137,25 +136,25 @@ export default {
         uni.$u.toast('倒计时结束后再发送')
       }
     },
-    handleSubmit() {
-      this.$refs.form.validate().then(res => {
-        uni.login({
-          provider: 'weixin',
-          success: res => {
-            let data = this.formData
-            data.socialType = 34 //WECHAT_MINI_APP 先指定固定值
-            data.socialCode = res.code
-            data.socialState = Math.random() // 该参数没有实际意义暂时传随机数
-            this.mobileLogin(data)
-          },
-          fail: res => {
-            this.mobileLogin(this.formData)
-          }
-        })
-      })
-    },
-    mobileLogin(data){
-      this.$store.dispatch('Login', { type: this.currentModeIndex, data: data }).then(res => {
+    // handleSubmit() {
+    //   this.$refs.form.validate().then(res => {
+    //     uni.login({
+    //       provider: 'weixin',
+    //       success: res => {
+    //         let data = this.formData
+    //         data.socialType = 34 //WECHAT_MINI_APP 先指定固定值
+    //         data.socialCode = res.code
+    //         data.socialState = Math.random() // 该参数没有实际意义暂时传随机数
+    //         this.mobileLogin(data)
+    //       },
+    //       fail: res => {
+    //         this.mobileLogin(this.formData)
+    //       }
+    //     })
+    //   })
+    // },
+    mobileLogin(){
+      this.$store.dispatch('Login', { type: this.currentModeIndex, data: this.formData }).then(res => {
         uni.$u.toast('登录成功')
         setTimeout(() => {
           uni.switchTab({

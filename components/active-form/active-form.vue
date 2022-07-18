@@ -152,7 +152,7 @@
                             {{ item.__config__.label }}
                         </view>
                         <view class="line-right pr20">
-                         <u-rate :count="item.max" v-model="item.__config__.defaultValue"    activeIcon="heart-fill" inactiveIcon="heart"></u-rate>
+                         <u-rate :count="item.max" v-model="item.__config__.defaultValue" active-icon="heart-fill" inactive-icon="heart"></u-rate>
                         </view>
                     </view>
                     <!-- 多行文本框 -->
@@ -188,14 +188,8 @@
                                 :uploadList="item.__config__.regList"
                                 :disabled="item.disabled"
                                 :accept="item.accept"
-                                :capture="item.capture"
                                 :maxCount="item.maxCount"
-                                :sizeType="item.sizeType"
-                                :compressed="item.compressed"
-                                :camera="item.camera"
-                                :multiple="item.multiple"
                                 :maxSize="item.maxSize"
-                                :previewImage="item.previewImage"
                                 width="150rpx"
                                 height="150rpx"
                                 @afterRead="afterRead($event,item)"

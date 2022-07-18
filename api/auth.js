@@ -2,7 +2,7 @@
 const { http } = uni.$u
 
 //使用手机 + 密码登录
-export const passwordLogin = data => http.post('/member/auth/login', data)
+export const passwordLogin = data => http.post('/system/auth/login', data)
 //发送手机验证码
 export const sendSmsCode = data => http.post('/member/auth/send-sms-code', data)
 //使用手机 + 验证码登录
