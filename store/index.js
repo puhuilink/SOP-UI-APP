@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { logout } from '@/api/auth'
-import { getUserInfo } from '@/api/user'
+// import { getUserInfo } from '@/api/user'
 import { passwordLogin, smsLogin, weixinMiniAppLogin } from '@/api/auth'
 
 const AccessTokenKey = 'ACCESS_TOKEN'
@@ -43,7 +43,7 @@ const store = new Vuex.Store({
       uni.setStorageSync(RefreshTokenKey, refreshToken)
 
       // 加载用户信息
-      this.dispatch('ObtainUserInfo')
+      // this.dispatch('ObtainUserInfo')
     },
     // 更新用户信息
     SET_USER_INFO(state, data) {
