@@ -66,15 +66,15 @@ export default {
       tempName: ''
     }
   },
-  onLoad() {
-    this.loadUserInfoData()
-  },
+  // onLoad() {
+  //   this.loadUserInfoData()
+  // },
   methods: {
-    loadUserInfoData() {
-      getUserInfo().then(res => {
-        this.userInfo = res.data
-      })
-    },
+    // loadUserInfoData() {
+    //   getUserInfo().then(res => {
+    //     this.userInfo = res.data
+    //   })
+    // },
     handleAvatarClick() {
       uni.chooseImage({
         success: chooseImageRes => {

@@ -24,18 +24,21 @@
 </template>
 
 <script>
+import { getList } from '@/api/index.js'
 export default {
+  name: 'index',
   components: {},
   data() {
     return {
       menuList: [
-        { icon: '../../static/images/icon/问题反馈.png', title: '财务云问题反馈',url:'/pages/info/info' },
-        { icon: '../../static/images/icon/相关申请.png', title: '财务云相关申请' },
-        { icon: '../../static/images/icon/堡垒机.png', title: '堡垒机申请' },
-        { icon: '../../static/images/icon/问题变更.png', title: '系统变更申请' },
-         { icon: '../../static/images/icon/视频会议.png', title: '总部视频会议' },
-          { icon: '../../static/images/icon/访问权限.png', title: '访问权限申请' },
+        { icon: '../../static/images/icon/问题反馈.png', title: '' },
+        { icon: '../../static/images/icon/相关申请.png', title: '' },
+        { icon: '../../static/images/icon/堡垒机.png', title: '' },
+        { icon: '../../static/images/icon/问题变更.png', title: '' },
+         { icon: '../../static/images/icon/视频会议.png', title: '' },
+          { icon: '../../static/images/icon/访问权限.png', title: '' },
       ], 
+      Listdata :[],
       noticeList:'您有一个新的工单待接收，请及时处理',
     }
   },
@@ -70,6 +73,19 @@ export default {
         })
       }
 			}
+  },
+  onLoad() {
+    this.getList()
+  },
+  methods:{
+        getList(){
+          getList().then(res => {
+          this.Listdata =res.data.list
+          for(var i=0;i<this.Listdata.length;i++){
+            this.menuList[i].title = this.Listdata[i].label
+          }    
+      })
+        }
   },
   computed: {
   }
