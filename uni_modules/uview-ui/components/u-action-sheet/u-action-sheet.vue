@@ -68,7 +68,7 @@
 									<text
 									    class="u-action-sheet__item-wrap__item__name"
 									    :style="[itemStyle(index)]"
-									>{{ item.name }}</text>
+									>{{ item.name || item.label}}</text>
 									<text
 									    v-if="item.subname"
 									    class="u-action-sheet__item-wrap__item__subname"
@@ -149,7 +149,7 @@
 		mixins: [openType, button, uni.$u.mixin, props],
 		data() {
 			return {
-
+       
 			}
 		},
 		computed: {
@@ -176,6 +176,9 @@
 			cancel() {
 				this.$emit('close')
 			},
+      close() {
+        this.$emit('close')
+      },
 			selectHandler(index) {
 				const item = this.actions[index]
 				if (item && !item.disabled && !item.loading) {

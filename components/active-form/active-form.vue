@@ -357,7 +357,6 @@ export default {
     computed: {
         fields: {
             get() {
-                // console.log("this.fields", this.value)
                 return this.value
             },
             set(nval) {
@@ -379,7 +378,8 @@ export default {
         },
         //显示select
         showSelect(item) {
-          if(item.__config__.tagIcon == 'cascader'){
+          console.log(item);
+          if(item.__config__.tagIcon == 'cascader' || item.__config__.tagIcon == 'listicon_14'){
             item.type = 'linkage'
           }else if(item.__config__.tagIcon == 'date-range'){
             item.type = 'range'
@@ -588,6 +588,7 @@ export default {
     }
 
     .line-right {
+      margin-left: 20px;
         flex: 1;
         height: 100%;
         display: flex;

@@ -8,81 +8,23 @@
 
 <script>
 import ActiveForm from "@/components/active-form/active-form";
-
+import { getFrom } from '@/api/index.js'
 export default {
+  name:'Form',
     components: {
         ActiveForm,
     },
     data() {
         return {
-		 "fields": [{
-    "__config__": {
-      "label": "记录人",
-      "labelWidth": null,
-      "showLabel": true,
-      "changeTag": true,
-      "tag": "el-input",
-      "tagIcon": "listicon_03",
-      "defaultValue": "admin",
-      "required": true,
-      "layout": "defaultData",
-      "span": 24,
-      "show": false,
-      "fixedType": "username",
-      "document": "https://element.eleme.cn/#/zh-CN/component/input",
-      "regList": [],
-      "formId": 103,
-      "renderKey": "1031657783621672"
-    },
-    "__slot__": {
-      "prepend": "",
-      "append": ""
-    },
-    "placeholder": "请输入记录人",
-    "style": {
-      "width": "100%"
-    },
-    "clearable": true,
-    "prefix-icon": "",
-    "suffix-icon": "",
-    "maxlength": null,
-    "show-word-limit": false,
-    "readonly": false,
-    "disabled": false,
-    "tableColumn": "user_name",
-    "__vModel__": "field103"
-  }, {
-    "__config__": {
-      "label": "工单编号",
-      "labelWidth": null,
-      "showLabel": true,
-      "changeTag": true,
-      "tag": "el-input",
-      "tagIcon": "listicon_01",
-      "required": true,
-      "layout": "text",
-      "span": 24,
-      "show": false,
-      "document": "https://element.eleme.cn/#/zh-CN/component/input",
-      "value": "系统自动生成",
-      "formId": 104,
-      "renderKey": "1041657783622285"
-    },
-    "placeholder": "系统自动生成工单编号",
-    "style": {
-      "width": "100%"
-    },
-    "clearable": true,
-    "prefix-icon": "",
-    "suffix-icon": "",
-    "maxlength": null,
-    "show-word-limit": false,
-    "readonly": false,
-    "disabled": false,
-    "tableColumn": "work_order_id"
-  }],
+        fields:[],
+          formIds:{
+        id:'165'
+      },
         };
     },
+     onLoad() {
+    this.getFrom()
+  },
       mounted() {
     window.addEventListener("message", (event) => {
       const data = event.data;
@@ -102,6 +44,13 @@ export default {
             const res = this.$refs.activeForm.$submitForm(this.formData); //校验成功 获取表单值
             console.log('表单对象 :>> ', res);
         },
+           getFrom(){
+          getFrom(this.formIds).then(res => {
+             for(var i=0;i<res.data.fields.length;i++){
+             this.fields.push(JSON.parse(res.data.fields[i])) 
+          }    
+          })
+        }
     },
 };
 </script>
