@@ -7,15 +7,15 @@
                     <view
                         class="line"
                         v-if="
-                     item.__config__.tag === 'el-input' ||
                      item.__config__.tag === 'el-password' ||
-                     item.__config__.tag === 'el-code'
+                     item.__config__.tag === 'el-code' ||
+                      item.__config__.tag === 'el-input' &&item.type!='textarea'
                      "
                     >
                         <view :class="item.__config__.required ? 'line-left' : 'p-l14 line-left'">
                             <text class="colorRed" v-if="item.__config__.required">*</text>
                             <text class="num" v-if="num">{{ index + 1 }}.</text>
-                            {{ item.__config__.label }}
+                            {{ item.__config__.label }}：
                         </view>
                         <!-- 发送验证码 -->
                         <view
@@ -60,7 +60,7 @@
                         <view :class="item.__config__.required ? 'line-left' : 'p-l14 line-left'">
                             <text class="colorRed" v-if="item.__config__.required">*</text>
                             <text class="num" v-if="num">{{ index + 1 }}.</text>
-                            {{ item.__config__.label }}
+                            {{ item.__config__.label }}：
                         </view>
                         <view class="line-right pr20">
                             <input
@@ -87,7 +87,7 @@
                         <view :class="item.__config__.required ? 'line-left' : 'p-l14 line-left'">
                             <text class="colorRed" v-if="item.__config__.required">*</text>
                             <text class="num" v-if="num">{{ index + 1 }}.</text>
-                            {{ item.__config__.label }}
+                            {{ item.__config__.label }}：
                         </view>
                         <view class="line-right">
                             <u-switch
@@ -102,7 +102,7 @@
                         <view :class="item.__config__.required ? 'line-left' : 'p-l14 line-left'">
                             <text class="colorRed" v-if="item.__config__.required">*</text>
                             <text class="num" v-if="num">{{ index + 1 }}.</text>
-                            {{ item.__config__.label }}
+                            {{ item.__config__.label }}：
                         </view>
                         <view class="line-right pr20">
                             <input
@@ -132,7 +132,7 @@
                         <view :class="item.__config__.required ? 'line-left' : 'p-l14 line-left'">
                             <text class="colorRed" v-if="item.__config__.required">*</text>
                             <text class="num" v-if="num">{{ index + 1 }}.</text>
-                            {{ item.__config__.label }}
+                            {{ item.__config__.label }}：
                         </view>
                         <view class="line-right">
                             <u-button
@@ -149,23 +149,23 @@
                         <view :class="item.__config__.required ? 'line-left' : 'p-l14 line-left'">
                             <text class="colorRed" v-if="item.__config__.required">*</text>
                             <text class="num" v-if="num">{{ index + 1 }}.</text>
-                            {{ item.__config__.label }}
+                            {{ item.__config__.label }}：
                         </view>
                         <view class="line-right pr20">
                          <u-rate :count="item.max" v-model="item.__config__.defaultValue" active-icon="heart-fill" inactive-icon="heart"></u-rate>
                         </view>
                     </view>
                     <!-- 多行文本框 -->
-                    <view class="textarea-box" v-else-if="item.__config__.tag == 'el-textarea'">
+                    <view class="textarea-box" v-else-if="item.__config__.tag == 'el-input' && item.type == 'textarea'">
                         <view :class="item.__config__.required ? '' : 'p-l14 '">
                             <text class="colorRed" v-if="item.__config__.required">*</text>
                             <text class="num" v-if="num">{{ index + 1 }}.</text>
-                            {{ item.__config__.label }}
+                            {{ item.__config__.label }}：
                         </view>
                         <view class="line-bottom-textarea">
                             <!-- placeholder-class="plaClass" -->
                             <textarea
-                                style="color: #a7a7a7; font-size: 24rpx"
+                               
                                 auto-height
                                 :maxlength="-1"
 							          	:disabled="item.disabled"
@@ -181,7 +181,7 @@
                         <view class="font26" :class="item.__config__.required ? '' : 'p-l14 '">
                             <text class="colorRed" v-if="item.__config__.required">*</text>
                             <text class="num" v-if="num">{{ index + 1 }}.</text>
-                            {{ item.__config__.label }}
+                            {{ item.__config__.label }}：
                         </view>
                         <view class="img-upload p30">
                             <u-upload
@@ -203,7 +203,7 @@
                         <view :class="item.__config__.required ? 'line-left' : 'p-l14 line-left'">
                             <text class="colorRed" v-if="item.__config__.required">*</text>
                             <text class="num" v-if="num">{{ index + 1 }}.</text>
-                            {{ item.__config__.label }}
+                            {{ item.__config__.label }}：
                             <text
                                 style="
                             font-size: 20rpx;
@@ -243,7 +243,7 @@
                         <view :class="item.__config__.required ? 'line-left' : 'p-l14 line-left'">
                             <text class="colorRed" v-if="item.__config__.required">*</text>
                             <text class="num" v-if="num">{{ index + 1 }}.</text>
-                            {{ item.__config__.label }}
+                            {{ item.__config__.label }}：
                             <text
                                 style="
                              font-size: 20rpx;
@@ -282,7 +282,7 @@
                         <view :class="item.__config__.required ? 'line-left' : 'p-l14 line-left'">
                             <text class="colorRed" v-if="item.__config__.required">*</text>
                             <text class="num" v-if="num">{{ index + 1 }}.</text>
-                            {{ item.__config__.label }}
+                            {{ item.__config__.label }}：
                         </view>
                         <view class="line-right pr20">
                             <input
