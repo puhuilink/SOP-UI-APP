@@ -12,4 +12,4 @@ export const getByDir = params => http.get('so/model/get-by-dir', { params })
 //通过表单id拿到表单
 export const getFrom = params => http.get('/bpm/form/get', { params })
 //根据表单创建工单
-export const getCreate = params => http.get('/so/work-order/create', { params })
+export const getCreate = params => http.post('/so/work-order/create', { params })

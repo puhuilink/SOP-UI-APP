@@ -1,6 +1,6 @@
 <template>
     <view class="content">
-        <active-form v-model="fields" num></active-form>
+        <active-form ref="activeForm" v-model="fields" num></active-form>
 
         <view class="subform" @click="sub">提交表单</view>
     </view>
@@ -8,7 +8,7 @@
 
 <script>
 import ActiveForm from "@/components/active-form/active-form";
-import { getFrom } from '@/api/index.js'
+import { getFrom,getCreate } from '@/api/index.js'
 export default {
   name:'Form',
     components: {
@@ -39,10 +39,16 @@ export default {
   },
     methods: {
         // 提交表单
-        sub() {
-            this.$refs.activeForm.$vervify(this.formData); //表单校验 成功会继续往下走 失败抛出异常
-            const res = this.$refs.activeForm.$submitForm(this.formData); //校验成功 获取表单值
-            console.log('表单对象 :>> ', res);
+        sub() {      
+            this.$refs.activeForm.$vervify()
+            .then(async (form) => {
+                getCreate(form).then(res=>{
+            console.log(res);
+            })
+            })
+            .catch((err) => {
+               console.log("err", err);
+            });
         },
            getFrom(){
           getFrom(this.formIds).then(res => {
