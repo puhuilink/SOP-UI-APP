@@ -1,7 +1,11 @@
 <template>
     <view class="content">
+       <u-navbar
+            title="表单"
+            :autoBack="true"
+        > 
+        </u-navbar>
         <active-form ref="activeForm" v-model="fields" num></active-form>
-
         <view class="subform" @click="sub">提交表单</view>
     </view>
 </template>
