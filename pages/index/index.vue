@@ -107,6 +107,7 @@ export default {
   height: 179px;
   background: url(../../static/images/icon/head-bg.png) no-repeat;
   position: relative;
+	size:100%;
 }
 .block3 {
   height: 30px;

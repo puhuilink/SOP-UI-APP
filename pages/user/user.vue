@@ -11,16 +11,21 @@
       <u-notice-bar :text="noticeList" mode="closable" speed="100"  ></u-notice-bar>
         <u-gap height="10" bgColor="#f3f3f3"></u-gap>
      
+    
          <u-cell-group class="fun-list">
            <view class="order-header">
         <text class="order-title">我的工单</text>
-      </view>
+      </view> 
       <u-cell class="fun-item" :border="false" icon="clock" title="我的待办" isLink></u-cell>
       <u-cell class="fun-item" :border="false" icon="checkmark-circle" title="我的已办" isLink></u-cell>
       <u-cell class="fun-item" :border="false" icon="email" title="我管理的" isLink></u-cell>
       <u-cell class="fun-item" :border="false" icon="chat" title="消息中心" @click="loginOrJump('/pages/address/list')" isLink></u-cell>
     </u-cell-group>
- 
+   <fui-card radius="5%" >
+				<view class="fui-card__title">
+				 宝剑锋从磨砺出，梅花香自苦寒来
+				</view>
+			</fui-card>
 
     <view v-if="hasLogin" class="logout-btn">
       <u-button type="error" color="#ea322b" text="退出登录" @click="logout"></u-button>

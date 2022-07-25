@@ -35,7 +35,7 @@
 			margin: {
 				type: Array,
 				default () {
-					return ['0', '32rpx']
+					return ['10rpx', '10rpx']
 				}
 			},
 			//是否通栏，为true时margin-left，margin-right失效
@@ -66,7 +66,7 @@
 			//是否显示card 边框，为true时box-shadow失效
 			showBorder: {
 				type: Boolean,
-				default: false
+				default: true
 			},
 			//边框颜色，仅nvue下生效
 			borderColor: {
@@ -203,7 +203,7 @@
 		position: absolute;
 		height: 200%;
 		width: 200%;
-		border: 1px solid var(--fui-color-border, #EEEEEE);
+		border: 1px solid var(--fui-color-border, #e9ebee);
 		transform-origin: 0 0;
 		-webkit-transform-origin: 0 0;
 		-webkit-transform: scale(0.5);
