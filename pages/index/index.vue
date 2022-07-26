@@ -6,14 +6,17 @@
       </view> 
       <view>
              <!--消息滚动栏-->
-  <u-notice-bar :text="noticeList" mode="closable" speed="100"  ></u-notice-bar>
+             <fui-card radius="5%" :padding="['20rpx','32rpx']" src="../../static/images/icon/消息.png" title="工单" tag="上午11:30">
+		<view class="fui-card__content">您有一个新的工单待接收，请及时处理</view>
+</fui-card>
       </view>
       </view>
 
     <u-gap height="30px"></u-gap>
     <!--宫格菜单按钮-->
-    <u-grid :border="false" col="4" @click="click"
-      ><u-grid-item v-for="(item, index) in menuList" :key="index">
+    <view class="title">自助工单</view>
+    <u-grid :border="false" col="4" @click="click">
+      <u-grid-item v-for="(item, index) in menuList" :key="index">
       <u-image :src="item.icon" width="46px" height="46px"> 
                         </u-image>
         <text class="grid-title">{{ item.title }}</text>
@@ -123,6 +126,22 @@ export default {
   line-height: 100rpx;
   font-size: 26rpx;
 }
-
-
+.title{
+font-size: 15px;
+	padding: 0rpx 20rpx 10px 20px;
+font-family: PingFangSC-Semibold, PingFang SC;
+font-weight: 600;
+color: #333333;
+line-height: 21px;
+}
+.fui-card__content {
+		font-size: 28rpx;
+		padding: 32rpx 20rpx 10px 20px;
+height: 14px;
+font-size: 14px;
+font-family: PingFangSC-Regular, PingFang SC;
+font-weight: 400;
+color: #68696D;
+line-height: 14px;
+	}
 </style>
