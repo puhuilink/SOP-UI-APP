@@ -367,7 +367,9 @@ export default {
             get() {
                 return this.value.reduce((obj, item) => {
           obj[item.tableColumn] = item.__config__.defaultValue;
+         
           obj.prefix="S"
+		  obj.processKey='demo1'
           return obj;
         }, {});
             },
