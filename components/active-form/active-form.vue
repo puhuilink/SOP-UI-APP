@@ -347,7 +347,6 @@ export default {
         return {
             submitData: "",
             selectBox: [],
-            form:{},
             currentSelectIndex: "",
             currentSelectValue: "",
             codeFont: "获取验证码",
@@ -363,7 +362,16 @@ export default {
             set(nval) {
                 this.$emit("input", nval);
             }
-        }
+        },
+         form: {
+            get() {
+                return this.value.reduce((obj, item) => {
+          obj[item.tableColumn] = item.__config__.defaultValue;
+          obj.prefix="S"
+          return obj;
+        }, {});
+            },
+        },
     },
     methods: {
         // 删除图片

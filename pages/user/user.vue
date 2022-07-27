@@ -34,6 +34,7 @@
 </template>
 
 <script>
+	import { getToDoList } from '@/api/list.js'
 export default {
   data() {
     return {
@@ -44,6 +45,10 @@ export default {
         { icon: 'order', title: '待收货' },
         { icon: 'integral', title: '已完成' }
       ],
+			form:{
+				pageNo:1,
+				pageSize:10
+			},
       statList: [
         { value: '0', title: '我的收藏' },
         { value: '0', title: '我的消息' },
@@ -56,7 +61,15 @@ export default {
       this.$store.dispatch('ObtainUserInfo')
     }
   },
+  created(){
+    this.getToDoList()
+  },
   methods: {
+    getToDoList(){
+      getToDoList(this.form).then(res=>{
+        console.log(res)
+      })
+    },
     loginOrJump(pageUrl) {
       if (!this.hasLogin) {
         uni.$u.route('/pages/login/social')

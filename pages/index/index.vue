@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { getList,getByDir,getFrom } from '@/api/index.js'
+import { getList } from '@/api/index.js'
 export default {
   name: 'index',
   components: {},
@@ -64,6 +64,7 @@ export default {
           url: '/pages/info/info'
         })
       } else if (name == 1) {
+        //路由跳转携带参数
         wx.navigateTo({
           url: '/pages/info/test'
         })
@@ -85,19 +86,13 @@ export default {
         })
       }
 			},
-        getList(){
+   async   getList(){
           getList().then(res => {
-            this.getByDir()
           this.Listdata =res.data.list
           for(var i=0;i<this.Listdata.length;i++){
             this.menuList[i].title = this.Listdata[i].label
           }    
       })
-        },
-        getByDir(){
-          getByDir(this.form).then(res => {
-            this.formId.id = res.data.formId
-          })
         },
   },
   computed: {
