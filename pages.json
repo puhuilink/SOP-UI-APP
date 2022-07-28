@@ -30,12 +30,12 @@
 				"navigationBarTitleText": "授权登录"
 			}
 		},
-    {
-      "path": "pages/login/mobile",
-      "style": {
-        "navigationBarTitleText": "手机登录"
-      }
-    },
+		{
+			"path": "pages/login/mobile",
+			"style": {
+				"navigationBarTitleText": "手机登录"
+			}
+		},
 		{
 			"path": "pages/forgot/forgot",
 			"style": {
@@ -102,8 +102,11 @@
   }
 	],
 	"tabBar": {
-		"selectedColor": "#333333",
-		"color": "#bfbfbf",
+		"selectedColor": "#007EFD",
+		"color": "#666666",
+		"fontSize": "25rpx",
+		"spacing": "15rpx",
+		"height": "129rpx",
 		"list": [
 			{
 				"pagePath": "pages/index/index",
@@ -134,7 +137,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "yudao-ui-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
+		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#FFFFFF"
 	}
 }

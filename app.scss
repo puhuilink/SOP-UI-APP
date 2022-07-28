@@ -1,6 +1,6 @@
 /* 页面公共scss */
 .container {
-	background-color: $custom-bg-color;
+  background: #F1F4F5;
   margin: 0;
   padding: 0;
 	box-sizing: border-box;
@@ -12,4 +12,8 @@
   padding: 50rpx;
   box-sizing: border-box;
   font-weight: 500;
+}
+
+html, body {
+  background: #F1F4F5;
 }
