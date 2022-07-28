@@ -51,44 +51,23 @@
 </template>
 
 <script>
-import { getList } from "@/api/index.js";
+import { getList,getByDir } from '@/api/index.js'
 export default {
   name: "index",
   components: {},
   data() {
     return {
-      form: {
-        dirId: 79,
+      form:{
+  dirId:'',
       },
       formId: {
         id: "",
       },
-      menuList: [
-        {
-          icon: "../../static/images/icon/问题反馈.png",
-          title: "财务云问题反馈",
-        },
-        {
-          icon: "../../static/images/icon/相关申请.png",
-          title: "财务云相关申请",
-        },
-        { icon: "../../static/images/icon/堡垒机.png", title: "堡垒机申请" },
-        {
-          icon: "../../static/images/icon/问题变更.png",
-          title: "系统变更申请",
-        },
-        {
-          icon: "../../static/images/icon/视频会议.png",
-          title: "总部视频会议",
-        },
-        {
-          icon: "../../static/images/icon/访问权限.png",
-          title: "访问权限申请",
-        },
-      ],
-      Listdata: [],
-      noticeList: "您有一个新的工单待接收，请及时处理",
-    };
+      menuList: [],
+      noticeList:'您有一个新的工单待接收，请及时处理',
+    }
+  },
+  onLoad() {
   },
   onLoad() {},
   onLoad() {
@@ -102,11 +81,13 @@ export default {
           url: "/pages/info/info",
         });
       } else if (name == 1) {
-        //路由跳转携带参数
+        //H5页面跳转动态拼接参数
         wx.navigateTo({
-          url: "/pages/info/test",
-        });
+          url: '/pages/info/test?id=' + this.formId.id
+        })
       } else if (name == 2) {
+        //将formId传递给下一个页面
+     
         wx.navigateTo({
           url: "/pages/info/info",
         });
@@ -123,15 +104,23 @@ export default {
           url: "/pages/info/info",
         });
       }
-    },
-    async getList() {
-      getList().then((res) => {
-        this.Listdata = res.data.list;
-        for (var i = 0; i < this.Listdata.length; i++) {
-          this.menuList[i].title = this.Listdata[i].label;
+			},
+  async   getList(){
+      await    getList().then(res => {
+              this.form.dirId =  res.data.list[0].id    
+          this.menuList =res.data.list
+          //将this.menuList的label替换为title
+          for(var i=0;i<this.menuList.length;i++){
+            this.menuList[i].title = this.menuList[i].label
+          }  
+      })
+      this.getByDir()
+        },
+       getByDir(){
+          getByDir(this.form).then(res => {
+            this.formId.id = res.data.formId
+          })
         }
-      });
-    },
   },
   computed: {},
 };
