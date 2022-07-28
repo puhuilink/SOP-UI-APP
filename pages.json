@@ -92,7 +92,14 @@
 	  "navigationStyle": "custom" ,
 	  "navigationBarBackgroundColor": "#07c160"
 	}
-	  }
+	  }, {
+      "path" : "pages/list/Todolist",
+      "style" : {
+  "navigationBarTitleText": "待办列表",
+  "navigationStyle": "custom" ,
+  "navigationBarBackgroundColor": "#07c160"
+}
+  }
 	],
 	"tabBar": {
 		"selectedColor": "#333333",

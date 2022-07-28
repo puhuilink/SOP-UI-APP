@@ -48,12 +48,12 @@ export default {
             this.$refs.activeForm.$vervify()
             .then(async (form) => {
          //取消obj属性的所有下划线，没有下划线则跳过
-          Object.keys(form).forEach(key => {
-            if (key.indexOf("_") > -1) {
-              form[key.replace(/_/g, "")] = form[key];
-              delete form[key];
-            }
-          });
+          // Object.keys(form).forEach(key => {
+          //   if (key.indexOf("_") > -1) {
+          //     form[key.replace(/_/g, "")] = form[key];
+          //     delete form[key];
+          //   }
+          // });
                 getCreate(form).then(res=>{
             console.log(res);
             })
@@ -63,7 +63,7 @@ export default {
             });
         },
            getFrom(){
-          getFrom(this.formIds).then(res => {
+          getFrom(this.$route.query).then(res => {
              for(var i=0;i<res.data.fields.length;i++){
              this.fields.push(JSON.parse(res.data.fields[i])) 
           }    

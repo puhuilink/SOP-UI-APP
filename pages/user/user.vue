@@ -16,7 +16,7 @@
            <view class="order-header">
         <text class="order-title">我的工单</text>
       </view> 
-      <u-cell class="fun-item" :border="false" icon="clock" title="我的待办" isLink></u-cell>
+      <u-cell class="fun-item" :border="false" icon="clock" title="我的待办" isLink url="/pages/list/Todolist"></u-cell>
       <u-cell class="fun-item" :border="false" icon="checkmark-circle" title="我的已办" isLink></u-cell>
       <u-cell class="fun-item" :border="false" icon="email" title="我管理的" isLink></u-cell>
       <u-cell class="fun-item" :border="false" icon="chat" title="消息中心" @click="loginOrJump('/pages/address/list')" isLink></u-cell>

@@ -28,7 +28,7 @@
 							       	:disabled="item.disabled"
                                 placeholder-class="plaClass"
                                 :placeholder="item.placeholder"
-                              v-model="form[item.tableColumn]"
+                              v-model="form[item.formDataType]"
                                 @input="inputVal(index)"
                             />
                             <view style="width:250rpx">
@@ -50,7 +50,7 @@
 							                	:disabled="item.disabled"
                                 placeholder-class="plaClass"
                                 :placeholder="item.placeholder"
-                                v-model="form[item.tableColumn]"
+                                v-model="form[item.formDataType]"
                                 @input="inputVal(index)"
                             />
                         </view>
@@ -68,7 +68,7 @@
                                 class="input"
                                 placeholder-class="plaClass"
                                 :placeholder="item.placeholder"
-                              v-model="form[item.tableColumn]"
+                              v-model="form[item.formDataType]"
                                 :disabled="item.disabled"
                                 @click="showSelect(item)"
                             />
@@ -92,7 +92,7 @@
                         <view class="line-right">
                             <u-switch
                                 :disabled="item.disabled"
-                             v-model="form[item.tableColumn]"
+                             v-model="form[item.formDataType]"
                                 @change="switchChange(index)"
                             ></u-switch>
                         </view>
@@ -109,7 +109,7 @@
                                 type="text"
                                 class="input"
                                 placeholder-class="plaClass"
-                               v-model="form[item.tableColumn]"
+                               v-model="form[item.formDataType]"
                                 :placeholder="item.placeholder"
                                 :disabled="item.disabled"
                                 @click="showSelect(item)"
@@ -152,7 +152,7 @@
                             {{ item.__config__.label }}：
                         </view>
                         <view class="line-right pr20">
-                         <u-rate :count="item.max" v-model="form[item.tableColumn]" active-icon="heart-fill" inactive-icon="heart"></u-rate>
+                         <u-rate :count="item.max" v-model="form[item.formDataType]" active-icon="heart-fill" inactive-icon="heart"></u-rate>
                         </view>
                     </view>
                     <!-- 多行文本框 -->
@@ -170,7 +170,7 @@
                                 :maxlength="-1"
 							          	:disabled="item.disabled"
                                 :placeholder="item.placeholder"
-                              v-model="form[item.tableColumn]"
+                              v-model="form[item.formDataType]"
                                 @input="inputVal(index)"
                             >
                             </textarea>
@@ -219,7 +219,7 @@
                             :style="{ 'padding-left': num ? '60rpx' : '34rpx' }"
                         >
                             <u-radio-group
-                              v-model="form[item.tableColumn]"
+                              v-model="form[item.formDataType]"
                                 @change="radioChange($event, index)"
                                 placement="row"
                             >
@@ -259,7 +259,7 @@
                             :style="{ 'padding-left': num ? '60rpx' : '34rpx' }"
                         >
                             <u-checkbox-group
-                               v-model="form[item.tableColumn]"
+                               v-model="form[item.formDataType]"
                                 @change="checkboxGroupChange($event,item)"
                             >
                                 <u-checkbox
@@ -287,7 +287,7 @@
                         <view class="line-right pr20">
                             <input
                                 type="number"
-                               v-model="form[item.tableColumn]"
+                               v-model="form[item.formDataType]"
                                 :placeholder="item.placeholder"
                                 @input="inputVal(index)"
                                 class="input"
@@ -366,10 +366,27 @@ export default {
          form: {
             get() {
                 return this.value.reduce((obj, item) => {
-          obj[item.tableColumn] = item.__config__.defaultValue;
-         
+          obj[item.formDataType] = item.__config__.defaultValue;
           obj.prefix="S"
 		  obj.processKey='demo1'
+      obj.approvalDocument=''
+      obj.associateWorkOrder=''
+      obj.degreeOfInfluence=''
+      obj.expectedCompletionTime=''
+      obj.operationRecord=''
+      obj.owningModule=''
+      obj.owningSystem=''
+      obj.priority=''
+      obj.recorder=''
+      obj.recorderDept=''
+      obj.serviceRequestClassification=''
+      obj.serviceRequestDetails=''
+      obj.serviceRequestSource=''
+      obj.title=''
+      obj.urgency=''
+      obj.userContactDetails=''
+      obj.userDept=''
+      obj.userName=''
           return obj;
         }, {});
             },
@@ -412,13 +429,13 @@ export default {
         },
         //开关
         switchChange(index, item) {
-            this.fields[index].tableColumn = item.value;
+            this.fields[index].formDataType = item.value;
             this.$emit("input", this.fields);
         },
         // 单选 下拉框点击确定
         selectConfirm($event, item) {
             item.__slot__.label = $event.label;
-            this.form[item.tableColumn] = $event.label;
+            this.form[item.formDataType] = $event.label;
             item.__config__.show = false
             this.$emit("input", this.fields);
         },
@@ -432,9 +449,9 @@ export default {
         //级联确定
         onConfirm($event, item){
           if(item.type= 'range'){
-             this.form[item.tableColumn] = $event.result;
+             this.form[item.formDataType] = $event.result;
           }else{
-  this.form[item.tableColumn] = $event.value;
+  this.form[item.formDataType] = $event.value;
           }     
             item.__config__.show = false
             this.$emit("input", this.fields);
@@ -453,7 +470,7 @@ export default {
             // console.log("$event", $event)
             const selectArr = item.__slot__.options.filter((v => ($event.includes(v.name)))) //过滤
             // console.log("selectArr", selectArr)
-             this.form[item.tableColumn]= selectArr.map(v => (v.value))
+             this.form[item.formDataType]= selectArr.map(v => (v.value))
             this.$emit("input", this.fields);
         },
 
@@ -484,7 +501,7 @@ export default {
                     if (item.__config__.required) {
                         switch (item.tag) {
                             case "el-checkbox":
-                                if (this.form[item.tableColumn].length === 0) {
+                                if (this.form[item.formDataType].length === 0) {
                                     uni.showToast({
                                         title:  "请选择" + item.__config__.label,
                                         duration: 2000,
@@ -496,7 +513,7 @@ export default {
                                 }
                                 break;
                             case "upload":
-                                if (this.form[item.tableColumn].length === 0) {
+                                if (this.form[item.formDataType].length === 0) {
                                     uni.showToast({
                                         title:  "请选择" + item.__config__.label,
                                         duration: 2000,
@@ -507,7 +524,7 @@ export default {
                                 }
                                 break;
                             case "mobile":
-                                if (!this.form[item.tableColumn]) {
+                                if (!this.form[item.formDataType]) {
                                     uni.showToast({
                                         // title: item.rules.errMess || "手机号不能为空",
                                         title:  "手机号不能为空",
@@ -517,7 +534,7 @@ export default {
                                     reject(false)
                                     // throw Error(); //终止函数
                                 }
-                                if (!/^\s{0}$|^1\d{10}$/.test(this.form[item.tableColumn])) {
+                                if (!/^\s{0}$|^1\d{10}$/.test(this.form[item.formDataType])) {
                                     uni.showToast({
                                         title: "手机格式错误",
                                         duration: 2000,
@@ -528,7 +545,7 @@ export default {
                                 }
                                 break;
                             default:
-                                if ([null, undefined, ''].includes(this.form[item.tableColumn])) {
+                                if ([null, undefined, ''].includes(this.form[item.formDataType])) {
                                     uni.showToast({
                                         title:  item.__config__.label + "不能为空",
                                         duration: 2000,
@@ -537,7 +554,7 @@ export default {
                                     reject(false)
                                     // throw Error(); //终止函数
                                 }
-                                // if (item.rules.regexp && !(new RegExp(item.rules.regexp).test(this.form[item.tableColumn]))) {
+                                // if (item.rules.regexp && !(new RegExp(item.rules.regexp).test(this.form[item.formDataType]))) {
                                 //     uni.showToast({
                                 //         title: item.__config__.label + "格式不正确",
                                 //         duration: 2000,
