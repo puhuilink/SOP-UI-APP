@@ -81,9 +81,7 @@
 		{
 			"path": "pages/info/info",
 			"style": {
-				"navigationBarTitleText": "信息中心",
-				"navigationStyle": "custom",
-				"navigationBarBackgroundColor": "#07c160"
+				"navigationBarTitleText": "消息"
 			}
 		},
 		{
