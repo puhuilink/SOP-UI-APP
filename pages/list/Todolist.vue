@@ -1,11 +1,18 @@
 <template>
+
 	<view>
 		<view class="uni-container">
+       <u-navbar
+            title="待办列表"
+            :autoBack="true"
+        > 
+        </u-navbar>
+         <u-gap height="60rpx" />
 			<uni-table ref="table" :loading="loading" border stripe  emptyText="暂无更多数据">
 				<uni-tr>
 					<uni-th   align="center">工单编号</uni-th>
 					<uni-th  align="center">标题</uni-th>
-					<uni-th align="center">优先级</uni-th>
+					<uni-th  align="center">优先级</uni-th>
 					<uni-th  align="center">记录人</uni-th>
           <uni-th  align="center">状态更新时间</uni-th>
 				</uni-tr>
