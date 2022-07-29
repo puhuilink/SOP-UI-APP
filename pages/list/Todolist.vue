@@ -7,7 +7,22 @@
             :autoBack="true"
         > 
         </u-navbar>
-         <u-gap height="60rpx" />
+         <u-gap height="80rpx" />
+           <!-- <view class="search-box">
+        <u-search
+          placeholder="请输入关键字"
+          bgColor="#fff"
+          placeholderColor="#999999"
+          :show-action="false"
+          searchIconColor="#000"
+          height="75rpx"
+          shape="square"
+          :inputStyle="{ padding: '0 30rpx' }"
+          v-model="keyword"
+          @change="search"
+          @clickIcon="search"
+        />
+      </view> -->
 			<uni-table ref="table" :loading="loading" border stripe  emptyText="暂无更多数据">
 				<uni-tr>
 					<uni-th   align="center">工单编号</uni-th>
@@ -15,6 +30,7 @@
 					<uni-th  align="center">优先级</uni-th>
 					<uni-th  align="center">记录人</uni-th>
           <uni-th  align="center">状态更新时间</uni-th>
+          <uni-th  align="center">操作</uni-th>
 				</uni-tr>
 				<uni-tr v-for="(item, index) in tableData" :key="index">
 					<uni-td>{{ item.processInstance.id }}</uni-td>
@@ -29,6 +45,12 @@
 					</uni-td>
         
 				<uni-td >{{item.createTime }}</uni-td>
+        <uni-td>
+						<view class="uni-group">
+							<!-- <button class="uni-button" size="mini" type="primary"  @click="detail(item.id)">详情</button> -->
+              <button class="uni-button" size="mini" type="primary"  @click="claim(item.id)">认领</button>
+						</view>
+					</uni-td>
 				</uni-tr>
 			</uni-table>
 			<view class="uni-pagination-box"><uni-pagination show-icon :page-size="pageSize" :current="pageNo" :total="total" @change="change" /></view>
@@ -38,7 +60,7 @@
 
 
 <script>
-import { getToDoList } from '@/api/list.js'
+import { getToDoList,getClaim } from '@/api/list.js'
 export default {
   name: 'Todolist',
 	data() {
@@ -96,12 +118,34 @@ export default {
       this.pageNo = e.current
 			this.getTodolist()
 		},
+    //详情页
+    detail(){
+      uni.navigateTo({
+        url: '/pages/list/detail'
+      })
+    },
+    //认领
+    claim(id){
+     getClaim({
+        taskId: id
+      }).then(res => {
+        uni.showToast({
+          title: '认领成功',
+          icon: 'none'
+        })
+        this.getTodolist()
+      })
+    }
 	}
 }
 </script>
 
 
 <style lang="scss">
+.search-box {
+  background: #f1f4f5;
+  padding: 23rpx 15rpx 0;
+}
 /* #ifndef H5 */
 .page {
 	padding-top: 85px;

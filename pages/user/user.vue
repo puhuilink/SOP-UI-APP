@@ -4,7 +4,7 @@
       <view class="user-info" @click="loginOrJump('/pages/profile/profile')">
         <u-avatar size="80" :src="userInfo.avatar"></u-avatar>
         <text class="nick-name">{{
-          hasLogin ? userInfo.nickname || "游客" : "登录/注册"
+          hasLogin ? userInfo.nickname || "用户" : "登录/注册"
         }}</text>
       </view>
     </view>
