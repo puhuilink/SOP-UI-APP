@@ -15,8 +15,8 @@
     
     <view class="work-order">
       <view class="work-order-tit">我的工单</view>
-      <view class="work-order-item">
-        <view class="work-order-item-left" @click="loginOrJump('/pages/list/Todolist')">
+      <view class="work-order-item" @click="loginOrJump('/pages/list/Todolist')">
+        <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/wait-done.png"
             class="work-order-item-icon"
@@ -25,7 +25,7 @@
         </view>
         <u-icon name="arrow-right" />
       </view>
-      <view class="work-order-item">
+      <view class="work-order-item" @click="loginOrJump('')">
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/done.png"
@@ -35,7 +35,7 @@
         </view>
         <u-icon name="arrow-right" />
       </view>
-      <view class="work-order-item">
+      <view class="work-order-item" @click="loginOrJump('')">
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/administration.png"
@@ -107,8 +107,8 @@ export default {
     },
     loginOrJump(pageUrl) {
       if (!this.hasLogin) {
-        uni.$u.route("/pages/login/social");
-      } else {
+        uni.$u.route("/pages/login/login");
+      } else if (pageUrl) {
         uni.$u.route(pageUrl);
       }
     },
