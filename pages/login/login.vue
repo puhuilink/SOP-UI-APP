@@ -156,11 +156,13 @@ export default {
     mobileLogin(){
       this.$store.dispatch('Login', { type: this.currentModeIndex, data: this.formData }).then(res => {
         uni.$u.toast('登录成功')
-        setTimeout(() => {
+        setTimeout(() => { 
           uni.switchTab({
             url: '/pages/user/user'
           })
+        window.location.reload();
         }, 300)
+    
       })
     }
   }
