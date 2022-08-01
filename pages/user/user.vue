@@ -25,7 +25,7 @@
         </view>
         <u-icon name="arrow-right" />
       </view>
-      <view class="work-order-item" @click="loginOrJump('')">
+      <view class="work-order-item" @click="loginOrJump('/pages/list/Havedolist')">
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/done.png"

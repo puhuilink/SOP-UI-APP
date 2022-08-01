@@ -105,6 +105,14 @@
 				"navigationStyle": "custom",
 				"navigationBarBackgroundColor": "#07c160"
 			}
+		},
+    {
+			"path": "pages/list/Havedolist",
+			"style": {
+				"navigationBarTitleText": "已办列表",
+				"navigationStyle": "custom",
+				"navigationBarBackgroundColor": "#07c160"
+			}
 		}
 	],
 	"tabBar": {
