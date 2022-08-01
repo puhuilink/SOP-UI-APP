@@ -7,18 +7,6 @@
 			}
 		},
 		{
-			"path": "pages/category/category",
-			"style": {
-				"navigationBarTitleText": "分类"
-			}
-		},
-		{
-			"path": "pages/cart/cart",
-			"style": {
-				"navigationBarTitleText": "购物车"
-			}
-		},
-		{
 			"path": "pages/user/user",
 			"style": {
 				"navigationBarTitleText": "我的"
@@ -55,33 +43,9 @@
 			}
 		},
 		{
-			"path": "pages/product/product",
-			"style": {
-				"navigationBarTitleText": "商品详情"
-			}
-		},
-		{
-			"path": "pages/address/list",
-			"style": {
-				"navigationBarTitleText": "收货地址"
-			}
-		},
-		{
 			"path": "pages/search/search",
 			"style": {
 				"navigationBarTitleText": "搜索"
-			}
-		},
-		{
-			"path": "pages/address/create",
-			"style": {
-				"navigationBarTitleText": "新增地址"
-			}
-		},
-		{
-			"path": "pages/address/update",
-			"style": {
-				"navigationBarTitleText": "修改地址"
 			}
 		},
 		{

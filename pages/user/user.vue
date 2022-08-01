@@ -45,7 +45,7 @@
         </view>
         <u-icon name="arrow-right" />
       </view>
-      <view class="work-order-item" @click="loginOrJump('/pages/address/list')">
+      <view class="work-order-item" @click="loginOrJump('')">
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/message.png"
@@ -74,21 +74,10 @@ export default {
   data() {
     return {
       noticeList: "您有一个新的工单待接收，请及时处理",
-      orderStatusList: [
-        { icon: "rmb-circle", title: "待支付" },
-        { icon: "car", title: "代发货" },
-        { icon: "order", title: "待收货" },
-        { icon: "integral", title: "已完成" },
-      ],
       form: {
         pageNo: 1,
         pageSize: 10,
       },
-      statList: [
-        { value: "0", title: "我的收藏" },
-        { value: "0", title: "我的消息" },
-        { value: "0", title: "我的足迹" },
-      ],
     };
   },
   onLoad() {
