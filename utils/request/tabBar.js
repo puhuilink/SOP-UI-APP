@@ -17,9 +17,9 @@ const User = [
 const Admin = [
   {
     "pagePath": "/pages/index/echarts",
-    "text": "报表",
-    "iconPath": "/static/images/tabbar/index.png",
-    "selectedIconPath": "/static/images/tabbar/index-active.png"
+    "text": "报表视图",
+    "iconPath": "/static/images/tabbar/echarts.png",
+    "selectedIconPath": "/static/images/tabbar/echarts-active.png"
   },
   {
     "pagePath": "/pages/index/index",
