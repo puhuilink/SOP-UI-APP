@@ -38,10 +38,7 @@
 
     <view class="work-order">
       <view class="work-order-tit">我的工单</view>
-      <view
-        class="work-order-item"
-        @click="loginOrJump('/pages/list/Todolist')"
-      >
+      <view class="work-order-item" @click="loginOrJump('/pages/list/Todolist')">
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/wait-done.png"
@@ -51,7 +48,7 @@
         </view>
         <u-icon name="arrow-right" />
       </view>
-      <view class="work-order-item" @click="loginOrJump('/pages/list/Todolist')">
+      <view class="work-order-item" @click="loginOrJump('/pages/list/Havedolist')">
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/done.png"
@@ -61,7 +58,7 @@
         </view>
         <u-icon name="arrow-right" />
       </view>
-      <view class="work-order-item" @click="loginOrJump('/pages/list/Todolist')">
+      <view class="work-order-item" @click="loginOrJump('')">
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/administration.png"
@@ -91,12 +88,6 @@ export default {
   data() {
     return {
       noticeList: "您有一个新的工单待接收，请及时处理",
-      orderStatusList: [
-        { icon: "rmb-circle", title: "待支付" },
-        { icon: "car", title: "代发货" },
-        { icon: "order", title: "待收货" },
-        { icon: "integral", title: "已完成" },
-      ],
     };
   },
   computed: {
