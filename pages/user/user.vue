@@ -79,11 +79,25 @@
         <u-icon name="arrow-right" />
       </view>
     </view>
+    <u-tabbar
+	:fixed="true"
+	:placeholder="false"
+	:safeAreaInsetBottom="false"
+   @change="change"
+>
+<block v-for="(item,index) in tabarList" :key="index">
+<u-tabbar-item :text="item.text" :icon="item.iconPath"  ></u-tabbar-item>
+</block>
+	
+</u-tabbar>
   </view>
 </template>
 
 <script>
 import { getToDoList } from "@/api/list.js";
+import {
+		mapState,
+	} from "vuex";
 export default {
   data() {
     return {
@@ -97,6 +111,7 @@ export default {
     hasLogin() {
       return this.$store.getters.hasLogin;
     },
+    ...mapState(["tabarList"]),
   },
   onLoad() {
     if (this.hasLogin) {
@@ -105,6 +120,9 @@ export default {
   },
   created() {},
   methods: {
+    change(name) {
+    uni.$u.route(this.tabarList[name].pagePath);
+    },
     getToDoList() {
       getToDoList(this.form).then((res) => {
         console.log(res);
@@ -117,7 +135,7 @@ export default {
         uni.$u.route(pageUrl);
       }
     },
-  },
+  }
 };
 </script>
 

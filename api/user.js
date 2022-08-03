@@ -2,7 +2,7 @@
 const { http } = uni.$u
 
 //获取用户信息
-export const getUserInfo = params => http.get('/member/user/get', params)
+export const getUserInfo = params => http.get('/system/user/profile/get', params)
 //修改用户头像
 export const updateAvatar = filePath =>
   http.upload('/member/user/update-avatar', {

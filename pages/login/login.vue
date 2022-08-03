@@ -81,9 +81,7 @@ export default {
             localStorage.removeItem('username')
           }
           setTimeout(() => {
-            uni.switchTab({
-              url: "/pages/user/user",
-            });
+            uni.$u.route("/pages/user/user");
           }, 300);
         });
     },

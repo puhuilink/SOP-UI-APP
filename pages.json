@@ -57,68 +57,9 @@
 				"navigationBarBackgroundColor": "#07c160"
 			}
 		}
-		// {
-		// 	"path": "pages/category/category",
-		// 	"style": {
-		// 		"navigationBarTitleText": "分类"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/cart/cart",
-		// 	"style": {
-		// 		"navigationBarTitleText": "购物车"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/login/social",
-		// 	"style": {
-		// 		"navigationBarTitleText": "授权登录"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/login/mobile",
-		// 	"style": {
-		// 		"navigationBarTitleText": "手机登录"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/forgot/forgot",
-		// 	"style": {
-		// 		"navigationBarTitleText": "忘记密码"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/product/product",
-		// 	"style": {
-		// 		"navigationBarTitleText": "商品详情"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/address/list",
-		// 	"style": {
-		// 		"navigationBarTitleText": "收货地址"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/search/search",
-		// 	"style": {
-		// 		"navigationBarTitleText": "搜索"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/address/create",
-		// 	"style": {
-		// 		"navigationBarTitleText": "新增地址"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/address/update",
-		// 	"style": {
-		// 		"navigationBarTitleText": "修改地址"
-		// 	}
-		// },
 	],
 	"tabBar": {
+    "custom":true,
 		"selectedColor": "#007EFD",
 		"color": "#666666",
 		"fontSize": "25rpx",
@@ -126,13 +67,13 @@
 		"height": "129rpx",
 		"list": [
 			{
-				"pagePath": "pages/index/index",
+				"pagePath": "/pages/index/index",
 				"text": "自助工单",
 				"iconPath": "/static/images/tabbar/index.png",
 				"selectedIconPath": "/static/images/tabbar/index-active.png"
 			},
 			{
-				"pagePath": "pages/user/user",
+				"pagePath": "/pages/user/user",
 				"text": "我的",
 				"iconPath": "/static/images/tabbar/user.png",
 				"selectedIconPath": "/static/images/tabbar/user-active.png"
