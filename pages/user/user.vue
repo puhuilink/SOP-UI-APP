@@ -79,6 +79,12 @@
         <u-icon name="arrow-right" />
       </view>
     </view>
+     <u-gap height="60rpx" />
+      <!--国际化切换按钮测试-->
+    <view class="work-order">
+      <view class="work-order-tit">{{index.text}}</view>
+       <u-tabs  :scrollable="false" :list="list" @click="changeLanguage"></u-tabs>
+  </view>
     <u-tabbar
 	:fixed="true"
 	:placeholder="false"
@@ -102,6 +108,11 @@ export default {
   data() {
     return {
       noticeList: "您有一个新的工单待接收，请及时处理",
+       list: [{
+                    name: '中文',
+                }, {
+                    name: '英文',
+                }]
     };
   },
   computed: {
@@ -112,6 +123,9 @@ export default {
       return this.$store.getters.hasLogin;
     },
     ...mapState(["tabarList"]),
+       index(){
+        return this.$t("index");
+      }
   },
   onLoad() {
     if (this.hasLogin) {
@@ -120,6 +134,18 @@ export default {
   },
   created() {},
   methods: {
+       changeLanguage(item) {
+     if(item.name == "中文"){
+      this._i18n.locale = 'zh-CN'
+		let count = this.$t('lang') === 'zh' ? 1 : 2
+		// this.$store.commit('setLang', count)
+		localStorage.setItem('language', count)
+     }else{
+  this._i18n.locale = 'en-US'
+		let count = this.$t('lang') === 'zh' ? 1 : 2
+		localStorage.setItem('language', count)
+     }
+    },
     change(name) {
     uni.$u.route(this.tabarList[name].pagePath);
     },
@@ -140,6 +166,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+button {
+  width: 200rpx;
+  height: 80rpx;
+}
 .user-header {
   height: 374rpx;
   background: url(../../static/images/icon/head-bg.png) no-repeat;

@@ -35,6 +35,7 @@
       </u-grid>
     </view>
     <u-gap height="15rpx" />
+  
     <u-tabbar
 	:fixed="true"
 	:placeholder="false"
@@ -52,8 +53,7 @@
 <script>
 import { getList, getByDir } from "@/api/index.js";
 import {
-		mapState,
-		mapMutations
+		mapState
 	} from "vuex";
 export default {
   name: "index",
@@ -75,8 +75,10 @@ export default {
   },
   computed: {
 			...mapState(["tabarList"]),
+
 		},
   methods: {
+ 
     change(name){
       uni.$u.route(this.tabarList[name].pagePath);
     },
