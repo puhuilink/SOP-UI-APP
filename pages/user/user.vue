@@ -1,21 +1,47 @@
 <template>
   <view class="container">
     <view class="user-header">
-      <view class="user-info" @click="loginOrJump('/pages/profile/profile')">
-        <u-avatar size="80" :src="userInfo.avatar"></u-avatar>
-        <text class="nick-name">{{
-          hasLogin ? userInfo.nickname || "用户" : "登录/注册"
-        }}</text>
+      <view class="user-info">
+        <view>
+          <u-avatar size="120rpx" :src="userInfo.avatar" />
+          <view class="nick-name">
+            <view>用户名</view>
+            <view>{{ userInfo.nickname || "********" }}</view>
+          </view>
+        </view>
+        <u-icon
+          name="setting"
+          color="#fff"
+          size="42rpx"
+          @click="loginOrJump('/pages/profile/profile')"
+        />
+      </view>
+      <view class="scroll-msg">
+        <img src="../../static/images/icon/消息.png" />
+        <view class="content">
+          <view class="tlt">
+            <view>
+              工单
+              <view class="remind" />
+            </view>
+            <view class="time">上午11:30</view>
+          </view>
+          <view class="msg">您有一个新的工单待接收，请及时处理</view>
+        </view>
       </view>
     </view>
 
-    <u-gap height="10" bgColor="#f3f3f3"></u-gap>
+    <!-- <u-gap height="10" bgColor="#f3f3f3"></u-gap>
     <u-notice-bar :text="noticeList" mode="closable" speed="100"></u-notice-bar>
-    <u-gap height="10" bgColor="#f3f3f3"></u-gap>
-    
+    <u-gap height="10" bgColor="#f3f3f3"></u-gap> -->
+    <u-gap height="60rpx" />
+
     <view class="work-order">
       <view class="work-order-tit">我的工单</view>
-      <view class="work-order-item" @click="loginOrJump('/pages/list/Todolist')">
+      <view
+        class="work-order-item"
+        @click="loginOrJump('/pages/list/Todolist')"
+      >
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/wait-done.png"
@@ -25,7 +51,7 @@
         </view>
         <u-icon name="arrow-right" />
       </view>
-      <view class="work-order-item" @click="loginOrJump('')">
+      <view class="work-order-item" @click="loginOrJump('/pages/list/Todolist')">
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/done.png"
@@ -35,7 +61,7 @@
         </view>
         <u-icon name="arrow-right" />
       </view>
-      <view class="work-order-item" @click="loginOrJump('')">
+      <view class="work-order-item" @click="loginOrJump('/pages/list/Todolist')">
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/administration.png"
@@ -45,7 +71,7 @@
         </view>
         <u-icon name="arrow-right" />
       </view>
-      <view class="work-order-item" @click="loginOrJump('/pages/address/list')">
+      <view class="work-order-item" @click="loginOrJump('/pages/info/info')">
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/message.png"
@@ -55,15 +81,6 @@
         </view>
         <u-icon name="arrow-right" />
       </view>
-    </view>
-
-    <view v-if="hasLogin" class="logout-btn">
-      <u-button
-        type="error"
-        color="#ea322b"
-        text="退出登录"
-        @click="logout"
-      ></u-button>
     </view>
   </view>
 </template>
@@ -80,25 +97,22 @@ export default {
         { icon: "order", title: "待收货" },
         { icon: "integral", title: "已完成" },
       ],
-      form: {
-        pageNo: 1,
-        pageSize: 10,
-      },
-      statList: [
-        { value: "0", title: "我的收藏" },
-        { value: "0", title: "我的消息" },
-        { value: "0", title: "我的足迹" },
-      ],
     };
+  },
+  computed: {
+    userInfo() {
+      return this.$store.getters.userInfo;
+    },
+    hasLogin() {
+      return this.$store.getters.hasLogin;
+    },
   },
   onLoad() {
     if (this.hasLogin) {
       this.$store.dispatch("ObtainUserInfo");
     }
   },
-  created() {
-    this.getToDoList();
-  },
+  created() {},
   methods: {
     getToDoList() {
       getToDoList(this.form).then((res) => {
@@ -112,41 +126,103 @@ export default {
         uni.$u.route(pageUrl);
       }
     },
-    logout() {
-      uni.showModal({
-        title: "提示",
-        content: "您确定要退出登录吗",
-        success: (res) => {
-          if (res.confirm) {
-            this.$store.dispatch("Logout");
-          } else if (res.cancel) {
-            //console.log('用户点击取消')
-          }
-        },
-      });
-    },
-  },
-  computed: {
-    userInfo() {
-      return this.$store.getters.userInfo;
-    },
-    hasLogin() {
-      return this.$store.getters.hasLogin;
-    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .user-header {
-  @include flex-center(column);
-  height: 280rpx;
+  height: 374rpx;
+  background: url(../../static/images/icon/head-bg.png) no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+  size: 100%;
+  padding-top: 1px;
   .user-info {
-    @include flex-center(column);
+    height: 120rpx;
+    margin: 104rpx 50rpx 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    > view {
+      display: flex;
+    }
     .nick-name {
-      margin-top: 20rpx;
-      font-size: 32rpx;
-      font-weight: 700;
+      margin-left: 20rpx;
+      font-size: 33rpx;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #ffffff;
+
+      > view {
+        height: 60rpx;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .scroll-msg {
+    position: absolute;
+    top: 263rpx;
+    left: 50%;
+    margin-left: -360rpx;
+    width: 719rpx;
+    min-height: 140rpx;
+    background: #ffffff;
+    border-radius: 21rpx;
+    display: flex;
+    padding: 30rpx;
+    box-sizing: border-box;
+
+    img {
+      display: block;
+      width: 80rpx;
+      height: 80rpx;
+      margin-right: 21rpx;
+    }
+
+    .content {
+      flex: 1;
+      .tlt {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 29rpx;
+        font-size: 29rpx;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #111111;
+        margin-bottom: 19rpx;
+
+        view {
+          display: flex;
+          align-items: center;
+          .remind {
+            width: 16rpx;
+            height: 16rpx;
+            background: #ff0000;
+            margin-left: 10rpx;
+            border-radius: 8rpx;
+          }
+        }
+
+        .time {
+          font-size: 25rpx;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: #a6a6a8;
+        }
+      }
+
+      .msg {
+        height: 29rpx;
+        font-size: 29rpx;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #68696d;
+        line-height: 29rpx;
+      }
     }
   }
 }

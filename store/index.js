@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { logout } from '@/api/auth'
-// import { getUserInfo } from '@/api/user'
+import { getUserInfo } from '@/api/user'
 import { passwordLogin, smsLogin, weixinMiniAppLogin } from '@/api/auth'
 
 const AccessTokenKey = 'ACCESS_TOKEN'
@@ -78,7 +78,9 @@ const store = new Vuex.Store({
     // 退出登录
     async Logout({ state, commit }) {
       commit('CLEAR_LOGIN_INFO')
-      await logout()
+      await logout().then(() => {
+        uni.$u.route("/pages/login/login")
+      }).catch(res => {})
     },
     // 获得用户基本信息
     async ObtainUserInfo({ state, commit }) {

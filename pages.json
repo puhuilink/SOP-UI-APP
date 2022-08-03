@@ -1,29 +1,66 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "首页"
-			}
-		},
-		{
-			"path": "pages/category/category",
-			"style": {
-				"navigationBarTitleText": "分类"
-			}
-		},
-		{
-			"path": "pages/cart/cart",
-			"style": {
-				"navigationBarTitleText": "购物车"
+				"navigationBarTitleText": "首页",
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/user/user",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "我的",
+				"navigationStyle": "custom"
 			}
 		},
+		{
+			"path": "pages/profile/profile",
+			"style": {
+				"navigationBarTitleText": "个人资料"
+			}
+		},
+		{
+			"path": "pages/info/info",
+			"style": {
+				"navigationBarTitleText": "消息"
+			}
+		},
+		{
+			"path": "pages/list/Todolist",
+			"style": {
+				"navigationBarTitleText": "待办列表",
+				"navigationStyle": "custom",
+				"navigationBarBackgroundColor": "#07c160"
+			}
+		},
+		{
+			"path": "pages/info/test",
+			"style": {
+				"navigationBarTitleText": "测试",
+				"navigationStyle": "custom",
+				"navigationBarBackgroundColor": "#07c160"
+			}
+		}
+		// {
+		// 	"path": "pages/category/category",
+		// 	"style": {
+		// 		"navigationBarTitleText": "分类"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/cart/cart",
+		// 	"style": {
+		// 		"navigationBarTitleText": "购物车"
+		// 	}
+		// },
 		// {
 		// 	"path": "pages/login/social",
 		// 	"style": {
@@ -36,76 +73,42 @@
 		// 		"navigationBarTitleText": "手机登录"
 		// 	}
 		// },
-		{
-			"path": "pages/login/login",
-			"style": {
-				"navigationBarTitleText": "登录"
-			}
-		},
-		{
-			"path": "pages/forgot/forgot",
-			"style": {
-				"navigationBarTitleText": "忘记密码"
-			}
-		},
-		{
-			"path": "pages/profile/profile",
-			"style": {
-				"navigationBarTitleText": "个人资料"
-			}
-		},
-		{
-			"path": "pages/product/product",
-			"style": {
-				"navigationBarTitleText": "商品详情"
-			}
-		},
-		{
-			"path": "pages/address/list",
-			"style": {
-				"navigationBarTitleText": "收货地址"
-			}
-		},
-		{
-			"path": "pages/search/search",
-			"style": {
-				"navigationBarTitleText": "搜索"
-			}
-		},
-		{
-			"path": "pages/address/create",
-			"style": {
-				"navigationBarTitleText": "新增地址"
-			}
-		},
-		{
-			"path": "pages/address/update",
-			"style": {
-				"navigationBarTitleText": "修改地址"
-			}
-		},
-		{
-			"path": "pages/info/info",
-			"style": {
-				"navigationBarTitleText": "消息"
-			}
-		},
-		{
-			"path": "pages/info/test",
-			"style": {
-				"navigationBarTitleText": "测试",
-				"navigationStyle": "custom",
-				"navigationBarBackgroundColor": "#07c160"
-			}
-		},
-		{
-			"path": "pages/list/Todolist",
-			"style": {
-				"navigationBarTitleText": "待办列表",
-				"navigationStyle": "custom",
-				"navigationBarBackgroundColor": "#07c160"
-			}
-		}
+		// {
+		// 	"path": "pages/forgot/forgot",
+		// 	"style": {
+		// 		"navigationBarTitleText": "忘记密码"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/product/product",
+		// 	"style": {
+		// 		"navigationBarTitleText": "商品详情"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/address/list",
+		// 	"style": {
+		// 		"navigationBarTitleText": "收货地址"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/search/search",
+		// 	"style": {
+		// 		"navigationBarTitleText": "搜索"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/address/create",
+		// 	"style": {
+		// 		"navigationBarTitleText": "新增地址"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/address/update",
+		// 	"style": {
+		// 		"navigationBarTitleText": "修改地址"
+		// 	}
+		// },
 	],
 	"tabBar": {
 		"selectedColor": "#007EFD",
@@ -120,18 +123,6 @@
 				"iconPath": "/static/images/tabbar/index.png",
 				"selectedIconPath": "/static/images/tabbar/index-active.png"
 			},
-			// {
-			// 	"pagePath": "pages/category/category",
-			// 	"text": "分类",
-			// 	"iconPath": "/static/images/tabbar/category.png",
-			// 	"selectedIconPath": "/static/images/tabbar/category-active.png"
-			// },
-			// {
-			// 	"pagePath": "pages/cart/cart",
-			// 	"text": "购物车",
-			// 	"iconPath": "/static/images/tabbar/cart.png",
-			// 	"selectedIconPath": "/static/images/tabbar/cart-active.png"
-			// },
 			{
 				"pagePath": "pages/user/user",
 				"text": "我的",

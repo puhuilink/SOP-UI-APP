@@ -5,18 +5,6 @@
         <text class="word1">IT服务运营管理平台</text>
       </view>
       <view class="scroll-msg">
-        <!--消息滚动栏-->
-        <!-- <fui-card
-          radius="5%"
-          :padding="['20rpx', '32rpx']"
-          src="../../static/images/icon/消息.png"
-          title="工单"
-          tag="上午11:30"
-        >
-          <view class="fui-card__content"
-            >您有一个新的工单待接收，请及时处理</view
-          >
-        </fui-card> -->
         <img src="../../static/images/icon/消息.png" />
         <view class="content">
           <view class="tlt">
@@ -31,7 +19,7 @@
       </view>
     </view>
 
-    <u-gap height="30rpx" />
+    <u-gap height="60rpx" />
     <!--宫格菜单按钮-->
     <view class="menu">
       <view class="title">自助工单</view>
@@ -51,24 +39,23 @@
 </template>
 
 <script>
-import { getList,getByDir } from '@/api/index.js'
+import { getList, getByDir } from "@/api/index.js";
 export default {
   name: "index",
   components: {},
   data() {
     return {
-      form:{
-  dirId:'',
+      form: {
+        dirId: "",
       },
       formId: {
         id: "",
       },
       menuList: [],
-      noticeList:'您有一个新的工单待接收，请及时处理',
-    }
+      noticeList: "您有一个新的工单待接收，请及时处理",
+    };
   },
-  onLoad() {
-  },
+  onLoad() {},
   onLoad() {},
   onLoad() {
     this.getList();
@@ -83,11 +70,11 @@ export default {
       } else if (name == 1) {
         //H5页面跳转动态拼接参数
         wx.navigateTo({
-          url: '/pages/info/test?id=' + this.formId.id
-        })
+          url: "/pages/info/test?id=" + this.formId.id,
+        });
       } else if (name == 2) {
         //将formId传递给下一个页面
-     
+
         wx.navigateTo({
           url: "/pages/info/info",
         });
@@ -104,23 +91,23 @@ export default {
           url: "/pages/info/info",
         });
       }
-			},
-  async   getList(){
-      await    getList().then(res => {
-              this.form.dirId =  res.data.list[0].id    
-          this.menuList =res.data.list
-          //将this.menuList的label替换为title
-          for(var i=0;i<this.menuList.length;i++){
-            this.menuList[i].title = this.menuList[i].label
-          }  
-      })
-      this.getByDir()
-        },
-       getByDir(){
-          getByDir(this.form).then(res => {
-            this.formId.id = res.data.formId
-          })
+    },
+    async getList() {
+      await getList().then((res) => {
+        this.form.dirId = res.data.list[0].id;
+        this.menuList = res.data.list;
+        //将this.menuList的label替换为title
+        for (var i = 0; i < this.menuList.length; i++) {
+          this.menuList[i].title = this.menuList[i].label;
         }
+      });
+      this.getByDir();
+    },
+    getByDir() {
+      getByDir(this.form).then((res) => {
+        this.formId.id = res.data.formId;
+      });
+    },
   },
   computed: {},
 };
@@ -151,7 +138,10 @@ export default {
 }
 
 .scroll-msg {
-  margin: 0 auto;
+  position: absolute;
+  top: 263rpx;
+  left: 50%;
+  margin-left: -360rpx;
   width: 719rpx;
   min-height: 140rpx;
   background: #ffffff;

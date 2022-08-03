@@ -148,7 +148,7 @@ export default {
   min-height: 185rpx;
   background: #ffffff;
   border-radius: 17rpx;
-  padding: 0 28rpx 30rpx;
+  padding-bottom: 30rpx;
   box-sizing: border-box;
 
   .level1,
@@ -177,6 +177,7 @@ export default {
   }
 
   .account {
+    padding: 0 28rpx;
     height: 46rpx;
     line-height: 46rpx;
     font-size: 33rpx;
@@ -188,6 +189,7 @@ export default {
   }
 
   .record {
+    padding: 0 28rpx;
     margin-top: 23rpx;
     display: flex;
     justify-content: space-between;

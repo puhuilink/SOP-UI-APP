@@ -26,11 +26,18 @@ module.exports = vm => {
         // 如果是忽略的错误码，直接返回 msg 异常
         return Promise.reject(msg)
       } else if (code === 401) {
+        // 未登录状态跳转到登录页
+        let routes = getCurrentPages()
+        let curRoute = routes[routes.length - 1].route
+        if (curRoute !== '/pages/login/login') {
+          uni.$u.route("/pages/login/login")
+        }
+
         // 如果未认证，并且未进行刷新令牌，说明可能是访问令牌过期了
         if (!isRefreshToken) {
           isRefreshToken = true
           // 1. 如果获取不到刷新令牌，则只能执行登出操作
-          if (!vm.$store.getters.refreshToken()) {
+          if (!vm.$store.getters.refreshToken) {
             vm.$store.commit('CLEAR_LOGIN_INFO')
             return Promise.reject(res)
           }
@@ -80,11 +87,10 @@ module.exports = vm => {
       }
     },
     err => {
-      console.log(err)
       let { message } = err
       if (!message) {
         message = '系统发生未知错误'
-      }else if (message === 'Network Error') {
+      } else if (message === 'Network Error') {
         message = '后端接口连接异常'
       } else if (message.includes('timeout')) {
         message = '系统接口请求超时'
