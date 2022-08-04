@@ -16,15 +16,26 @@
             class="btn"
             name="edit-pen"
             @click="
-              tempName = userInfo.nickname
-              nameEditOn = true
+              tempName = userInfo.nickname;
+              nameEditOn = true;
             "
           ></u-icon>
         </view>
         <view v-else class="name-edit">
-          <u--input maxlength="10" border="bottom" v-model="tempName"></u--input>
+          <u--input
+            maxlength="10"
+            border="bottom"
+            v-model="tempName"
+          ></u--input>
           <view class="edit-btn-group">
-            <u-tag class="edit-btn" text="保存" plain size="mini" type="primary" @click="handleSaveBtnClick"></u-tag>
+            <u-tag
+              class="edit-btn"
+              text="保存"
+              plain
+              size="mini"
+              type="primary"
+              @click="handleSaveBtnClick"
+            ></u-tag>
             <u-tag
               class="edit-btn"
               text="取消"
@@ -32,69 +43,89 @@
               size="mini"
               type="info"
               @click="
-                tempName = ''
-                nameEditOn = false
+                tempName = '';
+                nameEditOn = false;
               "
             ></u-tag>
           </view>
         </view>
       </view>
-      <view class="info-item">
-        <view class="label">手机：</view>
-        <view class="info">
-          <view class="value">{{ userInfo.mobile }}</view>
-          <u-icon class="btn" name="edit-pen"></u-icon>
-        </view>
-      </view>
+    </view>
+    <view v-if="hasLogin" class="logout-btn">
+      <u-button
+        type="error"
+        color="#ea322b"
+        text="退出登录"
+        @click="logout"
+      ></u-button>
     </view>
   </view>
 </template>
 
 <script>
-import { getUserInfo, updateAvatar, updateNickname } from '../../api/user'
+import { updateAvatar, updateNickname } from "../../api/user";
 
 export default {
   data() {
     return {
-      userInfo: {
-        nickname: '',
-        avatar: '',
-        mobile: ''
-      },
       avatarFiles: [],
       nameEditOn: false,
-      tempName: ''
-    }
+      tempName: "",
+    };
   },
-  // onLoad() {
-  //   this.loadUserInfoData()
-  // },
+  computed: {
+    userInfo() {
+      return {
+        nickname: "",
+        avatar: "",
+        ...this.$store.getters.userInfo,
+      };
+    },
+    hasLogin() {
+      return this.$store.getters.hasLogin;
+    },
+  },
+  onLoad() {},
   methods: {
-    // loadUserInfoData() {
-    //   getUserInfo().then(res => {
-    //     this.userInfo = res.data
-    //   })
-    // },
     handleAvatarClick() {
       uni.chooseImage({
-        success: chooseImageRes => {
-          const tempFilePaths = chooseImageRes.tempFilePaths
-          updateAvatar(tempFilePaths[0]).then(res => {
-            this.userInfo.avatar = res.data
-            this.$store.commit('SET_USER_INFO', this.userInfo)
-          })
-        }
-      })
+        success: (chooseImageRes) => {
+          this.getBase64(chooseImageRes.tempFiles[0], (img) => {
+            updateAvatar({
+              avatarFile: img
+            }).then((res) => {
+              this.userInfo.avatar = res.data;
+              this.$store.commit("SET_USER_INFO", this.userInfo);
+            });
+          });
+        },
+      });
+    },
+    getBase64(img, callback) {
+      let reader = new FileReader();
+      reader.addEventListener("load", () => callback(reader.result));
+      reader.readAsDataURL(img);
     },
     handleSaveBtnClick() {
-      updateNickname({ nickname: this.tempName }).then(res => {
+      updateNickname({ nickname: this.tempName }).then((res) => {
         this.nameEditOn = false;
-        this.userInfo.nickname = this.tempName
-        this.$store.commit('SET_USER_INFO', this.userInfo)
-      })
-    }
-  }
-}
+        this.userInfo.nickname = this.tempName;
+        this.$store.commit("SET_USER_INFO", this.userInfo);
+      });
+    },
+    logout() {
+      uni.showModal({
+        title: "提示",
+        content: "您确定要退出登录吗",
+        success: (res) => {
+          if (res.confirm) {
+            this.$store.dispatch("Logout");
+          }
+        },
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -125,5 +156,9 @@ export default {
       }
     }
   }
+}
+.logout-btn {
+  margin: 60rpx auto 0;
+  width: 400rpx;
 }
 </style>
