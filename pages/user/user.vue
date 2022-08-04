@@ -1,37 +1,33 @@
 <template>
   <view class="container">
     <view class="user-header">
-      <view class="user-info">
-        <view>
-          <u-avatar size="120rpx" :src="userInfo.avatar" />
-          <view class="nick-name">
-            <view>用户名</view>
-            <view>{{ userInfo.nickname || "********" }}</view>
-          </view>
+      <view>
+        <u-avatar size="120rpx" :src="userInfo.avatar" />
+        <view class="nick-name">
+          <view>用户名</view>
+          <view>{{ userInfo.nickname || "********" }}</view>
         </view>
-        <u-icon
-          name="setting"
-          color="#fff"
-          size="42rpx"
-          @click="loginOrJump('/pages/profile/profile')"
-        />
       </view>
-      <view class="scroll-msg">
-        <img src="../../static/images/icon/消息.png" />
-        <view class="content">
-          <view class="tlt">
-            <view>
-              工单
-              <view class="remind" />
-            </view>
-            <view class="time">上午11:30</view>
+      <u-icon
+        name="setting"
+        color="#fff"
+        size="42rpx"
+        @click="loginOrJump('/pages/profile/profile')"
+      />
+    </view>
+    <view v-if="lastMsg.show" class="scroll-msg" @click="msgDel">
+      <img src="../../static/images/icon/消息.png" />
+      <view class="msg-box">
+        <view class="tlt">
+          <view>
+            工单
+            <view class="remind" />
           </view>
-          <view class="msg">您有一个新的工单待接收，请及时处理</view>
+          <view class="time">上午11:30</view>
         </view>
+        <view class="msg">您有一个新的工单待接收，请及时处理</view>
       </view>
     </view>
-
-    <u-gap height="60rpx" />
 
     <view class="work-order">
       <view class="work-order-tit">我的工单</view>
@@ -96,7 +92,10 @@
       @change="change"
     >
       <block v-for="(item, index) in tabarList" :key="index">
-        <u-tabbar-item :text="item.text" :icon="index === 2 ? item.selectedIconPath : item.iconPath"></u-tabbar-item>
+        <u-tabbar-item
+          :text="item.text"
+          :icon="index === 2 ? item.selectedIconPath : item.iconPath"
+        ></u-tabbar-item>
       </block>
     </u-tabbar>
   </view>
@@ -108,7 +107,6 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      noticeList: "您有一个新的工单待接收，请及时处理",
       list: [
         {
           name: "中文",
@@ -117,7 +115,9 @@ export default {
           name: "英文",
         },
       ],
-      noticeList: '',
+      lastMsg: {
+        show: true,
+      },
     };
   },
   computed: {
@@ -152,7 +152,9 @@ export default {
       }
     },
     change(name) {
-      uni.$u.route(this.tabarList[name].pagePath);
+      uni.navigateTo({
+        url: this.tabarList[name].pagePath,
+      });
     },
     getToDoList() {
       getToDoList(this.form).then((res) => {
@@ -161,112 +163,108 @@ export default {
     },
     loginOrJump(pageUrl) {
       if (!this.hasLogin) {
-        uni.$u.route("/pages/login/login");
+        uni.navigateTo({
+          url: "/pages/login/login",
+        });
       } else if (pageUrl) {
-        uni.$u.route(pageUrl);
+        uni.navigateTo({
+          url: pageUrl,
+        });
       }
+    },
+    msgDel() {
+      this.lastMsg.show = false;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-button {
-  width: 200rpx;
-  height: 80rpx;
+.container {
+  background: url(../../static/images/icon/head-bg.png) no-repeat;
+  background-size: 100% auto;
 }
 .user-header {
-  height: 374rpx;
-  background: url(../../static/images/icon/head-bg.png) no-repeat;
-  background-size: 100% 100%;
-  position: relative;
-  size: 100%;
-  padding-top: 1px;
-  .user-info {
-    height: 120rpx;
-    margin: 104rpx 50rpx 0;
+  height: 120rpx;
+  padding: 104rpx 50rpx 35rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  > view {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    > view {
-      display: flex;
-    }
-    .nick-name {
-      margin-left: 20rpx;
-      font-size: 33rpx;
-      font-family: PingFangSC-Medium, PingFang SC;
-      font-weight: 500;
-      color: #ffffff;
+  }
+  .nick-name {
+    margin-left: 20rpx;
+    font-size: 33rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: #ffffff;
 
-      > view {
-        height: 60rpx;
-        display: flex;
-        align-items: center;
-      }
+    > view {
+      height: 60rpx;
+      display: flex;
+      align-items: center;
     }
   }
+}
 
-  .scroll-msg {
-    position: absolute;
-    top: 263rpx;
-    left: 50%;
-    margin-left: -360rpx;
-    width: 719rpx;
-    min-height: 140rpx;
-    background: #ffffff;
-    border-radius: 21rpx;
-    display: flex;
-    padding: 30rpx;
-    box-sizing: border-box;
+.scroll-msg {
+  margin: 0 auto 33rpx;
+  width: 719rpx;
+  min-height: 140rpx;
+  background: #ffffff;
+  border-radius: 21rpx;
+  display: flex;
+  padding: 30rpx;
+  box-sizing: border-box;
 
-    img {
-      display: block;
-      width: 80rpx;
-      height: 80rpx;
-      margin-right: 21rpx;
-    }
+  img {
+    display: block;
+    width: 80rpx;
+    height: 80rpx;
+    margin-right: 21rpx;
+  }
 
-    .content {
-      flex: 1;
-      .tlt {
+  .msg-box {
+    flex: 1;
+    .tlt {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 29rpx;
+      font-size: 29rpx;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #111111;
+      margin-bottom: 19rpx;
+
+      view {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        height: 29rpx;
-        font-size: 29rpx;
-        font-family: PingFangSC-Medium, PingFang SC;
-        font-weight: 500;
-        color: #111111;
-        margin-bottom: 19rpx;
-
-        view {
-          display: flex;
-          align-items: center;
-          .remind {
-            width: 16rpx;
-            height: 16rpx;
-            background: #ff0000;
-            margin-left: 10rpx;
-            border-radius: 8rpx;
-          }
-        }
-
-        .time {
-          font-size: 25rpx;
-          font-family: PingFangSC-Regular, PingFang SC;
-          font-weight: 400;
-          color: #a6a6a8;
+        .remind {
+          width: 16rpx;
+          height: 16rpx;
+          background: #ff0000;
+          margin-left: 10rpx;
+          border-radius: 8rpx;
         }
       }
 
-      .msg {
-        height: 29rpx;
-        font-size: 29rpx;
+      .time {
+        font-size: 25rpx;
         font-family: PingFangSC-Regular, PingFang SC;
         font-weight: 400;
-        color: #68696d;
-        line-height: 29rpx;
+        color: #a6a6a8;
       }
+    }
+
+    .msg {
+      height: 29rpx;
+      font-size: 29rpx;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: #68696d;
+      line-height: 29rpx;
     }
   }
 }

@@ -39,7 +39,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -61,10 +60,10 @@ export default {
     };
   },
   onLoad() {
-    let username = localStorage.getItem('username') || ''
+    let username = localStorage.getItem("username") || "";
     if (username) {
-      this.formData.username = username
-      this.remember = ['username']
+      this.formData.username = username;
+      this.remember = ["username"];
     }
   },
   onReady() {},
@@ -74,14 +73,19 @@ export default {
         .dispatch("Login", { type: 0, data: this.formData })
         .then((res) => {
           uni.$u.toast("登录成功");
-          if (this.remember.includes('username')) {
-            localStorage.setItem('username', this.formData.username)
+          if (this.remember.includes("username")) {
+            localStorage.setItem("username", this.formData.username);
           }
-          if (!this.remember.includes('username') && localStorage.getItem('username')) {
-            localStorage.removeItem('username')
+          if (
+            !this.remember.includes("username") &&
+            localStorage.getItem("username")
+          ) {
+            localStorage.removeItem("username");
           }
           setTimeout(() => {
-            uni.$u.route("/pages/user/user");
+            uni.navigateTo({
+              url: "/pages/user/user",
+            });
           }, 300);
         });
     },
