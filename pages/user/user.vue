@@ -79,15 +79,40 @@
         <u-icon name="arrow-right" />
       </view>
     </view>
+     <u-gap height="60rpx" />
+      <!--国际化切换按钮测试-->
+    <view class="work-order">
+      <view class="work-order-tit">{{index.text}}</view>
+       <u-tabs  :scrollable="false" :list="list" @click="changeLanguage"></u-tabs>
+  </view>
+    <u-tabbar
+	:fixed="true"
+	:placeholder="false"
+	:safeAreaInsetBottom="false"
+   @change="change"
+>
+<block v-for="(item,index) in tabarList" :key="index">
+<u-tabbar-item :text="item.text" :icon="item.iconPath"  ></u-tabbar-item>
+</block>
+	
+</u-tabbar>
   </view>
 </template>
 
 <script>
 import { getToDoList } from "@/api/list.js";
+import {
+		mapState,
+	} from "vuex";
 export default {
   data() {
     return {
       noticeList: "您有一个新的工单待接收，请及时处理",
+       list: [{
+                    name: '中文',
+                }, {
+                    name: '英文',
+                }]
     };
   },
   computed: {
@@ -97,6 +122,10 @@ export default {
     hasLogin() {
       return this.$store.getters.hasLogin;
     },
+    ...mapState(["tabarList"]),
+       index(){
+        return this.$t("index");
+      }
   },
   onLoad() {
     if (this.hasLogin) {
@@ -105,6 +134,21 @@ export default {
   },
   created() {},
   methods: {
+       changeLanguage(item) {
+     if(item.name == "中文"){
+      this._i18n.locale = 'zh-CN'
+		let count = this.$t('lang') === 'zh' ? 1 : 2
+		// this.$store.commit('setLang', count)
+		localStorage.setItem('language', count)
+     }else{
+  this._i18n.locale = 'en-US'
+		let count = this.$t('lang') === 'zh' ? 1 : 2
+		localStorage.setItem('language', count)
+     }
+    },
+    change(name) {
+    uni.$u.route(this.tabarList[name].pagePath);
+    },
     getToDoList() {
       getToDoList(this.form).then((res) => {
         console.log(res);
@@ -117,11 +161,15 @@ export default {
         uni.$u.route(pageUrl);
       }
     },
-  },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+button {
+  width: 200rpx;
+  height: 80rpx;
+}
 .user-header {
   height: 374rpx;
   background: url(../../static/images/icon/head-bg.png) no-repeat;
