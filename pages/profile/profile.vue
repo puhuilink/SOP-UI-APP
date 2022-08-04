@@ -1,5 +1,6 @@
 <template>
   <view class="container">
+    <Navbar :title="'个人资料'" />
     <view class="user-info">
       <view class="info-item">
         <view class="label">头像：</view>
@@ -63,9 +64,13 @@
 </template>
 
 <script>
+import Navbar from "@/components/navbar/navbar";
 import { updateAvatar, updateNickname } from "../../api/user";
 
 export default {
+  components: {
+    Navbar,
+  },
   data() {
     return {
       avatarFiles: [],
@@ -92,7 +97,7 @@ export default {
         success: (chooseImageRes) => {
           this.getBase64(chooseImageRes.tempFiles[0], (img) => {
             updateAvatar({
-              avatarFile: img
+              avatarFile: img,
             }).then((res) => {
               this.userInfo.avatar = res.data;
               this.$store.commit("SET_USER_INFO", this.userInfo);

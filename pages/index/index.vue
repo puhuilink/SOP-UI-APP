@@ -252,14 +252,4 @@ export default {
     }
   }
 }
-// .fui-card__content {
-//   font-size: 28rpx;
-//   padding: 32rpx 20rpx 10px 20px;
-//   height: 14px;
-//   font-size: 14px;
-//   font-family: PingFangSC-Regular, PingFang SC;
-//   font-weight: 400;
-//   color: #68696d;
-//   line-height: 14px;
-// }
 </style>
