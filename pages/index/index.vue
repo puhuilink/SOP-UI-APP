@@ -35,26 +35,24 @@
       </u-grid>
     </view>
     <u-gap height="15rpx" />
-  
+
     <u-tabbar
-	:fixed="true"
-	:placeholder="false"
-	:safeAreaInsetBottom="false"
-   @change="change"
->
-<block v-for="(item,index) in tabarList" :key="index">
-<u-tabbar-item :text="item.text" :icon="item.iconPath"  ></u-tabbar-item>
-</block>
-	
-</u-tabbar>
+      :value="1"
+      :fixed="true"
+      :placeholder="false"
+      :safeAreaInsetBottom="false"
+      @change="change"
+    >
+      <block v-for="(item, index) in tabarList" :key="index">
+        <u-tabbar-item :text="item.text" :icon="index === 1 ? item.selectedIconPath : item.iconPath"></u-tabbar-item>
+      </block>
+    </u-tabbar>
   </view>
 </template>
 
 <script>
 import { getList, getByDir } from "@/api/index.js";
-import {
-		mapState
-	} from "vuex";
+import { mapState } from "vuex";
 export default {
   name: "index",
   components: {},
@@ -74,12 +72,10 @@ export default {
     this.getList();
   },
   computed: {
-			...mapState(["tabarList"]),
-
-		},
+    ...mapState(["tabarList"]),
+  },
   methods: {
- 
-    change(name){
+    change(name) {
       uni.$u.route(this.tabarList[name].pagePath);
     },
     click(name) {

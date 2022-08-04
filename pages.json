@@ -8,6 +8,13 @@
 			}
 		},
 		{
+			"path": "pages/index/echarts",
+			"style": {
+				"navigationBarTitleText": "报表视图",
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/user/user",
 			"style": {
 				"navigationBarTitleText": "我的",
@@ -119,7 +126,7 @@
 		}
 	],
 	"tabBar": {
-    "custom":true,
+		"custom": true,
 		"selectedColor": "#007EFD",
 		"color": "#666666",
 		"fontSize": "25rpx",

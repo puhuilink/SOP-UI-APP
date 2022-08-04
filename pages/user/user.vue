@@ -31,14 +31,14 @@
       </view>
     </view>
 
-    <!-- <u-gap height="10" bgColor="#f3f3f3"></u-gap>
-    <u-notice-bar :text="noticeList" mode="closable" speed="100"></u-notice-bar>
-    <u-gap height="10" bgColor="#f3f3f3"></u-gap> -->
     <u-gap height="60rpx" />
 
     <view class="work-order">
       <view class="work-order-tit">我的工单</view>
-      <view class="work-order-item" @click="loginOrJump('/pages/list/Todolist')">
+      <view
+        class="work-order-item"
+        @click="loginOrJump('/pages/list/Todolist')"
+      >
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/wait-done.png"
@@ -48,7 +48,10 @@
         </view>
         <u-icon name="arrow-right" />
       </view>
-      <view class="work-order-item" @click="loginOrJump('/pages/list/Havedolist')">
+      <view
+        class="work-order-item"
+        @click="loginOrJump('/pages/list/Havedolist')"
+      >
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/done.png"
@@ -79,40 +82,41 @@
         <u-icon name="arrow-right" />
       </view>
     </view>
-     <u-gap height="60rpx" />
-      <!--国际化切换按钮测试-->
+    <u-gap height="60rpx" />
+    <!--国际化切换按钮测试-->
     <view class="work-order">
-      <view class="work-order-tit">{{index.text}}</view>
-       <u-tabs  :scrollable="false" :list="list" @click="changeLanguage"></u-tabs>
-  </view>
+      <view class="work-order-tit">{{ index.text }}</view>
+      <u-tabs :scrollable="false" :list="list" @click="changeLanguage"></u-tabs>
+    </view>
     <u-tabbar
-	:fixed="true"
-	:placeholder="false"
-	:safeAreaInsetBottom="false"
-   @change="change"
->
-<block v-for="(item,index) in tabarList" :key="index">
-<u-tabbar-item :text="item.text" :icon="item.iconPath"  ></u-tabbar-item>
-</block>
-	
-</u-tabbar>
+      :value="2"
+      :fixed="true"
+      :placeholder="false"
+      :safeAreaInsetBottom="false"
+      @change="change"
+    >
+      <block v-for="(item, index) in tabarList" :key="index">
+        <u-tabbar-item :text="item.text" :icon="index === 2 ? item.selectedIconPath : item.iconPath"></u-tabbar-item>
+      </block>
+    </u-tabbar>
   </view>
 </template>
 
 <script>
 import { getToDoList } from "@/api/list.js";
-import {
-		mapState,
-	} from "vuex";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
       noticeList: "您有一个新的工单待接收，请及时处理",
-       list: [{
-                    name: '中文',
-                }, {
-                    name: '英文',
-                }]
+      list: [
+        {
+          name: "中文",
+        },
+        {
+          name: "英文",
+        },
+      ],
     };
   },
   computed: {
@@ -123,9 +127,9 @@ export default {
       return this.$store.getters.hasLogin;
     },
     ...mapState(["tabarList"]),
-       index(){
-        return this.$t("index");
-      }
+    index() {
+      return this.$t("index");
+    },
   },
   onLoad() {
     if (this.hasLogin) {
@@ -134,20 +138,20 @@ export default {
   },
   created() {},
   methods: {
-       changeLanguage(item) {
-     if(item.name == "中文"){
-      this._i18n.locale = 'zh-CN'
-		let count = this.$t('lang') === 'zh' ? 1 : 2
-		// this.$store.commit('setLang', count)
-		localStorage.setItem('language', count)
-     }else{
-  this._i18n.locale = 'en-US'
-		let count = this.$t('lang') === 'zh' ? 1 : 2
-		localStorage.setItem('language', count)
-     }
+    changeLanguage(item) {
+      if (item.name == "中文") {
+        this._i18n.locale = "zh-CN";
+        let count = this.$t("lang") === "zh" ? 1 : 2;
+        // this.$store.commit('setLang', count)
+        localStorage.setItem("language", count);
+      } else {
+        this._i18n.locale = "en-US";
+        let count = this.$t("lang") === "zh" ? 1 : 2;
+        localStorage.setItem("language", count);
+      }
     },
     change(name) {
-    uni.$u.route(this.tabarList[name].pagePath);
+      uni.$u.route(this.tabarList[name].pagePath);
     },
     getToDoList() {
       getToDoList(this.form).then((res) => {
@@ -161,7 +165,7 @@ export default {
         uni.$u.route(pageUrl);
       }
     },
-  }
+  },
 };
 </script>
 

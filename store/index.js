@@ -53,17 +53,17 @@ const store = new Vuex.Store({
     //更新动态底部导航栏
     SET_TABAR_LIST(state, data) {
       let type = 'User'
-if(data != null){
-	switch(data.username){
-		case 'admin':
-			type = 'Admin'
-			break;
-		default:
-			break;
-	}
-}
-			state.tabarList = tabBar[type]
-		},
+      if (data != null) {
+        switch (data.username) {
+          case 'admin':
+            type = 'Admin'
+            break;
+          default:
+            break;
+        }
+      }
+      state.tabarList = tabBar[type]
+    },
     // 清空令牌 和 用户信息
     CLEAR_LOGIN_INFO(state) {
       uni.removeStorageSync(AccessTokenKey)
@@ -95,7 +95,7 @@ if(data != null){
       commit('CLEAR_LOGIN_INFO')
       await logout().then(() => {
         uni.$u.route("/pages/login/login")
-      }).catch(res => {})
+      }).catch(res => { })
     },
     // 获得用户基本信息
     async ObtainUserInfo({ state, commit }) {
