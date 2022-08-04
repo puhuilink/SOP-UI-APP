@@ -17,26 +17,14 @@
 </template>
 
 <script>
-import { getList, getByDir } from "@/api/index.js";
 import { mapState } from "vuex";
 export default {
   name: "index",
   components: {},
   data() {
-    return {
-      form: {
-        dirId: "",
-      },
-      formId: {
-        id: "",
-      },
-      menuList: [],
-      noticeList: "您有一个新的工单待接收，请及时处理",
-    };
+    return {};
   },
-  onLoad() {
-    this.getList();
-  },
+  onLoad() {},
   computed: {
     ...mapState(["tabarList"]),
   },

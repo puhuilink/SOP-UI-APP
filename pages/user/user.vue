@@ -117,6 +117,7 @@ export default {
           name: "英文",
         },
       ],
+      noticeList: '',
     };
   },
   computed: {
