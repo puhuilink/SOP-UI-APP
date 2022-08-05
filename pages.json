@@ -37,9 +37,7 @@
 		{
 			"path": "pages/list/Todolist",
 			"style": {
-				"navigationBarTitleText": "待办列表",
-				"navigationStyle": "custom",
-				"navigationBarBackgroundColor": "#07c160"
+				"navigationBarTitleText": "待办列表"
 			}
 		},
 		{
@@ -53,9 +51,7 @@
 		{
 			"path": "pages/list/Havedolist",
 			"style": {
-				"navigationBarTitleText": "已办列表",
-				"navigationStyle": "custom",
-				"navigationBarBackgroundColor": "#07c160"
+				"navigationBarTitleText": "已办列表"
 			}
 		},
 		// {
