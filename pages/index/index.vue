@@ -73,6 +73,8 @@ export default {
     };
   },
   onLoad() {
+    // 获取用户信息
+    this.$store.dispatch("ObtainUserInfo");
     this.getList();
   },
   computed: {

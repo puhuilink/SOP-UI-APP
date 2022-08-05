@@ -84,7 +84,7 @@ export default {
           }
           setTimeout(() => {
             uni.navigateTo({
-              url: "/pages/user/user",
+              url: "/pages/index/index",
             });
           }, 300);
         });
