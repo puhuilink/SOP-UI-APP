@@ -107,7 +107,7 @@
               <u-switch
                 :disabled="item.disabled"
                 v-model="form[item.formDataType]"
-                @change="switchChange(index)"
+                @change="switchChange(index,$event)"
               ></u-switch>
             </view>
           </view>
@@ -494,8 +494,8 @@ export default {
       this.$emit("input", this.fields);
     },
     //开关
-    switchChange(index, item) {
-      this.fields[index].formDataType = item.value;
+    switchChange(index,item) {
+      this.fields[index].formDataType =item;
       this.$emit("input", this.fields);
     },
     // 单选 下拉框点击确定
