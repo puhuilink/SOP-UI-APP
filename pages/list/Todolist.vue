@@ -1,10 +1,9 @@
 <template>
-  <view>
-    <view class="uni-container">
-      <Navbar :title="'待办列表'" />
-      <!-- <view class="search-box">
+  <view class="container">
+    <u-sticky bgColor="#fff">
+      <view class="search-box">
         <u-search
-          placeholder="请输入关键字"
+          placeholder="请输入查询条件"
           bgColor="#fff"
           placeholderColor="#999999"
           :show-action="false"
@@ -16,74 +15,38 @@
           @change="search"
           @clickIcon="search"
         />
-      </view> -->
-      <uni-table
-        ref="table"
-        :loading="loading"
-        border
-        stripe
-        emptyText="暂无更多数据"
-      >
-        <uni-tr>
-          <uni-th align="center">工单编号</uni-th>
-          <uni-th align="center">标题</uni-th>
-          <uni-th align="center">优先级</uni-th>
-          <uni-th align="center">记录人</uni-th>
-          <uni-th align="center">状态更新时间</uni-th>
-          <uni-th align="center">操作</uni-th>
-        </uni-tr>
-        <uni-tr v-for="(item, index) in tableData" :key="index">
-          <uni-td>{{ item.processInstance.id }}</uni-td>
-          <uni-td>
-            {{ item.processInstance.name }}
-          </uni-td>
-          <uni-td>
-            {{ item.suspensionState }}
-          </uni-td>
-          <uni-td>
-            {{ item.processInstance.startUserNickname }}
-          </uni-td>
-
-          <uni-td>{{ item.createTime }}</uni-td>
-          <uni-td>
-            <view class="uni-group">
-              <!-- <button class="uni-button" size="mini" type="primary"  @click="detail(item.id)">详情</button> -->
-              <button
-                class="uni-button"
-                size="mini"
-                type="primary"
-                @click="claim(item.id)"
-              >
-                认领
-              </button>
-            </view>
-          </uni-td>
-        </uni-tr>
-      </uni-table>
-      <view class="uni-pagination-box"
-        ><uni-pagination
-          show-icon
-          :page-size="pageSize"
-          :current="pageNo"
-          :total="total"
-          @change="change"
-      /></view>
-    </view>
+      </view>
+    </u-sticky>
+    <u-list :pagingEnabled="true">
+      <u-list-item v-for="(item, index) in listData" :key="index">
+        <u-row>
+          <u-col span="12">
+            <view class="time"> {{ item.createTime }} </view>
+          </u-col>
+        </u-row>
+        <view class="list-item">
+          <view class="level1">{{ item.value }}</view>
+          <view class="account">
+            <view>{{item.suspensionState}}</view>
+            <view>{{item.processInstance.id}}</view>
+          </view>
+          <view class="record">
+            <view>{{item.processInstance.name}}</view>
+            <view>{{item.processInstance.startUserNickname}}</view>
+          </view>
+        </view>
+      </u-list-item>
+    </u-list>
   </view>
 </template>
 
-
 <script>
-import { getToDoList, getClaim } from "@/api/list.js";
-import Navbar from "@/components/navbar/navbar";
+import uTabs from "../../uni_modules/uview-ui/components/u-tabs/u-tabs.vue";
+import { getToDoList } from "@/api/list.js";
 export default {
-  name: "Todolist",
-  components: {
-    Navbar,
-  },
+  components: { uTabs },
   data() {
     return {
-      tableData: [],
       // 每页数据量
       pageSize: 10,
       // 当前页
@@ -91,13 +54,14 @@ export default {
       // 数据总量
       total: 0,
       loading: false,
+      keyword: "",
+      listData:[]
     };
   },
-  onLoad() {
-    this.selectedIndexs = [];
-    this.getTodolist();
+    onLoad() {
+    this.getHavedolist();
   },
-  methods: {
+   methods: {
     //转换时间戳
     formatDate(timeStamp) {
       var date = new Date(timeStamp);
@@ -121,9 +85,9 @@ export default {
         pageSize: this.pageSize,
         pageNo: this.pageNo,
       }).then((res) => {
-        this.tableData = res.data.list;
+        this.listData = res.data.list;
         //res.data.list的时间戳转换
-        this.tableData.forEach((item) => {
+        this.listData.forEach((item) => {
           item.createTime = this.formatDate(item.createTime);
         });
         this.total = res.data.total;
@@ -134,7 +98,7 @@ export default {
     async change(e) {
       this.$refs.table.clearSelection();
       this.pageNo = e.current;
-      this.getTodolist();
+      this.getHavedolist();
     },
     //详情页
     detail() {
@@ -142,32 +106,93 @@ export default {
         url: "/pages/list/detail",
       });
     },
-    //认领
-    claim(id) {
-      getClaim({
-        taskId: id,
-      }).then((res) => {
-        uni.showToast({
-          title: "认领成功",
-          icon: "none",
-        });
-        this.getTodolist();
-      });
-    },
+      search() {
+      console.log(this.keyword)
+    }
   },
 };
 </script>
 
-
-<style lang="scss">
+<style lang="scss" scoped>
+.container {
+  padding-left: 0px;
+  padding-right: 0px;
+  font-size: 12px;
+}
 .search-box {
   background: #f1f4f5;
-  padding: 23rpx 15rpx 0;
+  padding: 17rpx 15rpx 0;
 }
-/* #ifndef H5 */
-.page {
-  padding-top: 85px;
+.time {
+  height: 35rpx;
+  font-size: 25rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #afb1b5;
+  line-height: 35rpx;
+  margin: 23rpx;
+  text-align: center;
 }
-/* #endif */
-</style>
+.u-list {
+  height: calc(100vh - 300rpx) !important;
+}
+.list-item {
+  margin: 0 auto;
+  width: 719rpx;
+  min-height: 185rpx;
+  background: #ffffff;
+  border-radius: 17rpx;
+  padding-bottom: 30rpx;
+  box-sizing: border-box;
 
+  .level1,
+  .level2,
+  .level3 {
+    width: 65rpx;
+    height: 38rpx;
+    border-top-left-radius: 17rpx;
+    border-bottom-right-radius: 17rpx;
+    background: #fd5b5b;
+    line-height: 38rpx;
+    font-size: 29rpx;
+    font-family: DINAlternate-Bold, DINAlternate;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 19rpx;
+  }
+
+  .level2 {
+    background: #f08743;
+  }
+
+  .level3 {
+    background: #3080f5;
+  }
+
+  .account {
+    padding: 0 28rpx;
+    height: 46rpx;
+    line-height: 46rpx;
+    font-size: 33rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: #333333;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .record {
+    padding: 0 28rpx;
+    margin-top: 23rpx;
+    display: flex;
+    justify-content: space-between;
+    height: 29rpx;
+    font-size: 29rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #878b8f;
+    line-height: 29rpx;
+  }
+}
+</style>
