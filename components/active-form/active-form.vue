@@ -117,7 +117,8 @@
             v-else-if="
               item.__config__.tag == 'el-cascader' ||
               item.__config__.tag === 'el-date-range' ||
-              item.__config__.tag === 'el-date'
+              item.__config__.tag === 'el-date' ||
+             item.__config__.tag === 'el-date-picker' 
             "
           >
             <view
