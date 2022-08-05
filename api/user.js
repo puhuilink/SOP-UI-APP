@@ -5,7 +5,7 @@ const { http } = uni.$u
 export const getUserInfo = params => http.get('/system/user/profile/get', params)
 //修改用户头像
 export const updateAvatar = data => http.request({
-  url: '/system/user/profile/update-avatar',
+  url: '/system/user/profile/update-avatar-app',
   method: 'PUT',
   data
 })
