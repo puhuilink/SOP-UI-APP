@@ -17,18 +17,18 @@
         />
       </view>
     </u-sticky>
-    <u-list :pagingEnabled="true">
+    <u-list >
       <u-list-item v-for="(item, index) in listData" :key="index">
         <u-row>
           <u-col span="12">
-            <view class="time"> {{ item.createTime }} </view>
+            <view class="time"> {{ item.time }} </view>
           </u-col>
         </u-row>
         <view class="list-item">
           <view class="level1">{{ item.value }}</view>
           <view class="account">
-            <view>{{item.suspensionState}}</view>
-            <view>{{item.processInstance.id}}</view>
+            <view>{{item.name}}</view>
+            <view>{{item.createTime}}</view>
           </view>
           <view class="record">
             <view>{{item.processInstance.name}}</view>
@@ -87,8 +87,10 @@ export default {
       }).then((res) => {
         this.listData = res.data.list;
         //res.data.list的时间戳转换
-        this.listData.forEach((item) => {
-          item.createTime = this.formatDate(item.createTime);
+        this.listData.forEach((item,index) => {
+          // 添加value属性，值为P1依次往后加
+          item.value = "P" + (index + 1);
+          item.time = this.formatDate(item.createTime);
         });
         this.total = res.data.total;
         this.loading = false;
