@@ -12,4 +12,4 @@ export const weixinMiniAppLogin = data => http.post('/member/auth/weixin-mini-ap
 //刷新令牌
 export const  refreshToken = data => http.post('/member/auth/refresh-token', data)
 //退出登录
-export const logout = data => http.post('/member/auth/logout', data)
+export const logout = data => http.post('/system/auth/logout', data)

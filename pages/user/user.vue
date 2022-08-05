@@ -132,11 +132,7 @@ export default {
       return this.$t("index");
     },
   },
-  onLoad() {
-    if (this.hasLogin) {
-      this.$store.dispatch("ObtainUserInfo");
-    }
-  },
+  onLoad() {},
   created() {},
   methods: {
     changeLanguage(item) {
