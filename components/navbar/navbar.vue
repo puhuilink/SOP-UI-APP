@@ -19,10 +19,11 @@ export default {
   methods: {
     goBack() {
       if (this.back) {
-        uni.$u.route(this.back);
+        uni.navigateTo({
+          url: this.back,
+        });
       } else {
-        uni.$u.route({
-          type: "navigateBack",
+        uni.navigateBack({
           delta: 1,
         });
       }

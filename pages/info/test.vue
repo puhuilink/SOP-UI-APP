@@ -19,9 +19,6 @@ export default {
   data() {
     return {
       fields: [],
-      formIds: {
-        id: "165",
-      },
     };
   },
   onLoad() {
@@ -61,6 +58,7 @@ export default {
     },
     getFrom() {
       getFrom(this.$route.query).then((res) => {
+        console.log(res)
         for (var i = 0; i < res.data.fields.length; i++) {
           this.fields.push(JSON.parse(res.data.fields[i]));
         }

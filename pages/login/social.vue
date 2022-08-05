@@ -43,7 +43,9 @@ export default {
           confirmColor: '#3C9CFFFF',
           success: res => {
             if (res.confirm) {
-              uni.$u.route('/pages/login/mobile')
+            uni.navigateTo({
+              url: '/pages/login/mobile',
+            });
             } else if (res.cancel) {
               //console.log('用户点击取消')
             }
@@ -66,7 +68,9 @@ export default {
       }
     },
     handleJump() {
-      uni.$u.route('/pages/login/mobile')
+      uni.navigateTo({
+        url: '/pages/login/mobile',
+      });
     }
   }
 }

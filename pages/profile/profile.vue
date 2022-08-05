@@ -97,7 +97,7 @@ export default {
         success: (chooseImageRes) => {
           this.getBase64(chooseImageRes.tempFiles[0], (img) => {
             updateAvatar({
-              avatarFile: img,
+              file: img,
             }).then((res) => {
               this.userInfo.avatar = res.data;
               this.$store.commit("SET_USER_INFO", this.userInfo);

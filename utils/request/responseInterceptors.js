@@ -30,7 +30,9 @@ module.exports = vm => {
         let routes = getCurrentPages()
         let curRoute = routes[routes.length - 1].route
         if (curRoute !== '/pages/login/login') {
-          uni.$u.route("/pages/login/login")
+          uni.navigateTo({
+            url: "/pages/login/login",
+          });
         }
 
         // 如果未认证，并且未进行刷新令牌，说明可能是访问令牌过期了

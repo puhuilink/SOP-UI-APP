@@ -30,7 +30,9 @@ export default {
   },
   methods: {
     change(name) {
-      uni.$u.route(this.tabarList[name].pagePath);
+      uni.navigateTo({
+        url: this.tabarList[name].pagePath
+      });
     },
   },
 };

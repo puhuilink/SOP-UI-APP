@@ -94,7 +94,9 @@ const store = new Vuex.Store({
     async Logout({ state, commit }) {
       commit('CLEAR_LOGIN_INFO')
       await logout().then(() => {
-        uni.$u.route("/pages/login/login")
+        uni.navigateTo({
+          url: "/pages/login/login",
+        });
       }).catch(res => { })
     },
     // 获得用户基本信息
