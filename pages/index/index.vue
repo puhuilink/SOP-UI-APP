@@ -41,7 +41,7 @@
     </view>
 
     <u-tabbar
-      :value="tabarList.findIndex(item => (item.name === 'index'))"
+      :value="tabarList.findIndex((item) => item.name === 'index')"
       :fixed="true"
       :placeholder="false"
       :safeAreaInsetBottom="false"
@@ -65,6 +65,7 @@ export default {
   components: {},
   data() {
     return {
+      isScrolltolower: false,
       pageNo: 1,
       menuList: [],
       lastMsg: {
@@ -112,13 +113,18 @@ export default {
           };
         });
         this.menuList = [...this.menuList, ...data.list];
-        this.pageNo += 1
       });
+      this.pageNo += 1;
+      if (this.isScrolltolower) {
+        this.isScrolltolower = false
+      }
     },
     msgDel() {
       this.lastMsg.show = false;
     },
     scrolltolower() {
+      if (this.isScrolltolower) return;
+      this.isScrolltolower = true;
       this.getList();
     },
   },
