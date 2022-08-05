@@ -4,7 +4,7 @@
       <view>
         <u-avatar size="120rpx" :src="userInfo.avatar" />
         <view class="nick-name">
-          <view>用户名</view>
+          <view>{{ index.userName }}</view>
           <view>{{ userInfo.nickname || "********" }}</view>
         </view>
       </view>
@@ -20,7 +20,7 @@
       <view class="msg-box">
         <view class="tlt">
           <view>
-            工单
+         {{ index.order }}
             <view class="remind" />
           </view>
           <view class="time">上午11:30</view>
@@ -30,7 +30,7 @@
     </view>
 
     <view class="work-order">
-      <view class="work-order-tit">我的工单</view>
+      <view class="work-order-tit">{{ index.workOrder }}</view>
       <view
         class="work-order-item"
         @click="loginOrJump('/pages/list/Todolist')"
@@ -40,7 +40,7 @@
             src="/static/images/icon/user/wait-done.png"
             class="work-order-item-icon"
           />
-          <view class="work-order-item-tit">我的待办</view>
+          <view class="work-order-item-tit">{{ index.toDo }}</view>
         </view>
         <u-icon name="arrow-right" />
       </view>
@@ -53,7 +53,7 @@
             src="/static/images/icon/user/done.png"
             class="work-order-item-icon"
           />
-          <view class="work-order-item-tit">我的已办</view>
+          <view class="work-order-item-tit">{{ index.haveDo }}</view>
         </view>
         <u-icon name="arrow-right" />
       </view>
@@ -63,7 +63,7 @@
             src="/static/images/icon/user/administration.png"
             class="work-order-item-icon"
           />
-          <view class="work-order-item-tit">我管理的</view>
+          <view class="work-order-item-tit">{{ index.myManage }}</view>
         </view>
         <u-icon name="arrow-right" />
       </view>
@@ -73,7 +73,7 @@
             src="/static/images/icon/user/message.png"
             class="work-order-item-icon"
           />
-          <view class="work-order-item-tit">消息中心</view>
+          <view class="work-order-item-tit">{{ index.messageCenter }}</view>
         </view>
         <u-icon name="arrow-right" />
       </view>
