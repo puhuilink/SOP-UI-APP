@@ -3,14 +3,17 @@
     echarts
 
     <u-tabbar
-      :value="0"
+      :value="tabarList.findIndex(item => (item.name === 'echarts'))"
       :fixed="true"
       :placeholder="false"
       :safeAreaInsetBottom="false"
       @change="change"
     >
       <block v-for="(item, index) in tabarList" :key="index">
-        <u-tabbar-item :text="item.text" :icon="index === 0 ? item.selectedIconPath : item.iconPath"></u-tabbar-item>
+        <u-tabbar-item
+          :text="item.text"
+          :icon="item.name === 'echarts' ? item.selectedIconPath : item.iconPath"
+        ></u-tabbar-item>
       </block>
     </u-tabbar>
   </view>
@@ -31,7 +34,7 @@ export default {
   methods: {
     change(name) {
       uni.navigateTo({
-        url: this.tabarList[name].pagePath
+        url: this.tabarList[name].pagePath,
       });
     },
   },
@@ -39,5 +42,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

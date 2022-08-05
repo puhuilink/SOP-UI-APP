@@ -85,7 +85,7 @@
       <u-tabs :scrollable="false" :list="list" @click="changeLanguage"></u-tabs>
     </view>
     <u-tabbar
-      :value="2"
+      :value="tabarList.findIndex(item => (item.name === 'user'))"
       :fixed="true"
       :placeholder="false"
       :safeAreaInsetBottom="false"
@@ -94,7 +94,7 @@
       <block v-for="(item, index) in tabarList" :key="index">
         <u-tabbar-item
           :text="item.text"
-          :icon="index === 2 ? item.selectedIconPath : item.iconPath"
+          :icon="item.name === 'user' ? item.selectedIconPath : item.iconPath"
         ></u-tabbar-item>
       </block>
     </u-tabbar>

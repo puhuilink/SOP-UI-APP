@@ -41,7 +41,7 @@
     </view>
 
     <u-tabbar
-      :value="1"
+      :value="tabarList.findIndex(item => (item.name === 'index'))"
       :fixed="true"
       :placeholder="false"
       :safeAreaInsetBottom="false"
@@ -50,7 +50,7 @@
       <block v-for="(item, index) in tabarList" :key="index">
         <u-tabbar-item
           :text="item.text"
-          :icon="index === 1 ? item.selectedIconPath : item.iconPath"
+          :icon="item.name === 'index' ? item.selectedIconPath : item.iconPath"
         ></u-tabbar-item>
       </block>
     </u-tabbar>
