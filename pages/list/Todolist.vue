@@ -59,7 +59,7 @@ export default {
     };
   },
     onLoad() {
-    this.getHavedolist();
+    this.getTodolist();
   },
    methods: {
     //转换时间戳
@@ -98,7 +98,7 @@ export default {
     async change(e) {
       this.$refs.table.clearSelection();
       this.pageNo = e.current;
-      this.getHavedolist();
+      this.getTodolist();
     },
     //详情页
     detail() {
