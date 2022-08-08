@@ -24,7 +24,7 @@
 		{
 			"path": "pages/profile/profile",
 			"style": {
-				"navigationBarTitleText": "个人资料",
+				"navigationBarTitleText": "设置",
 				"navigationStyle": "custom"
 			}
 		},

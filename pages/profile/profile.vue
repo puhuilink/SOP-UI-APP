@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-    <Navbar :title="'个人资料'" />
+    <Navbar :title="'设置'" />
     <view class="user-info">
       <view class="info-item">
         <view class="label">头像：</view>
@@ -51,6 +51,20 @@
           </view>
         </view>
       </view>
+      <view class="info-item">
+        <view class="label">语言：</view>
+        <view class="info" @click="language.show = true">
+          <u-picker
+            :show="language.show"
+            :columns="language.columns"
+            keyName="label"
+            @confirm="changeLanguage"
+            @cancel="language.show = false"
+          />
+          <view class="value">{{ language.active.label }}</view>
+          <u-icon class="btn" name="arrow-right" />
+        </view>
+      </view>
     </view>
     <view v-if="hasLogin" class="logout-btn">
       <u-button
@@ -76,6 +90,25 @@ export default {
       avatarFiles: [],
       nameEditOn: false,
       tempName: "",
+      language: {
+        active: {
+          label: "中文",
+          value: "zh-CN",
+        },
+        show: false,
+        columns: [
+          [
+            {
+              label: "中文",
+              value: "zh-CN",
+            },
+            {
+              label: "英文",
+              value: "zh-US",
+            },
+          ],
+        ],
+      },
     };
   },
   computed: {
@@ -117,6 +150,14 @@ export default {
         this.userInfo.nickname = this.tempName;
         this.$store.commit("SET_USER_INFO", this.userInfo);
       });
+    },
+    changeLanguage(data) {
+      let { value } = data;
+      this.language.active = value[0];
+      this.language.show = false;
+      this._i18n.locale = this.language.active.value;
+      let count = this.$t("lang") === "zh" ? 1 : 2;
+      localStorage.setItem("language", count);
     },
     logout() {
       uni.showModal({

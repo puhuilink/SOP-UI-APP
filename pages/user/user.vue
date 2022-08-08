@@ -79,11 +79,6 @@
       </view>
     </view>
     <u-gap height="60rpx" />
-    <!--国际化切换按钮测试-->
-    <view class="work-order">
-      <view class="work-order-tit">{{ index.text }}</view>
-      <u-tabs :scrollable="false" :list="list" @click="changeLanguage"></u-tabs>
-    </view>
     <u-tabbar
       :value="tabarList.findIndex(item => (item.name === 'user'))"
       :fixed="true"
@@ -107,14 +102,6 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      list: [
-        {
-          name: "中文",
-        },
-        {
-          name: "英文",
-        },
-      ],
       lastMsg: {
         show: true,
       },
@@ -135,18 +122,6 @@ export default {
   onLoad() {},
   created() {},
   methods: {
-    changeLanguage(item) {
-      if (item.name == "中文") {
-        this._i18n.locale = "zh-CN";
-        let count = this.$t("lang") === "zh" ? 1 : 2;
-        // this.$store.commit('setLang', count)
-        localStorage.setItem("language", count);
-      } else {
-        this._i18n.locale = "en-US";
-        let count = this.$t("lang") === "zh" ? 1 : 2;
-        localStorage.setItem("language", count);
-      }
-    },
     change(name) {
       uni.navigateTo({
         url: this.tabarList[name].pagePath,
