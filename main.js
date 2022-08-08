@@ -9,7 +9,7 @@ import VueI18n from 'vue-i18n'
 import messages from './common/lang.js'
 Vue.use(VueI18n)
 const i18n = new VueI18n({  
-  locale: localStorage.getItem('language') === '1' ||  localStorage.getItem('language') === null ? 'zh-CN' : 'en-US',  // 默认选择的语言(1:中文,2:英文<这里默认中文>)
+  locale: localStorage.getItem('language') ? localStorage.getItem('language') : 'zh-CN',  // 默认选择的语言中文
   messages 
 })
 Vue.prototype._i18n = i18n

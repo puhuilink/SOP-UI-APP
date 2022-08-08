@@ -60,6 +60,7 @@
             keyName="label"
             @confirm="changeLanguage"
             @cancel="language.show = false"
+            :defaultIndex="language.index"
           />
           <view class="value">{{ language.active.label }}</view>
           <u-icon class="btn" name="arrow-right" />
@@ -95,6 +96,7 @@ export default {
           label: "中文",
           value: "zh-CN",
         },
+        index: 0,
         show: false,
         columns: [
           [
@@ -123,7 +125,17 @@ export default {
       return this.$store.getters.hasLogin;
     },
   },
-  onLoad() {},
+  onLoad() {
+    // 同步语言设置
+    let languageActive = localStorage.getItem('language') ? localStorage.getItem('language') : 'zh-CN'
+    let index= this.language.columns[0].findIndex(item  =>  {
+      return item.value === languageActive
+    })
+    if (this.language.columns[0][index]) {
+      this.language.active = this.language.columns[0][index]
+      this.language.index = [index]
+    }
+  },
   methods: {
     handleAvatarClick() {
       uni.chooseImage({
@@ -156,8 +168,7 @@ export default {
       this.language.active = value[0];
       this.language.show = false;
       this._i18n.locale = this.language.active.value;
-      let count = this.$t("lang") === "zh" ? 1 : 2;
-      localStorage.setItem("language", count);
+      localStorage.setItem("language", this.language.active.value);
     },
     logout() {
       uni.showModal({
