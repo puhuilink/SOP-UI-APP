@@ -89,11 +89,12 @@ export default {
     },
     click(name) {
       let dirId = this.menuList[name].id || "";
+      let title = this.menuList[name].title || ""
       getByDir({ dirId }).then((res) => {
         let { code, data = {} } = res;
         if (data && data.formId) {
           uni.navigateTo({
-            url: `/pages/info/test?id=${data.formId}`,
+            url: `/pages/info/test?id=${data.formId}&title=${title}`,
           });
         }
       });

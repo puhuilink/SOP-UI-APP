@@ -1,6 +1,6 @@
 <template>
   <view class="content">
-    <Navbar :title="'表单'" />
+    <Navbar :title="pageTitle" />
     <active-form ref="activeForm" v-model="fields" num></active-form>
     <view class="subform" @click="sub">提交表单</view>
   </view>
@@ -18,6 +18,7 @@ export default {
   },
   data() {
     return {
+      pageTitle: this.$route.query.title || '',
       fields: [],
     };
   },
@@ -56,7 +57,7 @@ export default {
         });
     },
     getFrom() {
-      getFrom(this.$route.query).then((res) => {
+      getFrom({id: this.$route.query.id || ''}).then((res) => {
         console.log(res)
         for (var i = 0; i < res.data.fields.length; i++) {
           this.fields.push(JSON.parse(res.data.fields[i]));
