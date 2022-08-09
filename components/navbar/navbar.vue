@@ -46,7 +46,6 @@ export default {
     height: 75rpx;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     color: #fff;
     font-size: 33rpx;
     font-family: PingFangSC-Regular, PingFang SC;
@@ -55,6 +54,11 @@ export default {
     background: url(../../static/images/icon/head-bg.png) no-repeat;
     background-size: 100% auto;
     background-position: 0% 25%;
+
+    view {
+      flex: 1;
+      text-align: center;
+    }
   }
 }
 </style>

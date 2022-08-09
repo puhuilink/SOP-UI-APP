@@ -37,7 +37,6 @@
           </u-col>
         </u-row>
         <view class="list-item">
-          <view class="level1">{{ item.value }}</view>
           <view class="account">
             <view>{{item.title}}</view>
             <view>{{item.id}}</view>
@@ -74,7 +73,6 @@ export default {
       },
       listData: [
         {
-          value: "P1",
           id: "S20220531199",
           title: "01-财务账号问题",
           author_name: "二线人员王明已处理",
@@ -82,7 +80,6 @@ export default {
           published_at: "2022-07-22 08:19",
         },
         {
-          value: "P2",
           id: "S20220531199",
           title: "02-财务账号问题",
           author_name: "二线人员王明已处理",
@@ -90,7 +87,6 @@ export default {
           published_at: "2022-07-23 08:19",
         },
         {
-          value: "P3",
           id: "S20220531199",
           title: "03-财务账号问题",
           author_name: "二线人员王明已处理",
@@ -98,7 +94,6 @@ export default {
           published_at: "2022-07-24 08:19",
         },
         {
-          value: "P4",
           id: "S20220531199",
           title: "04-财务账号问题",
           author_name: "二线人员王明已处理",
@@ -145,39 +140,13 @@ export default {
 .list-item {
   margin: 0 auto;
   width: 719rpx;
-  min-height: 185rpx;
+  min-height: 165rpx;
   background: #ffffff;
   border-radius: 17rpx;
-  padding-bottom: 30rpx;
+  padding: 30rpx 28rpx;
   box-sizing: border-box;
 
-  .level1,
-  .level2,
-  .level3 {
-    width: 65rpx;
-    height: 38rpx;
-    border-top-left-radius: 17rpx;
-    border-bottom-right-radius: 17rpx;
-    background: #fd5b5b;
-    line-height: 38rpx;
-    font-size: 29rpx;
-    font-family: DINAlternate-Bold, DINAlternate;
-    font-weight: bold;
-    color: #ffffff;
-    text-align: center;
-    margin-bottom: 19rpx;
-  }
-
-  .level2 {
-    background: #f08743;
-  }
-
-  .level3 {
-    background: #3080f5;
-  }
-
   .account {
-    padding: 0 28rpx;
     height: 46rpx;
     line-height: 46rpx;
     font-size: 33rpx;
@@ -189,7 +158,6 @@ export default {
   }
 
   .record {
-    padding: 0 28rpx;
     margin-top: 23rpx;
     display: flex;
     justify-content: space-between;
