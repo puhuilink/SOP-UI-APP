@@ -3,6 +3,9 @@ import App from './App'
 
 // 引入全局uView
 import uView from '@/uni_modules/uview-ui'
+// 引入echarts
+import * as echarts from 'echarts'
+
 
 //国际化
 import VueI18n from 'vue-i18n'
@@ -18,6 +21,7 @@ Vue.config.productionTip = false
 import store from './store'
 
 Vue.config.productionTip = false
+Vue.prototype.$echarts = echarts
 Vue.prototype.$store = store
 
 
