@@ -54,7 +54,7 @@ export default {
   },
   data() {
     return {
-      pageTitle:'IT服务运营管理平台',
+      pageTitle:'IT服务运营平台',
          lastMsg: {
         show: true,
       },
