@@ -60,6 +60,7 @@
             keyName="label"
             @confirm="changeLanguage"
             @cancel="language.show = false"
+            :defaultIndex="language.index"
           />
           <view class="value">{{ language.active.label }}</view>
           <u-icon class="btn" name="arrow-right" />
