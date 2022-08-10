@@ -3,14 +3,14 @@
     <Navbar :title="'设置'" />
     <view class="user-info">
       <view class="info-item">
-        <view class="label">{{langText.avatar}}：</view>
+        <view class="label">{{ langText.avatar }}：</view>
         <view class="info" @click="handleAvatarClick">
           <u-avatar size="60" :src="userInfo.avatar"></u-avatar>
           <u-icon class="btn" name="arrow-right"></u-icon>
         </view>
       </view>
       <view class="info-item">
-        <view class="label">{{langText.nickname}}：</view>
+        <view class="label">{{ langText.nickname }}：</view>
         <view v-if="!nameEditOn" class="info">
           <view class="value">{{ userInfo.nickname }}</view>
           <u-icon
@@ -52,7 +52,7 @@
         </view>
       </view>
       <view class="info-item">
-        <view class="label">{{langText.language}}：</view>
+        <view class="label">{{ langText.language }}：</view>
         <view class="info" @click="language.show = true">
           <u-picker
             :show="language.show"
@@ -96,7 +96,7 @@ export default {
           label: "中文",
           value: "zh-CN",
         },
-        index: 0,
+        index: [0],
         show: false,
         columns: [
           [
@@ -130,13 +130,15 @@ export default {
   },
   onLoad() {
     // 同步语言设置
-    let languageActive = localStorage.getItem('language') ? localStorage.getItem('language') : 'zh-CN'
-    let index= this.language.columns[0].findIndex(item  =>  {
-      return item.value === languageActive
-    })
+    let languageActive = localStorage.getItem("language")
+      ? localStorage.getItem("language")
+      : "zh-CN";
+    let index = this.language.columns[0].findIndex((item) => {
+      return item.value === languageActive;
+    });
     if (this.language.columns[0][index]) {
-      this.language.active = this.language.columns[0][index]
-      this.language.index = [index]
+      this.language.active = this.language.columns[0][index];
+      this.language.index = [index];
     }
   },
   methods: {
