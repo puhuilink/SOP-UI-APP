@@ -720,7 +720,7 @@ export default {
     flex: 1;
 
     textarea {
-      min-height: 248rpx;
+      min-height: 200rpx;
       width: 100%;
     }
   }
@@ -741,11 +741,12 @@ export default {
 
   .textarea-box {
     width: 100%;
-    padding-top: 20rpx;
+    padding: 20rpx 0;
     display: flex;
 
     textarea {
-      padding-left: 32rpx;
+      padding: 0 32rpx;
+      box-sizing: border-box;
       color: #333;
     }
   }

@@ -74,17 +74,25 @@ export default {
       return this.$t("tabbar");
     },
   },
-  created() {
-    let { username = "" } = this.$store.getters.userInfo;
-    switch (username) {
-      case "admin":
-        this.tabarList = this.adminTabbar;
-        break;
-      default:
-        this.tabarList = this.userTabbar;
-        break;
-    }
+  watch: {
+    "$store.getters.userInfo": {
+      handler: function (val) {
+        console.log(val);
+        let { username = "" } = val;
+        switch (username) {
+          case "admin":
+            this.tabarList = this.adminTabbar;
+            break;
+          default:
+            this.tabarList = this.userTabbar;
+            break;
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
+  created() {},
   methods: {
     change(name) {
       uni.navigateTo({
