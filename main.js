@@ -6,7 +6,7 @@ import uView from '@/uni_modules/uview-ui'
 
 //国际化
 import VueI18n from 'vue-i18n'
-import messages from './common/lang.js'
+import messages from './lang/index.js'
 Vue.use(VueI18n)
 const i18n = new VueI18n({  
   locale: localStorage.getItem('language') ? localStorage.getItem('language') : 'zh-CN',  // 默认选择的语言中文

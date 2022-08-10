@@ -4,7 +4,7 @@
       <view>
         <u-avatar size="120rpx" :src="userInfo.avatar" />
         <view class="nick-name">
-          <view>{{ index.userName }}</view>
+          <view>{{ langText.userName }}</view>
           <view>{{ userInfo.nickname || "********" }}</view>
         </view>
       </view>
@@ -20,7 +20,7 @@
       <view class="msg-box">
         <view class="tlt">
           <view>
-         {{ index.order }}
+         {{ langText.order }}
             <view class="remind" />
           </view>
           <view class="time">上午11:30</view>
@@ -30,7 +30,7 @@
     </view>
 
     <view class="work-order">
-      <view class="work-order-tit">{{ index.workOrder }}</view>
+      <view class="work-order-tit">{{ langText.workOrder }}</view>
       <view
         class="work-order-item"
         @click="loginOrJump('/pages/list/Todolist')"
@@ -40,7 +40,7 @@
             src="/static/images/icon/user/wait-done.png"
             class="work-order-item-icon"
           />
-          <view class="work-order-item-tit">{{ index.toDo }}</view>
+          <view class="work-order-item-tit">{{ langText.toDo }}</view>
         </view>
         <u-icon name="arrow-right" />
       </view>
@@ -53,7 +53,7 @@
             src="/static/images/icon/user/done.png"
             class="work-order-item-icon"
           />
-          <view class="work-order-item-tit">{{ index.haveDo }}</view>
+          <view class="work-order-item-tit">{{ langText.haveDo }}</view>
         </view>
         <u-icon name="arrow-right" />
       </view>
@@ -63,7 +63,7 @@
             src="/static/images/icon/user/administration.png"
             class="work-order-item-icon"
           />
-          <view class="work-order-item-tit">{{ index.myManage }}</view>
+          <view class="work-order-item-tit">{{ langText.myManage }}</view>
         </view>
         <u-icon name="arrow-right" />
       </view>
@@ -73,7 +73,7 @@
             src="/static/images/icon/user/message.png"
             class="work-order-item-icon"
           />
-          <view class="work-order-item-tit">{{ index.messageCenter }}</view>
+          <view class="work-order-item-tit">{{ langText.messageCenter }}</view>
         </view>
         <u-icon name="arrow-right" />
       </view>
@@ -115,8 +115,8 @@ export default {
       return this.$store.getters.hasLogin;
     },
     ...mapState(["tabarList"]),
-    index() {
-      return this.$t("index");
+    langText() {
+      return this.$t("user");
     },
   },
   onLoad() {},
