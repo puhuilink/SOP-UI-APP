@@ -15,6 +15,38 @@
           <view class="msg">您有一个新的工单待接收，请及时处理</view>
         </view>
       </view>
+      <view class="box-card">
+         <view class="report-form">
+          <view class="tlt">
+          <view class="report-form-tit">报表</view>
+         <u-button class="report-form-button" type="primary" text="全部"   @click="loginOrJump('/pages/list/echartslist')"></u-button>
+         </view>
+       	<uni-table ref="table" width="360"  border stripe  emptyText="暂无更多数据">
+				<uni-tr>
+					<uni-th class="name" width="100" align="center">二级单位名称</uni-th>
+					<uni-th class="name" width="80" align="center">系统公共</uni-th>
+					<uni-th class="name"  width="80"  align="center">业务单据</uni-th>
+					<uni-th class="name"  width="80"  align="center">财务核算</uni-th>
+          <uni-th class="name"   width="80" align="center">司库管理</uni-th>
+				</uni-tr>
+				<uni-tr v-for="(item, index) in tableData" :key="index">
+					<uni-td align="center">{{ item.processInstance.id }}</uni-td>
+					<uni-td align="center">
+					{{ item.processInstance.name }}
+					</uni-td>
+          	<uni-td align="center">
+					{{ item.suspensionState }}
+					</uni-td>
+          	<uni-td align="center">
+					{{ item.processInstance.startUserNickname }}
+					</uni-td>
+        
+				<uni-td align="center">{{item.createTime }}</uni-td>
+				</uni-tr>
+			</uni-table>
+      </view>
+     
+      </view>
        <view class="box-card">
          <view class="report-form">
           <view class="tlt">
@@ -42,6 +74,63 @@ export default {
   },
   data() {
     return {
+      pageTitle:'IT服务运营平台',
+      tableData:[
+        {
+          processInstance:{
+            id:'二航局',
+            name:'815',
+            startUserNickname:'815',
+          },
+          suspensionState:'815',
+          createTime:'815'
+        },
+        {
+          processInstance:{
+            id:'中国城乡',
+            name:'121',
+            startUserNickname:'121',
+          },
+          suspensionState:'121',
+          createTime:'121'
+        },
+        {
+          processInstance:{
+            id:'二公院',
+            name:'44',
+            startUserNickname:'44',
+          },
+          suspensionState:'44',
+          createTime:'44'
+        },
+        {
+          processInstance:{
+            id:'信科集团',
+            name:'815',
+            startUserNickname:'815',
+          },
+          suspensionState:'815',
+          createTime:'815'
+        },
+        {
+          processInstance:{
+            id:'二航院',
+            name:'121',
+            startUserNickname:'121',
+          },
+          suspensionState:'121',
+          createTime:'121'
+        },
+        {
+          processInstance:{
+            id:'中国港湾',
+            name:'44',
+            startUserNickname:'44',
+          },
+          suspensionState:'44',
+          createTime:'44'
+        }
+      ],
          lastMsg: {
         show: true,
       },
@@ -49,6 +138,12 @@ export default {
   },
   onLoad() {},
   computed: {
+     userInfo() {
+      return this.$store.getters.userInfo;
+    },
+    hasLogin() {
+      return this.$store.getters.hasLogin;
+    },
     langText() {
       return this.$t("echarts");
     },
@@ -56,6 +151,17 @@ export default {
   methods: {
       msgDel() {
       this.lastMsg.show = false;
+    },
+      loginOrJump(pageUrl) {
+      if (!this.hasLogin) {
+        uni.navigateTo({
+          url: "/pages/login/login",
+        });
+      } else if (pageUrl) {
+        uni.navigateTo({
+          url: pageUrl,
+        });
+      }
     },
     // 初始化echarts
     initEcharts() {
@@ -123,6 +229,9 @@ export default {
 </script>
 
 <style  lang="scss" scoped>
+.name{
+  font-size:12rpx;
+}
 .content {
   width: 719rpx;
   margin: 0 auto;
@@ -226,7 +335,7 @@ export default {
     width: 120rpx;
      height: 50rpx;
     font-size: 15pt;
-    margin-right: 50rpx;
+    margin-right: 40rpx;
     font-family: PingFangSC-Regular, PingFang SC;
   }
  }

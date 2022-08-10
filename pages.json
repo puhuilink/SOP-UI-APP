@@ -41,9 +41,9 @@
 			}
 		},
 		{
-			"path": "pages/info/test",
+			"path": "pages/info/formsubmit",
 			"style": {
-				"navigationBarTitleText": "测试",
+				"navigationBarTitleText": "表单提交",
 				"navigationStyle": "custom",
 				"navigationBarBackgroundColor": "#07c160"
 			}
@@ -52,6 +52,12 @@
 			"path": "pages/list/Havedolist",
 			"style": {
 				"navigationBarTitleText": "已办列表"
+			}
+		},
+    {
+			"path": "pages/list/echartslist",
+			"style": {
+				"navigationBarTitleText": "全部工单"
 			}
 		},
 		// {
