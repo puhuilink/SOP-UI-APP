@@ -3,14 +3,14 @@
     <Navbar :title="'设置'" />
     <view class="user-info">
       <view class="info-item">
-        <view class="label">头像：</view>
+        <view class="label">{{langText.avatar}}：</view>
         <view class="info" @click="handleAvatarClick">
           <u-avatar size="60" :src="userInfo.avatar"></u-avatar>
           <u-icon class="btn" name="arrow-right"></u-icon>
         </view>
       </view>
       <view class="info-item">
-        <view class="label">昵称：</view>
+        <view class="label">{{langText.nickname}}：</view>
         <view v-if="!nameEditOn" class="info">
           <view class="value">{{ userInfo.nickname }}</view>
           <u-icon
@@ -52,7 +52,7 @@
         </view>
       </view>
       <view class="info-item">
-        <view class="label">语言：</view>
+        <view class="label">{{langText.language}}：</view>
         <view class="info" @click="language.show = true">
           <u-picker
             :show="language.show"
@@ -123,6 +123,9 @@ export default {
     },
     hasLogin() {
       return this.$store.getters.hasLogin;
+    },
+    langText() {
+      return this.$t("profile");
     },
   },
   onLoad() {

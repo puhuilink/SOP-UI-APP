@@ -1,9 +1,9 @@
 <template>
   <view class="container">
-    <view class="banner-tit">IT服务运营管理平台</view>
+    <view class="banner-tit">{{langText.systemName}}</view>
 
     <view class="content">
-      <view v-if="lastMsg.show" class="scroll-msg" @click="msgDel">
+      <!-- <view v-if="lastMsg.show" class="scroll-msg" @click="msgDel">
         <img src="../../static/images/icon/消息.png" />
         <view class="msg-box">
           <view class="tlt">
@@ -15,7 +15,7 @@
           </view>
           <view class="msg">您有一个新的工单待接收，请及时处理</view>
         </view>
-      </view>
+      </view> -->
 
       <!--宫格菜单按钮-->
       <scroll-view
@@ -26,7 +26,7 @@
         }"
         @scrolltolower="scrolltolower"
       >
-        <view class="title">自助工单</view>
+        <view class="title">{{langText.orderTitle}}</view>
         <u-grid :border="false" col="4" @click="click">
           <u-grid-item
             v-for="(item, index) in menuList"
@@ -40,29 +40,18 @@
       </scroll-view>
     </view>
 
-    <u-tabbar
-      :value="tabarList.findIndex((item) => item.name === 'index')"
-      :fixed="true"
-      :placeholder="false"
-      :safeAreaInsetBottom="false"
-      @change="change"
-    >
-      <block v-for="(item, index) in tabarList" :key="index">
-        <u-tabbar-item
-          :text="item.text"
-          :icon="item.name === 'index' ? item.selectedIconPath : item.iconPath"
-        ></u-tabbar-item>
-      </block>
-    </u-tabbar>
+    <Tabbar indexBar="index" />
   </view>
 </template>
 
 <script>
 import { getList, getByDir } from "@/api/index.js";
-import { mapState } from "vuex";
+import Tabbar from "@/components/tabbar/tabbar";
 export default {
   name: "index",
-  components: {},
+  components: {
+    Tabbar,
+  },
   data() {
     return {
       isScrolltolower: false,
@@ -74,22 +63,17 @@ export default {
     };
   },
   onLoad() {
-    // 获取用户信息
-    this.$store.dispatch("ObtainUserInfo");
     this.getList();
   },
   computed: {
-    ...mapState(["tabarList"]),
+    langText() {
+      return this.$t("index");
+    },
   },
   methods: {
-    change(name) {
-      uni.navigateTo({
-        url: this.tabarList[name].pagePath,
-      });
-    },
     click(name) {
       let dirId = this.menuList[name].id || "";
-      let title = this.menuList[name].title || ""
+      let title = this.menuList[name].title || "";
       getByDir({ dirId }).then((res) => {
         let { code, data = {} } = res;
         if (data && data.formId) {
@@ -117,7 +101,7 @@ export default {
       });
       this.pageNo += 1;
       if (this.isScrolltolower) {
-        this.isScrolltolower = false
+        this.isScrolltolower = false;
       }
     },
     msgDel() {

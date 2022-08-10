@@ -15,7 +15,7 @@
         @click="loginOrJump('/pages/profile/profile')"
       />
     </view>
-    <view v-if="lastMsg.show" class="scroll-msg" @click="msgDel">
+    <!-- <view v-if="lastMsg.show" class="scroll-msg" @click="msgDel">
       <img src="../../static/images/icon/消息.png" />
       <view class="msg-box">
         <view class="tlt">
@@ -27,7 +27,7 @@
         </view>
         <view class="msg">您有一个新的工单待接收，请及时处理</view>
       </view>
-    </view>
+    </view> -->
 
     <view class="work-order">
       <view class="work-order-tit">{{ langText.workOrder }}</view>
@@ -79,27 +79,17 @@
       </view>
     </view>
     <u-gap height="60rpx" />
-    <u-tabbar
-      :value="tabarList.findIndex(item => (item.name === 'user'))"
-      :fixed="true"
-      :placeholder="false"
-      :safeAreaInsetBottom="false"
-      @change="change"
-    >
-      <block v-for="(item, index) in tabarList" :key="index">
-        <u-tabbar-item
-          :text="item.text"
-          :icon="item.name === 'user' ? item.selectedIconPath : item.iconPath"
-        ></u-tabbar-item>
-      </block>
-    </u-tabbar>
+    <Tabbar indexBar="user" />
   </view>
 </template>
 
 <script>
 import { getToDoList } from "@/api/list.js";
-import { mapState } from "vuex";
+import Tabbar from "@/components/tabbar/tabbar";
 export default {
+  components: {
+    Tabbar
+  },
   data() {
     return {
       lastMsg: {
@@ -114,7 +104,6 @@ export default {
     hasLogin() {
       return this.$store.getters.hasLogin;
     },
-    ...mapState(["tabarList"]),
     langText() {
       return this.$t("user");
     },
@@ -122,11 +111,6 @@ export default {
   onLoad() {},
   created() {},
   methods: {
-    change(name) {
-      uni.navigateTo({
-        url: this.tabarList[name].pagePath,
-      });
-    },
     getToDoList() {
       getToDoList(this.form).then((res) => {
         console.log(res);

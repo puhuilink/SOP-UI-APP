@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import { logout } from '@/api/auth'
 import { getUserInfo } from '@/api/user'
 import { passwordLogin, smsLogin, weixinMiniAppLogin } from '@/api/auth'
-import tabBar from '@/utils/request/tabBar.js'
 
 const AccessTokenKey = 'ACCESS_TOKEN'
 const RefreshTokenKey = 'REFRESH_TOKEN'
@@ -15,7 +14,6 @@ const store = new Vuex.Store({
     accessToken: uni.getStorageSync(AccessTokenKey), // 访问令牌
     refreshToken: uni.getStorageSync(RefreshTokenKey), // 刷新令牌
     userInfo: {},
-    tabarList: [], // 动态底部导航栏
   },
   getters: {
     accessToken: state => state.accessToken,
@@ -49,20 +47,6 @@ const store = new Vuex.Store({
     // 更新用户信息
     SET_USER_INFO(state, data) {
       state.userInfo = data
-    },
-    //更新动态底部导航栏
-    SET_TABAR_LIST(state, data) {
-      let type = 'User'
-      if (data != null) {
-        switch (data.username) {
-          case 'admin':
-            type = 'Admin'
-            break;
-          default:
-            break;
-        }
-      }
-      state.tabarList = tabBar[type]
     },
     // 清空令牌 和 用户信息
     CLEAR_LOGIN_INFO(state) {
@@ -103,7 +87,6 @@ const store = new Vuex.Store({
     async ObtainUserInfo({ state, commit }) {
       const res = await getUserInfo()
       commit('SET_USER_INFO', res.data)
-      commit('SET_TABAR_LIST', res.data)
     }
   }
 })

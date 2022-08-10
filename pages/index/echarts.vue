@@ -1,7 +1,7 @@
 <template>
   <view class="container">
      <view class="content">
-        <Navbar :title="pageTitle" />
+        <Navbar :title="langText.pageTitle" />
      <view v-if="lastMsg.show" class="scroll-msg" @click="msgDel">
         <img src="../../static/images/icon/消息.png" />
         <view class="msg-box">
@@ -27,34 +27,21 @@
       </view>
       </view>
  
-    <u-tabbar
-      :value="tabarList.findIndex(item => (item.name === 'echarts'))"
-      :fixed="true"
-      :placeholder="false"
-      :safeAreaInsetBottom="false"
-      @change="change"
-    >
-      <block v-for="(item, index) in tabarList" :key="index">
-        <u-tabbar-item
-          :text="item.text"
-          :icon="item.name === 'echarts' ? item.selectedIconPath : item.iconPath"
-        ></u-tabbar-item>
-      </block>
-    </u-tabbar>
+    <Tabbar indexBar="echarts" />
   </view>
 </template>
 
 <script>
 import Navbar from "@/components/navbar/navbar";
-import { mapState } from "vuex";
+import Tabbar from "@/components/tabbar/tabbar";
 export default {
   name: "index",
  components: {
-    Navbar
+    Navbar,
+    Tabbar
   },
   data() {
     return {
-      pageTitle:'IT服务运营平台',
          lastMsg: {
         show: true,
       },
@@ -62,14 +49,11 @@ export default {
   },
   onLoad() {},
   computed: {
-    ...mapState(["tabarList"]),
+    langText() {
+      return this.$t("echarts");
+    },
   },
   methods: {
-    change(name) {
-      uni.navigateTo({
-        url: this.tabarList[name].pagePath,
-      });
-    },
       msgDel() {
       this.lastMsg.show = false;
     },
