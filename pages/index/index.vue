@@ -64,6 +64,8 @@ export default {
   },
   onLoad() {
     this.getList();
+    // 获取用户信息
+    this.$store.dispatch("ObtainUserInfo");
   },
   computed: {
     langText() {
