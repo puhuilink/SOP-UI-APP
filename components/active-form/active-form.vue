@@ -1,7 +1,10 @@
 <template>
   <view class="active-form form-container">
     <view class="form-box">
-      <block v-for="(item, index) in fields" :key="item.__config__.formId">
+      <block
+        v-for="(item, index) in fields"
+        :key="`${item.__config__.formId}_${index}`"
+      >
         <view class="form-item flex-row--c">
           <!-- 单行文本框 -->
           <view
@@ -73,8 +76,8 @@
             <view class="line-right pr20">
               <input
                 type="button"
-                class="input"
-                placeholder-class="plaClass"
+                class="input text-right"
+                placeholder-class="plaClass text-right"
                 :placeholder="item.placeholder"
                 v-model="form[item.formDataType]"
                 :disabled="item.disabled"
@@ -107,7 +110,7 @@
               <u-switch
                 :disabled="item.disabled"
                 v-model="form[item.formDataType]"
-                @change="switchChange(index,$event)"
+                @change="switchChange(index, $event)"
               ></u-switch>
             </view>
           </view>
@@ -118,7 +121,7 @@
               item.__config__.tag == 'el-cascader' ||
               item.__config__.tag === 'el-date-range' ||
               item.__config__.tag === 'el-date' ||
-             item.__config__.tag === 'el-date-picker' 
+              item.__config__.tag === 'el-date-picker'
             "
           >
             <view
@@ -133,8 +136,8 @@
             <view class="line-right pr20">
               <input
                 type="text"
-                class="input"
-                placeholder-class="plaClass"
+                class="input text-right"
+                placeholder-class="plaClass text-right"
                 v-model="form[item.formDataType]"
                 :placeholder="item.placeholder"
                 :disabled="item.disabled"
@@ -201,13 +204,12 @@
               item.__config__.tag == 'el-input' && item.type == 'textarea'
             "
           >
-            <view :class="item.__config__.required ? '' : 'p-l14 '">
+            <view class="line-left" :class="item.__config__.required ? '' : 'p-l14 '">
               <text class="colorRed" v-if="item.__config__.required">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
               {{ item.__config__.label }}：
             </view>
             <view class="line-bottom-textarea">
-              <!-- placeholder-class="plaClass" -->
               <textarea
                 auto-height
                 :maxlength="-1"
@@ -215,6 +217,7 @@
                 :placeholder="item.placeholder"
                 v-model="form[item.formDataType]"
                 @input="inputVal(index)"
+                placeholder-class="plaClass"
               >
               </textarea>
             </view>
@@ -429,27 +432,28 @@ export default {
     form: {
       get() {
         return this.value.reduce((obj, item) => {
-          obj[item.formDataType] = item.__config__.defaultValue;
-          obj.prefix = "S";
-          obj.processKey = "demo1";
-          obj.approvalDocument = "";
-          obj.associateWorkOrder = "";
-          obj.degreeOfInfluence = "";
-          obj.expectedCompletionTime = "";
-          obj.operationRecord = "";
-          obj.owningModule = "";
-          obj.owningSystem = "";
-          obj.priority = "";
-          obj.recorder = "";
-          obj.recorderDept = "";
-          obj.serviceRequestClassification = "";
-          obj.serviceRequestDetails = "";
-          obj.serviceRequestSource = "";
-          obj.title = "";
-          obj.urgency = "";
-          obj.userContactDetails = "";
-          obj.userDept = "";
-          obj.userName = "";
+          item.formDataType &&
+            (obj[item.formDataType] = item.__config__.defaultValue);
+          // obj.prefix = "S";
+          // obj.processKey = "demo1";
+          // obj.approvalDocument = "";
+          // obj.associateWorkOrder = "";
+          // obj.degreeOfInfluence = "";
+          // obj.expectedCompletionTime = "";
+          // obj.operationRecord = "";
+          // obj.owningModule = "";
+          // obj.owningSystem = "";
+          // obj.priority = "";
+          // obj.recorder = "";
+          // obj.recorderDept = "";
+          // obj.serviceRequestClassification = "";
+          // obj.serviceRequestDetails = "";
+          // obj.serviceRequestSource = "";
+          // obj.title = "";
+          // obj.urgency = "";
+          // obj.userContactDetails = "";
+          // obj.userDept = "";
+          // obj.userName = "";
           return obj;
         }, {});
       },
@@ -495,8 +499,8 @@ export default {
       this.$emit("input", this.fields);
     },
     //开关
-    switchChange(index,item) {
-      this.fields[index].formDataType =item;
+    switchChange(index, item) {
+      this.fields[index].formDataType = item;
       this.$emit("input", this.fields);
     },
     // 单选 下拉框点击确定
@@ -660,11 +664,21 @@ export default {
 
 <style lang="scss" scoped>
 .active-form {
-  min-height: 200px;
+  min-height: 200rpx;
+
+  .form-item {
+    min-height: 100rpx;
+    color: #333333;
+    font-size: 29rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+  }
 
   .plaClass {
-    text-align: right;
-    font-size: 26rpx;
+    font-size: 29rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #b9b9b9;
   }
 
   // 下拉icon
@@ -703,10 +717,11 @@ export default {
   }
 
   .line-bottom-textarea {
-    padding-top: 20rpx;
+    flex: 1;
 
     textarea {
-      min-height: 100rpx;
+      min-height: 248rpx;
+      width: 100%;
     }
   }
 
@@ -716,9 +731,8 @@ export default {
     align-items: center;
     height: 100%;
     letter-spacing: 0.5px;
-    font-size: 26rpx;
-    color: #000000;
     box-sizing: border-box;
+    white-space:nowrap;
   }
 
   .p-l14 {
@@ -727,14 +741,11 @@ export default {
 
   .textarea-box {
     width: 100%;
-    border-bottom: 1px solid #ededed;
     padding-top: 20rpx;
-    font-size: 26rpx;
+    display: flex;
 
     textarea {
       padding-left: 32rpx;
-      height: 100rpx;
-      font-size: 25rpx;
       color: #333;
     }
   }
@@ -745,7 +756,6 @@ export default {
     align-items: center;
     width: 100%;
     margin: 0 auto;
-    border-bottom: 1px solid #ededed;
     overflow: hidden;
 
     .input {
@@ -753,7 +763,6 @@ export default {
       height: 100%;
       width: 100%;
       text-align: left;
-      font-size: 28rpx;
       color: #333;
       border: none;
       overflow: hidden;
@@ -776,7 +785,6 @@ export default {
       height: 100%;
       width: 100%;
       text-align: left;
-      font-size: 28rpx;
       color: #333;
       border: none;
       overflow: hidden;
@@ -787,6 +795,10 @@ export default {
 
   .num {
     margin-right: 8rpx;
+  }
+
+  .text-right {
+    text-align: right !important;
   }
 }
 </style>
