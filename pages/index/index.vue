@@ -78,7 +78,7 @@ export default {
         let { code, data = {} } = res;
         if (data && data.formId) {
           uni.navigateTo({
-            url: `/pages/info/test?id=${data.formId}&title=${title}`,
+            url: `/pages/info/formsubmit?id=${data.formId}&title=${title}`,
           });
         }
       });
