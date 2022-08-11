@@ -251,7 +251,7 @@
           </view>
 
           <!-- 单选框 -->
-          <view class="line-col" v-else-if="item.__config__.tag === 'el-radio'">
+          <view class="line-col" v-else-if="item.__config__.tag === 'el-radio-group'">
             <view
               :class="
                 item.__config__.required ? 'line-left' : 'p-l14 line-left'
@@ -297,7 +297,7 @@
           <!-- 多选框 -->
           <view
             class="line-col"
-            v-else-if="item.__config__.tag == 'el-checkbox'"
+            v-else-if="item.__config__.tag == 'el-checkbox-group'"
           >
             <view
               :class="
