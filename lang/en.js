@@ -1,4 +1,17 @@
 export default {
+  tabbar: {
+    reportView: 'Report view',
+    workOrder: 'Work order',
+    user: 'user'
+  },
+  echarts: {
+    pageTitle: 'IT service operation platform',
+  },
+  index: {
+    pageTitle: 'index ',
+    systemName: 'IT service operation platform',
+    orderTitle: 'Self service work order'
+  },
   user: {
     text: 'International language switching test',
     toDo: 'My todo',
@@ -26,5 +39,11 @@ export default {
     fourthTitle: 'Financial accounting',
     fourthTitleOrderTotal: 'Fixed assets module',
     fourthTitleOrderDone: 'Credit and debt module',
+  },
+  profile: {
+    pageTitle: 'seting',
+    avatar: 'Avatar',
+    nickname: 'nickname',
+    language: 'language'
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-    <Navbar :title="'设置'" />
+    <Navbar :title="langText.pageTitle" />
     <view class="user-info">
       <view class="info-item">
         <view class="label">{{ langText.avatar }}：</view>

@@ -21,21 +21,18 @@ export default {
   props: ["indexBar"],
   data() {
     return {
+      tabbarText: [],
       // 普通用户
       userTabbar: [
         {
           name: "index",
           pagePath: "/pages/index/index",
-          // 自助工单
-          text: this.$t("tabbar.workOrder"),
           iconPath: "/static/images/tabbar/index.png",
           selectedIconPath: "/static/images/tabbar/index-active.png",
         },
         {
           name: "user",
           pagePath: "/pages/user/user",
-          // 我的
-          text: this.$t("tabbar.user"),
           iconPath: "/static/images/tabbar/user.png",
           selectedIconPath: "/static/images/tabbar/user-active.png",
         },
@@ -44,24 +41,18 @@ export default {
         {
           name: "echarts",
           pagePath: "/pages/index/echarts",
-          // 报表视图
-          text: this.$t("tabbar.reportForm"),
           iconPath: "/static/images/tabbar/echarts.png",
           selectedIconPath: "/static/images/tabbar/echarts-active.png",
         },
         {
           name: "index",
           pagePath: "/pages/index/index",
-          // 自助工单
-          text: this.$t("tabbar.workOrder"),
           iconPath: "/static/images/tabbar/index.png",
           selectedIconPath: "/static/images/tabbar/index-active.png",
         },
         {
           name: "user",
           pagePath: "/pages/user/user",
-          // 我的
-          text: this.$t("tabbar.user"),
           iconPath: "/static/images/tabbar/user.png",
           selectedIconPath: "/static/images/tabbar/user-active.png",
         },
@@ -77,7 +68,6 @@ export default {
   watch: {
     "$store.getters.userInfo": {
       handler: function (val) {
-        console.log(val);
         let { username = "" } = val;
         switch (username) {
           case "admin":
@@ -87,6 +77,30 @@ export default {
             this.tabarList = this.userTabbar;
             break;
         }
+      },
+      deep: true,
+      immediate: true,
+    },
+    langText: {
+      handler: function (val) {
+        this.tabarList = this.tabarList.map((item) => {
+          let text = "";
+          switch (item.name) {
+            case "echarts":
+              text = val.reportView; // 报表视图
+              break;
+            case "index":
+              text = val.workOrder; // 自助工单
+              break;
+            case "user":
+              text = val.user; // 我的
+              break;
+          }
+          return {
+            ...item,
+            text
+          };
+        });
       },
       deep: true,
       immediate: true,

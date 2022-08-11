@@ -1,6 +1,6 @@
 export default {
   tabbar: {
-    reportForm: '报表视图',
+    reportView: '报表视图',
     workOrder: '自助工单',
     user: '我的'
   },
@@ -41,6 +41,7 @@ export default {
     fourthTitleOrderDone: '债权债务模块',
   },
   profile: {
+    pageTitle: '设置',
     avatar: '头像',
     nickname: '昵称',
     language: '语言'
