@@ -5,7 +5,8 @@
       <view class="work-order-tit">{{ langText.firstTitle }}</view>
       <view
         class="work-order-item"
-        @click="loginOrJump('')"
+        
+        @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=首批上线单位工程量`)"
       >
         <view class="work-order-item-left">
           <img
@@ -40,11 +41,11 @@
         <u-icon name="arrow-right" />
       </view>
     </view>
-     <view class="work-order">
+     <!-- <view class="work-order">
       <view class="work-order-tit">{{ langText.secondTitle }}</view>
       <view
         class="work-order-item"
-        @click="loginOrJump('')"
+        @click="loginOrJump()"
       >
         <view class="work-order-item-left">
           <img
@@ -78,7 +79,7 @@
         </view>
         <u-icon name="arrow-right" />
       </view>
-    </view>
+    </view> -->
      <view class="work-order">
       <view class="work-order-tit">{{ langText.thirdTitle }}</view>
       <view
@@ -122,7 +123,7 @@
       <view class="work-order-tit">{{ langText.fourthTitle }}</view>
       <view
         class="work-order-item"
-        @click="loginOrJump('')"
+        @click="loginOrJump(`/pages/list/echartsDetail?type=2&title=固定资产模块`)"
       >
         <view class="work-order-item-left">
           <img

@@ -1,25 +1,19 @@
 <template>
   <view class="container">
      <view class="content">
-        <Navbar :title="langText.pageTitle" />
-     <view v-if="lastMsg.show" class="scroll-msg" @click="msgDel">
-        <img src="../../static/images/icon/消息.png" />
-        <view class="msg-box">
-          <view class="tlt">
-            <view>
-              工单
-              <view class="remind" />
-            </view>
-            <view class="time">上午11:30</view>
-          </view>
-          <view class="msg">您有一个新的工单待接收，请及时处理</view>
+        <Navbar :title="pageTitle" />
+        <view class="box-card">
+          <uni-data-select
+        v-model="form.value"
+        :localdata="range"
+        @change="change"
+        label="选择周期"
+      ></uni-data-select>
         </view>
-      </view>
       <view class="box-card">
          <view class="report-form">
           <view class="tlt">
           <view class="report-form-tit">{{langText.reportForm}}</view>
-         <u-button class="report-form-button" type="primary" :text="langText.all"   @click="loginOrJump('/pages/list/echartslist')"></u-button>
          </view>
        	<uni-table ref="table" width="360"  border stripe  emptyText="暂无更多数据">
 				<uni-tr>
@@ -51,10 +45,17 @@
          <view class="report-form">
           <view class="tlt">
           <view class="report-form-tit">{{langText.view}}</view>
-         <u-button class="report-form-button" type="primary" :text="langText.all" @click="loginOrJump('/pages/list/echartslist')"></u-button>
+          <view class="report-form-select" v-show="type==2">
+        <uni-data-select
+        v-model="form.company"
+        :localdata="company"
+        placeholder="请选择单位"
+        @change="change"
+      ></uni-data-select>
+      </view>
          </view>
-      <div class="myChart" ref="myChart"></div>
-      <div class="myChart" ref="myChart1"></div>
+      <div class="myChart" v-show="type==1" ref="myChart"></div>
+      <div class="myChart1" v-show="type==2" ref="myChart1"></div>
       </view>
       </view>
       </view>
@@ -74,7 +75,23 @@ export default {
   },
   data() {
     return {
-      pageTitle:'IT服务运营平台',
+       
+        form:{
+          company:'',
+           value: ''
+        },
+        range: [
+          { value: 0, text: "一周" },
+          { value: 1, text: "一个月" },
+          { value: 2, text: "近三个月" },
+        ],
+        company: [
+          { value: 0, text: "二航院" },
+          { value: 1, text: "中国城乡" },
+          { value: 2, text: "二公院" },
+        ],
+      pageTitle: this.$route.query.title || "",
+      type: this.$route.query.type || "",
       tableData:[
         {
           processInstance:{
@@ -131,12 +148,21 @@ export default {
           createTime:'44'
         }
       ],
-         lastMsg: {
-        show: true,
-      },
     };
   },
-  onLoad() {},
+ 	// watch:{
+	// 		type: {
+	// 			handler(newValue, oldValue) {
+	// 	       if(newValue == 1){
+  //          this.initEcharts()
+  //           }else if(newValue == 2){
+  //             this.initEcharts1()
+  //           }
+	// 			},
+	// 			immediate: true,
+	// 			deep: true
+	// 		}
+	// 	},
   computed: {
      userInfo() {
       return this.$store.getters.userInfo;
@@ -149,9 +175,9 @@ export default {
     },
   },
   methods: {
-      msgDel() {
-      this.lastMsg.show = false;
-    },
+     change(e) {
+        console.log("e:", e);
+      },
       loginOrJump(pageUrl) {
       if (!this.hasLogin) {
         uni.navigateTo({
@@ -167,62 +193,109 @@ export default {
     initEcharts() {
       const myChart =  this.$echarts.init(this.$refs.myChart);
       myChart.setOption({
+         legend: {
+    data: ['二航局', '中国城乡', '二公院', '信科集团', '二航院', '中国港湾']
+  },
+  xAxis: {
+    type: 'category',
+   axisLabel: {
+            //x轴文字的配置
+            show: true,
+            interval: 0,//使x轴文字显示全
+           },
+    data: ['系统公共', '业务单据', '财务核算', '司库管理','税务管理']
+  },
+  yAxis: {
+    type: 'value',
+    max:800
+  },
   series: [
     
     {
+        name: '二航局',
+      color: '#007EFD',
+      data: [500, 500, 500, 500, 500, 500],
+      type: 'bar'
+    },
+     {
+       name: '中国城乡',
+      color: '#AD65FF',
+      data: [460, 460, 460, 460, 460, 460],
+      type: 'bar'
+    },
+     {
+        name: '二公院',
+      color: '#FF6D6D',
+      data: [430, 430, 430, 430, 430, 430],
+      type: 'bar'
+    },
+     {
+        name: '信科集团',
+      color: '#FE883D',
+      data: [400, 400, 400, 400, 400, 400],
+      type: 'bar'
+    },
+     {
+        name: '二航院',
+      color: '#52BFA9',
+      data: [380, 380, 380, 380, 380, 380],
+      type: 'bar'
+    },
+     {
+        name: '中国港湾',
+      color: '#FED25C',
+      data: [320, 320, 320, 320, 320, 320],
+      type: 'bar'
+    }
+  ]
+      })
+      },
+  initEcharts1() {
+      const myChart =  this.$echarts.init(this.$refs.myChart1);
+      myChart.setOption({
+              legend: {
+                textStyle: {
+                  fontSize: '11'
+                },
+    data: ['操作问题','权限配置','系统Bug','影像扫描','影像上传','影像识别','业务咨询','功能缺失','场景不全','系统故障']
+  },
+  series: [
+    {
       type: 'pie',
-      radius: ['40%', '70%'],
+      radius: ['40%', '60%'],
       avoidLabelOverlap: false,
       itemStyle: {
         borderColor: '#fff',
         borderWidth: 2
       },
-      label: {
-        show: true,
-      },
-      emphasis: {
-        label: {
-          show: true,
-          fontSize: '40',
-          fontWeight: 'bold'
-        }
-      },
+     label : {
+      normal : {
+      formatter: '{c}',
+      textStyle : {
+      fontWeight : 'normal',
+      fontSize : 15
+      }
+    }
+   },
       labelLine: {
         show: true,
       },
       data: [
-        { value: 50, name: '系统公共' },
-        { value: 50, name: '业务单据' },
-        { value: 50, name: '财务核算' },
-        { value: 50, name: '司库管理' }
+        { value: 50, name: '操作问题' ,label:{textStyle:{color:"#4F7BFF"}} },
+        { value: 30, name: '权限配置' ,label:{textStyle:{color:"#FE883D "}} },
+        { value: 22, name: '系统Bug'  ,label:{textStyle:{color:"#52BFA9 "}} },
+        { value: 38, name: '影像扫描' ,label:{textStyle:{color:"#E8B428 "}} },
+        { value: 45, name: '影像上传' ,label:{textStyle:{color:"#38CA63"}} },
+        { value: 10, name: '影像识别' ,label:{textStyle:{color:"#65E0FF"}} },
+        { value: 17, name: '业务咨询' ,label:{textStyle:{color:"#FF6DEB "}} },
+        { value: 35, name: '功能缺失' ,label:{textStyle:{color:"#E22C2C "}} },
+        { value: 23, name: '场景不全' ,label:{textStyle:{color:"#AD65FF"}} },
+        { value: 29, name: '系统故障' ,label:{textStyle:{color:"#FF6D6D"}} },
       ]
     }
   ]
-      });
-    },
-    initEcharts1() {
-      const myChart =  this.$echarts.init(this.$refs.myChart1);
-      myChart.setOption({
-  xAxis: {
-    type: 'category',
-     axisLabel: {
-            //x轴文字的配置
-            show: true,
-            interval: 0,//使x轴文字显示全
-           },
-    data: ['二航局', '中国城乡', '二公院', '信科集团', '二航院', '中国港湾']
-  },
-  yAxis: {
-    type: 'value'
-  },
-  series: [
-    {
-      data: [120, 200, 150, 80, 70, 110],
-      type: 'bar'
-    }
-  ]
       })
-      }
+      },
 
   },
 
@@ -310,7 +383,6 @@ export default {
       width: 719rpx;
     margin: 0 auto 33rpx;
     background: #ffffff;
-    border-radius: 21rpx;
     display: flex;
     box-sizing: border-box;
 
@@ -323,21 +395,20 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-
         font-family: PingFangSC-Medium, PingFang SC;
         margin-bottom: 19rpx;
         margin-top: 19rpx;
 .report-form-tit {
-   width: 120rpx;
+     width: 120rpx;
   height: 50rpx;
     padding: 0 30rpx;
+    margin-bottom: 20rpx;
     font-size: 15pt;
     font-family: PingFangSC-Semibold, PingFang SC;
     font-weight: 600;
     color: #333333;
   }
-  .report-form-button{
-    width: 120rpx;
+  .report-form-select{
      height: 50rpx;
     font-size: 15pt;
     margin-right: 40rpx;
@@ -353,7 +424,7 @@ export default {
     }
     .myChart1{
         width: 360px;
-    	height: 400px;
+    	height: 500px;
       margin-left: -10rpx;
     }
 }
