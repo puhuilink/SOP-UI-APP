@@ -57,13 +57,13 @@
     {
 			"path": "pages/list/echartslist",
 			"style": {
-				"navigationBarTitleText": "全部工单"
+				"navigationBarTitleText": "报表列表"
 			}
 		},
     {
 			"path": "pages/list/echartsDetail",
 			"style": {
-				"navigationBarTitleText": "工单详情页"
+				"navigationBarTitleText": "报表详情页"
 			}
 		},
 		// {
