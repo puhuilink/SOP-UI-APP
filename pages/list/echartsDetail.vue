@@ -7,7 +7,8 @@
         v-model="form.value"
         :localdata="range"
         @change="change"
-        label="选择周期"
+        :placeholder="langText.select"
+        :label="langText.cycle"
       ></uni-data-select>
         </view>
       <view class="box-card">
@@ -49,7 +50,7 @@
         <uni-data-select
         v-model="form.company"
         :localdata="company"
-        placeholder="请选择单位"
+        :placeholder="langText.company"
         @change="change"
       ></uni-data-select>
       </view>
@@ -171,7 +172,7 @@ export default {
       return this.$store.getters.hasLogin;
     },
     langText() {
-      return this.$t("echarts");
+      return this.$t("echartsDetail");
     },
   },
   methods: {

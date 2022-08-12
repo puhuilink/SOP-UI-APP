@@ -43,6 +43,11 @@ export default {
     fourthTitleOrderTotal: '固定资产模块',
     fourthTitleOrderDone: '债权债务模块',
   },
+  echartsDetail: {
+    cycle:'选择周期',
+    company:'选择单位',
+    select:'请选择'
+  },
   profile: {
     pageTitle: '设置',
     avatar: '头像',

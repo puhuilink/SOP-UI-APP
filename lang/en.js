@@ -43,6 +43,11 @@ export default {
     fourthTitleOrderTotal: 'Fixed assets module',
     fourthTitleOrderDone: 'Credit and debt module',
   },
+  echartsDetail:{
+    cycle:'Select cycle',
+    company:'Select company',
+    select:'Please select'
+  },
   profile: {
     pageTitle: 'seting',
     avatar: 'Avatar',
