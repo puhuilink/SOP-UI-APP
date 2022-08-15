@@ -294,6 +294,7 @@
               </u-radio-group>
             </view>
           </view>
+
           <!-- 多选框 -->
           <view
             class="line-col"
@@ -376,15 +377,34 @@
           </view>
         </view>
       </block>
+      <view>
+		<u-popup :show="isShow" @close="close" @open="open">
+      <view class="content">
+        <mSidebar title="进度详情">
+            <view class="row">
+                <m-steps v-for="(item, index) in wrapRecordList" :item='item' :key="index" :index='index' :activity= 'activity'  date='updateTime'  >
+                    <text slot="status">{{progressStatus[item.progressStatus]}}</text>
+                </m-steps>
+            </view>
+        </mSidebar>
+    </view>
+		</u-popup>
+	</view>
     </view>
   </view>
 </template>
 
 <script>
 import mixins from "./mixins";
+import mSidebar from "@/components/m-sidebar/m-sidebar.vue"
+import mSteps from '@/components/m-steps/m-steps.vue'
 
 export default {
   name: "activeForm",
+  components: {
+    mSidebar,
+    mSteps
+},
   mixins: [mixins],
   props: {
     //是否展示序号
@@ -417,7 +437,17 @@ export default {
       currentSelectValue: "",
       codeFont: "获取验证码",
       wait: 60,
+    	activity: 0,
+				wrapRecordList: [
+					{updateTime: '2020-11-19 17:04:36',progressStatus: '4', content: '已到达目的地，本次服务结束！'},
+					{updateTime: '2020-11-19 17:04:36',progressStatus: '3',content: '终于到家啦，回去睡觉！'},
+					{updateTime: '2020-11-19 17:04:36',progressStatus: '2',content: '还有一半路程马上结束啦，换人来开！'},
+					{updateTime: '2020-11-19 17:04:36',progressStatus: '1',content: '准备出发啦！一路顺风！'},
+					{updateTime: '2020-11-19 17:04:36',progressStatus: '0',content: '开始啦'},
+				],
+				progressStatus: ['开始','准备出发','到达服务区', '到达目的地', '已送达'] ,
       isSend: false,
+      isShow:false,
     };
   },
   computed: {
@@ -460,6 +490,13 @@ export default {
     },
   },
   methods: {
+      open() {
+          // console.log('open');
+        },
+        close() {
+          this.isShow = false
+          // console.log('close');
+        },
     // 删除图片
     deletePic($event, item) {
       item.__config__.regList.splice($event.index, 1);
