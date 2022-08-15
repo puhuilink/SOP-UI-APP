@@ -71,7 +71,7 @@
       <u-button
         type="error"
         color="#ea322b"
-        text="退出登录"
+        :text="langText.logout"
         @click="logout"
       ></u-button>
     </view>
@@ -105,8 +105,8 @@ export default {
               value: "zh-CN",
             },
             {
-              label: "英文",
-              value: "zh-US",
+              label: "English",
+              value: "en-US",
             },
           ],
         ],

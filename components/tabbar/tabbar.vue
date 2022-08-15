@@ -21,41 +21,25 @@ export default {
   props: ["indexBar"],
   data() {
     return {
-      tabbarText: [],
-      // 普通用户
-      userTabbar: [
+      tabbar: [
+        // {
+        //   name: "echarts",
+        //   pagePath: "/pages/index/echarts",
+        //   iconPath: "/static/images/tabbar/echarts.png",
+        //   selectedIconPath: "/static/images/tabbar/echarts-active.png",
+        // },
         {
           name: "index",
           pagePath: "/pages/index/index",
           iconPath: "/static/images/tabbar/index.png",
           selectedIconPath: "/static/images/tabbar/index-active.png",
         },
-        {
-          name: "user",
-          pagePath: "/pages/user/user",
-          iconPath: "/static/images/tabbar/user.png",
-          selectedIconPath: "/static/images/tabbar/user-active.png",
-        },
-      ],
-      adminTabbar: [
-        {
-          name: "echarts",
-          pagePath: "/pages/index/echarts",
-          iconPath: "/static/images/tabbar/echarts.png",
-          selectedIconPath: "/static/images/tabbar/echarts-active.png",
-        },
-        {
-          name: "index",
-          pagePath: "/pages/index/index",
-          iconPath: "/static/images/tabbar/index.png",
-          selectedIconPath: "/static/images/tabbar/index-active.png",
-        },
-        {
-          name: "user",
-          pagePath: "/pages/user/user",
-          iconPath: "/static/images/tabbar/user.png",
-          selectedIconPath: "/static/images/tabbar/user-active.png",
-        },
+        // {
+        //   name: "user",
+        //   pagePath: "/pages/user/user",
+        //   iconPath: "/static/images/tabbar/user.png",
+        //   selectedIconPath: "/static/images/tabbar/user-active.png",
+        // },
       ],
       tabarList: [],
     };
@@ -66,24 +50,9 @@ export default {
     },
   },
   watch: {
-    "$store.getters.userInfo": {
-      handler: function (val) {
-        let { username = "" } = val;
-        switch (username) {
-          case "admin":
-            this.tabarList = this.adminTabbar;
-            break;
-          default:
-            this.tabarList = this.userTabbar;
-            break;
-        }
-      },
-      deep: true,
-      immediate: true,
-    },
     langText: {
       handler: function (val) {
-        this.tabarList = this.tabarList.map((item) => {
+        this.tabarList = this.tabbar.map((item) => {
           let text = "";
           switch (item.name) {
             case "echarts":

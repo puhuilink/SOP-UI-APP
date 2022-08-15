@@ -1,44 +1,117 @@
 <template>
   <view class="container">
-    <view class="banner-tit">{{langText.systemName}}</view>
-
-    <view class="content">
-      <!-- <view v-if="lastMsg.show" class="scroll-msg" @click="msgDel">
-        <img src="../../static/images/icon/消息.png" />
-        <view class="msg-box">
-          <view class="tlt">
-            <view>
-              工单
-              <view class="remind" />
-            </view>
-            <view class="time">上午11:30</view>
-          </view>
-          <view class="msg">您有一个新的工单待接收，请及时处理</view>
+    <view class="head">
+      <view class="head-title">{{ langText.systemName }}</view>
+      <view class="msg-set">
+        <view class="msg-num" @click="loginOrJump('/pages/message/message')">
+          <u-icon name="bell-fill" color="#fff" size="48rpx" />
+          <view class="num" v-if="msgNum > 0">{{
+            msgNum > 9 ? "···" : msgNum
+          }}</view>
         </view>
-      </view> -->
-
-      <!--宫格菜单按钮-->
-      <scroll-view
-        scroll-y
-        class="menu"
-        :style="{
-          height: lastMsg.show ? 'calc(100% - 140rpx);' : '100%',
-        }"
-        @scrolltolower="scrolltolower"
-      >
-        <view class="title">{{langText.orderTitle}}</view>
-        <u-grid :border="false" col="4" @click="click">
-          <u-grid-item
-            v-for="(item, index) in menuList"
-            :key="index"
-            class="menu-item"
-          >
-            <u-image :src="item.icon" width="96rpx" height="96rpx"> </u-image>
-            <text class="grid-title">{{ item.title }}</text>
-          </u-grid-item>
-        </u-grid>
-      </scroll-view>
+        <u-icon
+          name="setting-fill"
+          color="#fff"
+          size="48rpx"
+          @click="loginOrJump('/pages/profile/profile')"
+        />
+      </view>
     </view>
+    <view class="modular-box work-order">
+      <view class="title">{{ langText.myWorkOder }}</view>
+      <u-grid :border="false" col="4">
+        <u-grid-item
+          class="order-item"
+          @click="loginOrJump('/pages/list/Todolist')"
+        >
+          <u-image
+            src="@/static/images/index/todoOrder.png"
+            width="96rpx"
+            height="96rpx"
+          />
+          <text class="grid-title">{{ langText.todoOrder }}</text>
+        </u-grid-item>
+        <u-grid-item
+          class="order-item"
+          @click="loginOrJump('/pages/list/Havedolist')"
+        >
+          <u-image
+            src="@/static/images/index/havedoOrder.png"
+            width="96rpx"
+            height="96rpx"
+          />
+          <text class="grid-title">{{ langText.havedoOrder }}</text>
+        </u-grid-item>
+        <u-grid-item class="order-item" @click="loginOrJump('')">
+          <u-image
+            src="@/static/images/index/manageOrder.png"
+            width="96rpx"
+            height="96rpx"
+          />
+          <text class="grid-title">{{ langText.manageOrder }}</text>
+        </u-grid-item>
+      </u-grid>
+    </view>
+    <u-gap height="20rpx" />
+    <view class="modular-box work-order">
+      <view class="title">{{ langText.customOrder }}</view>
+      <u-grid :border="false" col="4" @click="click">
+        <u-grid-item
+          v-for="(item, index) in menuList"
+          :key="index"
+          class="order-item"
+        >
+          <u-image :src="item.icon" width="96rpx" height="96rpx" />
+          <text class="grid-title">{{ item.title }}</text>
+        </u-grid-item>
+      </u-grid>
+    </view>
+    <u-gap height="20rpx" />
+    <view class="modular-box" @click="loginOrJump('/pages/index/echarts')">
+      <view class="title">{{ langText.reportManage }}</view>
+      <view class="report">
+        <view class="report-title">单位报表</view>
+        <view class="report-item">
+          <text>上线单位工单总量</text>
+          <u-icon name="arrow-right" color="#737578" size="25rpx" />
+        </view>
+        <view class="report-item">
+          <text>上线单位已处理工单总量</text>
+          <u-icon name="arrow-right" color="#737578" size="25rpx" />
+        </view>
+        <view class="report-item">
+          <text>上线单位未处理工单总量</text>
+          <u-icon name="arrow-right" color="#737578" size="25rpx" />
+        </view>
+      </view>
+      <view class="report">
+        <view class="report-title">未处理工单</view>
+        <view class="report-item">
+          <text>超 48 小时未处理工单</text>
+          <u-icon name="arrow-right" color="#737578" size="25rpx" />
+        </view>
+        <view class="report-item">
+          <text>系统Bug未处理工单</text>
+          <u-icon name="arrow-right" color="#737578" size="25rpx" />
+        </view>
+        <view class="report-item">
+          <text>系统需求未处理工单</text>
+          <u-icon name="arrow-right" color="#737578" size="25rpx" />
+        </view>
+      </view>
+      <view class="report">
+        <view class="report-title">财务核算</view>
+        <view class="report-item">
+          <text>固定资产模块</text>
+          <u-icon name="arrow-right" color="#737578" size="25rpx" />
+        </view>
+        <view class="report-item">
+          <text>债权债务模块</text>
+          <u-icon name="arrow-right" color="#737578" size="25rpx" />
+        </view>
+      </view>
+    </view>
+    <u-gap height="110rpx" />
 
     <Tabbar indexBar="index" />
   </view>
@@ -54,6 +127,7 @@ export default {
   },
   data() {
     return {
+      msgNum: 0,
       isScrolltolower: false,
       pageNo: 1,
       menuList: [],
@@ -68,11 +142,26 @@ export default {
     this.$store.dispatch("ObtainUserInfo");
   },
   computed: {
+    hasLogin() {
+      return this.$store.getters.hasLogin;
+    },
     langText() {
       return this.$t("index");
     },
   },
   methods: {
+    loginOrJump(pageUrl) {
+      if (!pageUrl) return;
+      if (!this.hasLogin) {
+        uni.navigateTo({
+          url: "/pages/login/login",
+        });
+      } else if (pageUrl) {
+        uni.navigateTo({
+          url: pageUrl,
+        });
+      }
+    },
     click(name) {
       let dirId = this.menuList[name].id || "";
       let title = this.menuList[name].title || "";
@@ -123,128 +212,124 @@ export default {
   background: url(../../static/images/icon/head-bg.png) no-repeat;
   background-size: 100% auto;
 }
-.banner-tit {
-  font-size: 46rpx;
-  font-family: PingFangSC-Semibold, PingFang SC;
-  font-weight: 600;
-  color: #ffffff;
-  line-height: 63rpx;
-  padding: 144rpx 33px 54rpx;
-}
 
-.content {
-  width: 719rpx;
-  margin: 0 auto;
-  background: #f1f4f5;
-  height: calc(100vh - 377rpx);
-  overflow: hidden;
-  border-radius: 21rpx;
+.head {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  padding: 144rpx 30px 25rpx;
 
-  .scroll-msg {
-    width: 719rpx;
-    height: 140rpx;
-    margin: 0 auto 33rpx;
-    background: #ffffff;
-    border-radius: 21rpx;
+  .head-title {
+    font-size: 46rpx;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 63rpx;
+    width: 444rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .msg-set {
     display: flex;
-    padding: 30rpx;
-    box-sizing: border-box;
+    justify-content: flex-end;
+    align-items: center;
 
-    img {
-      display: block;
-      width: 80rpx;
-      height: 80rpx;
-      margin-right: 21rpx;
+    .u-icon:last-child {
+      margin-left: 40rpx;
     }
 
-    .msg-box {
-      flex: 1;
-      .tlt {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 29rpx;
-        font-size: 29rpx;
+    .msg-num {
+      display: inline-block;
+      position: relative;
+
+      .num {
+        position: absolute;
+        top: -20rpx;
+        right: -18rpx;
+        width: 36rpx;
+        line-height: 36rpx;
+        border-radius: 18rpx;
+        color: #fff;
+        background: #ff0000;
+        letter-spacing: -6rpx;
+        text-align: center;
+        font-size: 25rpx;
         font-family: PingFangSC-Medium, PingFang SC;
         font-weight: 500;
-        color: #111111;
-        margin-bottom: 19rpx;
-
-        view {
-          display: flex;
-          align-items: center;
-          .remind {
-            width: 16rpx;
-            height: 16rpx;
-            background: #ff0000;
-            margin-left: 10rpx;
-            border-radius: 8rpx;
-          }
-        }
-
-        .time {
-          font-size: 25rpx;
-          font-family: PingFangSC-Regular, PingFang SC;
-          font-weight: 400;
-          color: #a6a6a8;
-        }
-      }
-
-      .msg {
-        height: 29rpx;
-        font-size: 29rpx;
-        font-family: PingFangSC-Regular, PingFang SC;
-        font-weight: 400;
-        color: #68696d;
-        line-height: 29rpx;
+        color: #ffffff;
+        text-indent: -6rpx;
       }
     }
   }
+}
 
-  .menu {
-    width: 719rpx;
-    background: #ffffff;
-    margin: 0 auto;
-    padding-bottom: 30rpx;
-    box-sizing: border-box;
-    border-radius: 21rpx;
-    overflow: hidden;
-    // height: calc(100% - 140rpx);
+.modular-box {
+  width: 719rpx;
+  background: #ffffff;
+  margin: 0 auto;
+  padding: 30rpx 0;
+  box-sizing: border-box;
+  border-radius: 21rpx;
 
-    .title {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      width: 100%;
-      padding: 30rpx 36rpx 0;
-      font-size: 31rpx;
-      font-family: PingFangSC-Semibold, PingFang SC;
-      font-weight: 600;
-      color: #333333;
-      line-height: 44rpx;
-      background: #fff;
-    }
+  .title {
+    padding: 0 36rpx;
+    font-size: 31rpx;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: #333333;
+    line-height: 44rpx;
+  }
+}
 
-    .u-grid {
-      align-items: flex-start;
-    }
+.work-order {
+  .u-grid {
+    align-items: flex-start;
+  }
 
-    .menu-item {
-      padding-top: 38rpx;
+  .order-item {
+    padding-top: 38rpx;
 
-      .grid-title {
-        margin-top: 10rpx;
-        font-size: 25rpx;
-        font-family: PingFangSC-Regular, PingFang SC;
-        font-weight: 400;
-        color: #737578;
-        line-height: 35rpx;
-        width: 100rpx;
-        text-align: center;
-      }
+    .grid-title {
+      margin-top: 10rpx;
+      font-size: 25rpx;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: #737578;
+      line-height: 35rpx;
+      width: 100rpx;
+      text-align: center;
     }
   }
+}
+
+.report {
+  padding: 0 36rpx;
+
+  .report-title,
+  .report-item {
+    font-size: 28rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+  }
+
+  .report-title {
+    margin: 38rpx 0 25rpx;
+    font-weight: 600;
+    color: #333333;
+    line-height: 28px;
+  }
+
+  .report-item {
+    height: 92rpx;
+    font-weight: 400;
+    color: #4a4a4a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.report:first-child {
+  margin-top: 8rpx;
 }
 </style>

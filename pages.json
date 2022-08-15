@@ -29,7 +29,7 @@
 			}
 		},
 		{
-			"path": "pages/info/info",
+			"path": "pages/message/message",
 			"style": {
 				"navigationBarTitleText": "消息"
 			}

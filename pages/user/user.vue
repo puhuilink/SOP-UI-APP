@@ -15,19 +15,6 @@
         @click="loginOrJump('/pages/profile/profile')"
       />
     </view>
-    <!-- <view v-if="lastMsg.show" class="scroll-msg" @click="msgDel">
-      <img src="../../static/images/icon/消息.png" />
-      <view class="msg-box">
-        <view class="tlt">
-          <view>
-         {{ langText.order }}
-            <view class="remind" />
-          </view>
-          <view class="time">上午11:30</view>
-        </view>
-        <view class="msg">您有一个新的工单待接收，请及时处理</view>
-      </view>
-    </view> -->
 
     <view class="work-order">
       <view class="work-order-tit">{{ langText.workOrder }}</view>
@@ -159,67 +146,6 @@ export default {
       height: 60rpx;
       display: flex;
       align-items: center;
-    }
-  }
-}
-
-.scroll-msg {
-  margin: 0 auto 33rpx;
-  width: 719rpx;
-  min-height: 140rpx;
-  background: #ffffff;
-  border-radius: 21rpx;
-  display: flex;
-  padding: 30rpx;
-  box-sizing: border-box;
-
-  img {
-    display: block;
-    width: 80rpx;
-    height: 80rpx;
-    margin-right: 21rpx;
-  }
-
-  .msg-box {
-    flex: 1;
-    .tlt {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 29rpx;
-      font-size: 29rpx;
-      font-family: PingFangSC-Medium, PingFang SC;
-      font-weight: 500;
-      color: #111111;
-      margin-bottom: 19rpx;
-
-      view {
-        display: flex;
-        align-items: center;
-        .remind {
-          width: 16rpx;
-          height: 16rpx;
-          background: #ff0000;
-          margin-left: 10rpx;
-          border-radius: 8rpx;
-        }
-      }
-
-      .time {
-        font-size: 25rpx;
-        font-family: PingFangSC-Regular, PingFang SC;
-        font-weight: 400;
-        color: #a6a6a8;
-      }
-    }
-
-    .msg {
-      height: 29rpx;
-      font-size: 29rpx;
-      font-family: PingFangSC-Regular, PingFang SC;
-      font-weight: 400;
-      color: #68696d;
-      line-height: 29rpx;
     }
   }
 }

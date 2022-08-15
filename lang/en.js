@@ -13,7 +13,12 @@ export default {
   index: {
     pageTitle: 'index ',
     systemName: 'IT service operation platform',
-    orderTitle: 'Self service work order'
+    myWorkOder: 'My work order',
+    todoOrder: 'To do work order',
+    havedoOrder: 'Completed work order',
+    manageOrder: 'Jobs I manage',
+    customOrder: 'Self service work order',
+    reportManage: 'Report management',
   },
   user: {
     text: 'International language switching test',
@@ -25,7 +30,7 @@ export default {
     userName: 'Username',
     order: 'Order',
   },
-  echartslist:{
+  echartslist: {
     pageTitle: 'It service operation platform',
     firstTitle: 'Report of online units',
     firstTitleOrderTotal: 'Total work orders of online units',
@@ -43,15 +48,16 @@ export default {
     fourthTitleOrderTotal: 'Fixed assets module',
     fourthTitleOrderDone: 'Credit and debt module',
   },
-  echartsDetail:{
-    cycle:'Select cycle',
-    company:'Select company',
-    select:'Please select'
+  echartsDetail: {
+    cycle: 'Select cycle',
+    company: 'Select company',
+    select: 'Please select'
   },
   profile: {
     pageTitle: 'seting',
     avatar: 'Avatar',
     nickname: 'nickname',
-    language: 'language'
+    language: 'language',
+    logout: 'logout'
   }
 }
