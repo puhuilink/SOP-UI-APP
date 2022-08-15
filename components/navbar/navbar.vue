@@ -2,8 +2,7 @@
   <view class="navbar-box">
     <view class="navbar">
       <u-icon name="arrow-left" color="#fff" size="38rpx" @click="goBack" />
-      <view>{{ title || "" }}</view>
-      <view />
+      <view class="navbar-title">{{ title || "" }}</view>
     </view>
   </view>
 </template>
@@ -55,9 +54,14 @@ export default {
     background-size: 100% auto;
     background-position: 0% 25%;
 
-    view {
-      flex: 1;
+    .navbar-title {
+      width: calc(100% - 76rpx);
+      padding: 0 38rpx;
+      box-sizing: border-box;
       text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
