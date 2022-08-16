@@ -1,8 +1,9 @@
 export default {
   tabbar: {
-    reportView: '报表视图',
     workOrder: '自助工单',
-    user: '我的'
+    customerService: '在线客服',
+    serviceTel: '服务热线',
+    problems: '常见问题',
   },
   echarts: {
     pageTitle: 'IT服务运营平台',
@@ -18,7 +19,18 @@ export default {
     havedoOrder: '已办工单',
     manageOrder: '我管理的',
     customOrder: '自助工单',
-    reportManage: '报表管理',
+    reportTit: '报表管理',
+    reportModular1Title: '单位报表',
+    reportModular1Text1: '上线单位工单总量',
+    reportModular1Text2: '上线单位已处理工单总量',
+    reportModular1Text3: '上线单位未处理工单总量',
+    reportModular2Title: '未处理工单',
+    reportModular2Text1: '超48小时未处理工单',
+    reportModular2Text2: '系统Bug未处理工单',
+    reportModular2Text3: '系统需求未处理工单',
+    reportModular3Title: '财务核算',
+    reportModular3Text1: '固定资产模块',
+    reportModular3Text2: '债权债务模块',
   },
   user: {
     pageTitle: '我的',

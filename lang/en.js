@@ -1,8 +1,9 @@
 export default {
   tabbar: {
-    reportView: 'Report view',
     workOrder: 'Work order',
-    user: 'user'
+    customerService: 'Customer service',
+    serviceTel: 'Service telephone',
+    problems: 'problems',
   },
   echarts: {
     pageTitle: 'IT service operation platform',
@@ -18,7 +19,18 @@ export default {
     havedoOrder: 'Completed work order',
     manageOrder: 'Jobs I manage',
     customOrder: 'Self service work order',
-    reportManage: 'Report management',
+    reportTit: 'Report management',
+    reportModular1Title: 'Report of online units',
+    reportModular1Text1: 'Total work orders of online units',
+    reportModular1Text2: 'Total number of work orders processed by online units',
+    reportModular1Text3: 'Total number of unprocessed work orders of online units',
+    reportModular2Title: 'Unprocessed work order',
+    reportModular2Text1: 'Work order not processed for more than 48 hours',
+    reportModular2Text2: 'System bug unprocessed work order',
+    reportModular2Text3: 'System demand unprocessed work order',
+    reportModular3Title: 'Financial accounting',
+    reportModular3Text1: 'Fixed assets module',
+    reportModular3Text2: 'Credit and debt module',
   },
   user: {
     text: 'International language switching test',

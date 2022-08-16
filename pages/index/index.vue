@@ -68,45 +68,45 @@
     </view>
     <u-gap height="20rpx" />
     <view class="modular-box" @click="loginOrJump('/pages/index/echarts')">
-      <view class="title">{{ langText.reportManage }}</view>
+      <view class="title">{{ langText.reportTit }}</view>
       <view class="report">
-        <view class="report-title">单位报表</view>
+        <view class="report-title">{{ langText.reportModular1Title }}</view>
         <view class="report-item">
-          <text>上线单位工单总量</text>
+          <text>{{ langText.reportModular1Text1 }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
         <view class="report-item">
-          <text>上线单位已处理工单总量</text>
+          <text>{{ langText.reportModular1Text2 }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
         <view class="report-item">
-          <text>上线单位未处理工单总量</text>
+          <text>{{ langText.reportModular1Text3 }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
       </view>
       <view class="report">
-        <view class="report-title">未处理工单</view>
+        <view class="report-title">{{ langText.reportModular2Title }}</view>
         <view class="report-item">
-          <text>超 48 小时未处理工单</text>
+          <text>{{ langText.reportModular2Text1 }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
         <view class="report-item">
-          <text>系统Bug未处理工单</text>
+          <text>{{ langText.reportModular2Text2 }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
         <view class="report-item">
-          <text>系统需求未处理工单</text>
+          <text>{{ langText.reportModular2Text3 }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
       </view>
       <view class="report">
-        <view class="report-title">财务核算</view>
+        <view class="report-title">{{ langText.reportModular3Title }}</view>
         <view class="report-item">
-          <text>固定资产模块</text>
+          <text>{{ langText.reportModular3Text1 }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
         <view class="report-item">
-          <text>债权债务模块</text>
+          <text>{{ langText.reportModular3Text2 }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
       </view>
@@ -216,7 +216,9 @@ export default {
 .head {
   display: flex;
   justify-content: space-between;
-  padding: 144rpx 30px 25rpx;
+  padding: 25rpx 30px 25rpx;
+  height: 181rpx;
+  align-items: flex-end;
 
   .head-title {
     font-size: 46rpx;
@@ -225,9 +227,9 @@ export default {
     color: #ffffff;
     line-height: 63rpx;
     width: 444rpx;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
   }
 
   .msg-set {
@@ -320,12 +322,16 @@ export default {
   }
 
   .report-item {
-    height: 92rpx;
+    min-height: 92rpx;
     font-weight: 400;
     color: #4a4a4a;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    text {
+      width: 600rpx;
+    }
   }
 }
 
