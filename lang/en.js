@@ -59,5 +59,8 @@ export default {
     nickname: 'nickname',
     language: 'language',
     logout: 'logout'
+  },
+  message:{
+    pageTitle: 'Order manage',
   }
 }
