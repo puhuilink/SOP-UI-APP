@@ -4,15 +4,10 @@
     <view class="work-order">
       <view class="work-order-tit">{{ langText.firstTitle }}</view>
       <view
-        class="work-order-item"
-        
+        class="work-order-item" 
         @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=上线单位工单总量`)"
       >
         <view class="work-order-item-left">
-          <img
-            src="/static/images/icon/user/wait-done.png"
-            class="work-order-item-icon"
-          />
           <view class="work-order-item-tit">{{ langText.firstTitleOrderTotal }}</view>
         </view>
         <u-icon name="arrow-right" />
@@ -22,20 +17,12 @@
         @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=上线单位已处理工单总量`)"
       >
         <view class="work-order-item-left">
-          <img
-            src="/static/images/icon/user/done.png"
-            class="work-order-item-icon"
-          />
           <view class="work-order-item-tit">{{ langText.firstTitleOrderDone }}</view>
         </view>
         <u-icon name="arrow-right" />
       </view>
       <view class="work-order-item" @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=上线单位未处理工单总量`)">
         <view class="work-order-item-left">
-          <img
-            src="/static/images/icon/user/administration.png"
-            class="work-order-item-icon"
-          />
           <view class="work-order-item-tit">{{ langText.firstTitleOrderUndone }}</view>
         </view>
         <u-icon name="arrow-right" />
@@ -87,10 +74,6 @@
         @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=超48小时工单总量`)"
       >
         <view class="work-order-item-left">
-          <img
-            src="/static/images/icon/user/wait-done.png"
-            class="work-order-item-icon"
-          />
           <view class="work-order-item-tit">{{ langText.thirdTitleOrderTotal }}</view>
         </view>
         <u-icon name="arrow-right" />
@@ -100,20 +83,12 @@
         @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=系统Bug未处理工单总量`)"
       >
         <view class="work-order-item-left">
-          <img
-            src="/static/images/icon/user/done.png"
-            class="work-order-item-icon"
-          />
           <view class="work-order-item-tit">{{ langText.thirdTitleOrderDone }}</view>
         </view>
         <u-icon name="arrow-right" />
       </view>
       <view class="work-order-item" @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=系统需求未处理工单`)">
         <view class="work-order-item-left">
-          <img
-            src="/static/images/icon/user/administration.png"
-            class="work-order-item-icon"
-          />
           <view class="work-order-item-tit">{{ langText.thirdTitleOrderUndone }}</view>
         </view>
         <u-icon name="arrow-right" />
@@ -126,10 +101,6 @@
         @click="loginOrJump(`/pages/list/echartsDetail?type=2&title=固定资产模块`)"
       >
         <view class="work-order-item-left">
-          <img
-            src="/static/images/icon/user/wait-done.png"
-            class="work-order-item-icon"
-          />
           <view class="work-order-item-tit">{{ langText.fourthTitleOrderTotal }}</view>
         </view>
         <u-icon name="arrow-right" />
@@ -139,10 +110,6 @@
         @click="loginOrJump(`/pages/list/echartsDetail?type=2&title=债权债务模块`)"
       >
         <view class="work-order-item-left">
-          <img
-            src="/static/images/icon/user/done.png"
-            class="work-order-item-icon"
-          />
           <view class="work-order-item-tit">{{ langText.fourthTitleOrderDone }}</view>
         </view>
         <u-icon name="arrow-right" />

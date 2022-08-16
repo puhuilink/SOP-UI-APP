@@ -67,46 +67,46 @@
       </u-grid>
     </view>
     <u-gap height="20rpx" />
-    <view class="modular-box" @click="loginOrJump('/pages/index/echarts')">
+    <view class="modular-box" >
       <view class="title">{{ langText.reportManage }}</view>
       <view class="report">
-        <view class="report-title">单位报表</view>
-        <view class="report-item">
-          <text>上线单位工单总量</text>
+        <view class="report-title">{{ langText.firstTitle }}</view>
+        <view class="report-item"  @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=上线单位工单总量`)">
+          <text>{{ langText.firstTitleOrderTotal }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
-        <view class="report-item">
-          <text>上线单位已处理工单总量</text>
+        <view class="report-item"  @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=上线单位已处理工单总量`)">
+          <text>{{ langText.firstTitleOrderDone }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
-        <view class="report-item">
-          <text>上线单位未处理工单总量</text>
+        <view class="report-item" @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=上线单位未处理工单总量`)">
+          <text>{{ langText.firstTitleOrderUndone }}</text>
+          <u-icon name="arrow-right" color="#737578" size="25rpx" />
+        </view>
+      </view>
+      <view class="report" >
+        <view class="report-title">{{ langText.thirdTitle }}</view>
+        <view class="report-item"  @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=超48小时工单总量`)">
+          <text>{{ langText.thirdTitleOrderTotal }}</text>
+          <u-icon name="arrow-right" color="#737578" size="25rpx" />
+        </view>
+        <view class="report-item"  @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=系统Bug未处理工单总量`)">
+          <text>{{ langText.thirdTitleOrderDone }}</text>
+          <u-icon name="arrow-right" color="#737578" size="25rpx" />
+        </view>
+        <view class="report-item" @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=系统需求未处理工单`)">
+          <text>{{ langText.thirdTitleOrderUndone }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
       </view>
       <view class="report">
-        <view class="report-title">未处理工单</view>
-        <view class="report-item">
-          <text>超 48 小时未处理工单</text>
+        <view class="report-title">{{ langText.fourthTitle }}</view>
+        <view class="report-item"  @click="loginOrJump(`/pages/list/echartsDetail?type=2&title=固定资产模块`)">
+          <text>{{ langText.fourthTitleOrderTotal }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
-        <view class="report-item">
-          <text>系统Bug未处理工单</text>
-          <u-icon name="arrow-right" color="#737578" size="25rpx" />
-        </view>
-        <view class="report-item">
-          <text>系统需求未处理工单</text>
-          <u-icon name="arrow-right" color="#737578" size="25rpx" />
-        </view>
-      </view>
-      <view class="report">
-        <view class="report-title">财务核算</view>
-        <view class="report-item">
-          <text>固定资产模块</text>
-          <u-icon name="arrow-right" color="#737578" size="25rpx" />
-        </view>
-        <view class="report-item">
-          <text>债权债务模块</text>
+        <view class="report-item"  @click="loginOrJump(`/pages/list/echartsDetail?type=2&title=债权债务模块`)">
+          <text>{{ langText.fourthTitleOrderDone }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
       </view>
