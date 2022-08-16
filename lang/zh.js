@@ -71,5 +71,8 @@ export default {
     nickname: '昵称',
     language: '语言',
     logout: '退出登录',
+  },
+  message:{
+    pageTitle: '工单管理',
   }
 }

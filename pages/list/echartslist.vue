@@ -6,7 +6,7 @@
       <view
         class="work-order-item"
         
-        @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=首批上线单位工程量`)"
+        @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=上线单位工单总量`)"
       >
         <view class="work-order-item-left">
           <img
@@ -19,7 +19,7 @@
       </view>
       <view
         class="work-order-item"
-        @click="loginOrJump('')"
+        @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=上线单位已处理工单总量`)"
       >
         <view class="work-order-item-left">
           <img
@@ -30,7 +30,7 @@
         </view>
         <u-icon name="arrow-right" />
       </view>
-      <view class="work-order-item" @click="loginOrJump('')">
+      <view class="work-order-item" @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=上线单位未处理工单总量`)">
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/administration.png"
@@ -84,7 +84,7 @@
       <view class="work-order-tit">{{ langText.thirdTitle }}</view>
       <view
         class="work-order-item"
-        @click="loginOrJump('')"
+        @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=超48小时工单总量`)"
       >
         <view class="work-order-item-left">
           <img
@@ -97,7 +97,7 @@
       </view>
       <view
         class="work-order-item"
-        @click="loginOrJump('')"
+        @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=系统Bug未处理工单总量`)"
       >
         <view class="work-order-item-left">
           <img
@@ -108,7 +108,7 @@
         </view>
         <u-icon name="arrow-right" />
       </view>
-      <view class="work-order-item" @click="loginOrJump('')">
+      <view class="work-order-item" @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=系统需求未处理工单`)">
         <view class="work-order-item-left">
           <img
             src="/static/images/icon/user/administration.png"
@@ -136,7 +136,7 @@
       </view>
       <view
         class="work-order-item"
-        @click="loginOrJump('')"
+        @click="loginOrJump(`/pages/list/echartsDetail?type=2&title=债权债务模块`)"
       >
         <view class="work-order-item-left">
           <img
