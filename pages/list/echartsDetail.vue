@@ -400,14 +400,15 @@ export default {
         margin-bottom: 19rpx;
         margin-top: 19rpx;
 .report-form-tit {
-     width: 120rpx;
-  height: 50rpx;
     padding: 0 30rpx;
     margin-bottom: 20rpx;
     font-size: 15pt;
     font-family: PingFangSC-Semibold, PingFang SC;
     font-weight: 600;
     color: #333333;
+      height: 100%;
+    display: flex;
+    align-items: flex-end;
   }
   .report-form-select{
      height: 50rpx;
