@@ -36,13 +36,6 @@
 			}
 		},
 		{
-			"path": "pages/list/Todolist",
-			"style": {
-				"navigationBarTitleText": "待办列表",
-        "navigationStyle": "custom"
-			}
-		},
-		{
 			"path": "pages/info/formsubmit",
 			"style": {
 				"navigationBarTitleText": "表单提交",
@@ -54,13 +47,6 @@
 			"path": "pages/list/orderManage",
 			"style": {
 				"navigationBarTitleText": "工单管理",
-        "navigationStyle": "custom"
-			}
-		},
-    {
-			"path": "pages/list/echartslist",
-			"style": {
-				"navigationBarTitleText": "报表列表",
         "navigationStyle": "custom"
 			}
 		},
