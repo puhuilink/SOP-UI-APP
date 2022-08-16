@@ -1,8 +1,9 @@
 export default {
   tabbar: {
-    reportView: '报表视图',
     workOrder: '自助工单',
-    user: '我的'
+    customerService: '在线客服',
+    serviceTel: '服务热线',
+    problems: '常见问题',
   },
   index: {
     pageTitle: '首页 ',
@@ -12,7 +13,7 @@ export default {
     havedoOrder: '已办工单',
     manageOrder: '我管理的',
     customOrder: '自助工单',
-    reportManage: '报表管理',
+    reportTit: '报表管理',
     firstTitle: '单位报表',
     firstTitleOrderTotal: '上线单位工单总量',
     firstTitleOrderDone: '上线单位已处理工单总量',
@@ -24,6 +25,16 @@ export default {
     fourthTitle: '财务核算',
     fourthTitleOrderTotal: '固定资产模块',
     fourthTitleOrderDone: '债权债务模块',
+  },
+  user: {
+    pageTitle: '我的',
+    toDo: '我的待办',
+    haveDo: '我的已办',
+    workOrder: '我的工单',
+    myManage: '我管理的',
+    messageCenter: '消息中心',
+    userName: '用户名',
+    order: '工单',
   },
   user: {
     pageTitle: '我的',

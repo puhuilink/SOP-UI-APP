@@ -216,7 +216,9 @@ export default {
 .head {
   display: flex;
   justify-content: space-between;
-  padding: 144rpx 30px 25rpx;
+  padding: 25rpx 30px 25rpx;
+  height: 181rpx;
+  align-items: flex-end;
 
   .head-title {
     font-size: 46rpx;
@@ -225,9 +227,9 @@ export default {
     color: #ffffff;
     line-height: 63rpx;
     width: 444rpx;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
   }
 
   .msg-set {
@@ -320,12 +322,16 @@ export default {
   }
 
   .report-item {
-    height: 92rpx;
+    min-height: 92rpx;
     font-weight: 400;
     color: #4a4a4a;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    text {
+      width: 600rpx;
+    }
   }
 }
 

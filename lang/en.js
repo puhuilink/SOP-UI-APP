@@ -1,8 +1,9 @@
 export default {
   tabbar: {
-    reportView: 'Report view',
     workOrder: 'Work order',
-    user: 'user'
+    customerService: 'Customer service',
+    serviceTel: 'Service telephone',
+    problems: 'problems',
   },
   index: {
     pageTitle: 'index ',
@@ -12,7 +13,7 @@ export default {
     havedoOrder: 'Completed work order',
     manageOrder: 'Jobs I manage',
     customOrder: 'Self service work order',
-    reportManage: 'Report management',
+    reportTit: 'Report management',
     firstTitle: 'Report of online units',
     firstTitleOrderTotal: 'Total work orders of online units',
     firstTitleOrderDone: 'Total number of work orders processed by online units',
@@ -24,6 +25,16 @@ export default {
     fourthTitle: 'Financial accounting',
     fourthTitleOrderTotal: 'Fixed assets module',
     fourthTitleOrderDone: 'Credit and debt module',
+  },
+  user: {
+    text: 'International language switching test',
+    toDo: 'My todo',
+    haveDo: 'My have done',
+    workOrder: 'My work order',
+    myManage: 'My manage',
+    messageCenter: 'Message center',
+    userName: 'Username',
+    order: 'Order',
   },
   user: {
     text: 'International language switching test',

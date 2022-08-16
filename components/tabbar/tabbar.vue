@@ -22,12 +22,6 @@ export default {
   data() {
     return {
       tabbar: [
-        // {
-        //   name: "echarts",
-        //   pagePath: "/pages/index/echarts",
-        //   iconPath: "/static/images/tabbar/echarts.png",
-        //   selectedIconPath: "/static/images/tabbar/echarts-active.png",
-        // },
         {
           name: "index",
           pagePath: "/pages/index/index",
@@ -35,10 +29,23 @@ export default {
           selectedIconPath: "/static/images/tabbar/index-active.png",
         },
         // {
-        //   name: "user",
-        //   pagePath: "/pages/user/user",
-        //   iconPath: "/static/images/tabbar/user.png",
-        //   selectedIconPath: "/static/images/tabbar/user-active.png",
+        //   name: "customerService",
+        //   pagePath: "",
+        //   iconPath: "/static/images/tabbar/customer-service.png",
+        //   selectedIconPath: "/static/images/tabbar/customer-service-active.png",
+        // },
+        {
+          name: "serviceTel",
+          pagePath: "",
+          iconPath: "/static/images/tabbar/service-tel.png",
+          selectedIconPath: "/static/images/tabbar/service-tel-active.png",
+          tel: "4006869091",
+        },
+        // {
+        //   name: "problems",
+        //   pagePath: "",
+        //   iconPath: "/static/images/tabbar/problems.png",
+        //   selectedIconPath: "/static/images/tabbar/problems-active.png",
         // },
       ],
       tabarList: [],
@@ -55,19 +62,22 @@ export default {
         this.tabarList = this.tabbar.map((item) => {
           let text = "";
           switch (item.name) {
-            case "echarts":
-              text = val.reportView; // 报表视图
-              break;
             case "index":
               text = val.workOrder; // 自助工单
               break;
-            case "user":
-              text = val.user; // 我的
+            case "customerService":
+              text = val.customerService; // 在线客服
+              break;
+            case "serviceTel":
+              text = val.serviceTel; // 服务热线
+              break;
+            case "problems":
+              text = val.problems; // 常见问题
               break;
           }
           return {
             ...item,
-            text
+            text,
           };
         });
       },
@@ -77,10 +87,15 @@ export default {
   },
   created() {},
   methods: {
-    change(name) {
-      uni.navigateTo({
-        url: this.tabarList[name].pagePath,
-      });
+    change(i) {
+      let item = this.tabarList[i];
+      if (item.pagePath) {
+        uni.navigateTo({
+          url: item.pagePath,
+        });
+      } else if (item.tel) {
+        uni.makePhoneCall({ phoneNumber: item.tel });
+      }
     },
   },
 };

@@ -31,13 +31,15 @@
 		{
 			"path": "pages/message/message",
 			"style": {
-				"navigationBarTitleText": "消息"
+				"navigationBarTitleText": "消息",
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/list/Todolist",
 			"style": {
-				"navigationBarTitleText": "待办列表"
+				"navigationBarTitleText": "待办列表",
+        "navigationStyle": "custom"
 			}
 		},
 		{
@@ -51,19 +53,22 @@
 		{
 			"path": "pages/list/Havedolist",
 			"style": {
-				"navigationBarTitleText": "已办列表"
+				"navigationBarTitleText": "已办列表",
+        "navigationStyle": "custom"
 			}
 		},
     {
 			"path": "pages/list/echartslist",
 			"style": {
-				"navigationBarTitleText": "报表列表"
+				"navigationBarTitleText": "报表列表",
+        "navigationStyle": "custom"
 			}
 		},
     {
 			"path": "pages/list/echartsDetail",
 			"style": {
-				"navigationBarTitleText": "报表详情页"
+				"navigationBarTitleText": "报表详情页",
+        "navigationStyle": "custom"
 			}
 		},
 		// {
