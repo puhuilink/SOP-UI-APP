@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-     <Navbar :title="langText.pageTitle" />
+       <Navbar title="消息" />
     <u-sticky bgColor="#fff">
       <u-tabs
         :list="msgState.list"
@@ -34,32 +34,16 @@
       <u-list-item v-for="(item, index) in listData" :key="index">
         <u-row>
           <u-col span="12">
-            <view class="time"></view>
+            <view class="time"> {{ item.published_at }} </view>
           </u-col>
         </u-row>
         <view class="list-item">
-            <view class="title">
-            <u-tag :text="item.text" :type="item.type" plain size="mini" class="tag"> </u-tag>
-            <view>{{item.title}}</view>
-          </view>
           <view class="account">
-            <view class="account-box">
-              <view class="account-text">{{item.author_name}}</view>
-            </view>
-            <view class="account-box">
-              <view class="account-text">{{item.name}}</view>
-            </view>
+            <view>{{item.id}}</view>
           </view>
           <view class="record">
-          
-           <view>
-            <img src="/static/images/icon/icon_dingdan.png" class="record-img"/>
-             {{item.id}}
-             </view>  
-          <view>
-            <img src="/static/images/icon/icon_time.png" class="record-img"/>
-            {{item.time}}
-            </view>
+            <view>{{item.author_name}}</view>
+            <view>{{item.name}}</view>
           </view>
         </view>
       </u-list-item>
@@ -71,7 +55,7 @@
 import uTabs from "../../uni_modules/uview-ui/components/u-tabs/u-tabs.vue";
 import Navbar from "@/components/navbar/navbar";
 export default {
-  components: { uTabs,Navbar },
+  components: { uTabs, Navbar },
   data() {
     return {
       keyword: "",
@@ -81,84 +65,46 @@ export default {
         index: 0,
         list: [
           {
-            name: "待办",
-             badge: {
-                        value: 5,
-                    }
+            name: "已读",
           },
           {
-            name: "已办",
-          },
-            {
-            name: "我管理的",
+            name: "未读",
           },
         ],
       },
       listData: [
         {
           id: "S20220531199",
-          title: "财务账号问题",
+          title: "01-财务账号问题",
           author_name: "二线人员王明已处理",
-          name: "记录人：高得",
+          name: "记录人高得",
           published_at: "2022-07-22 08:19",
-          time:'2022-08-10',
-          type: "error",
-          text:'P1'
         },
         {
           id: "S20220531199",
-          title: "财务账号问题",
+          title: "02-财务账号问题",
           author_name: "二线人员王明已处理",
-          name: "记录人：李雷",
+          name: "记录人李雷",
           published_at: "2022-07-23 08:19",
-           time:'2022-08-10',
-          text:'P2'
         },
         {
           id: "S20220531199",
-          title: "财务账号问题",
+          title: "03-财务账号问题",
           author_name: "二线人员王明已处理",
-          name: "记录人：王露",
+          name: "记录人王露",
           published_at: "2022-07-24 08:19",
-           time:'2022-08-10',
-           type: "success",
-          text:'P3'
         },
         {
           id: "S20220531199",
-          title: "财务账号问题",
+          title: "04-财务账号问题",
           author_name: "二线人员王明已处理",
-          name: "记录人：高得",
+          name: "记录人高得",
           published_at: "2022-07-25 08:19",
-           time:'2022-08-10',
-          text:'P2'
         },
       ],
     };
   },
-    computed: {
-    userInfo() {
-      return this.$store.getters.userInfo;
-    },
-    hasLogin() {
-      return this.$store.getters.hasLogin;
-    },
-    langText() {
-      return this.$t("message");
-    },
-  },
   methods: {
-      loginOrJump(pageUrl) {
-      if (!this.hasLogin) {
-        uni.navigateTo({
-          url: "/pages/login/login",
-        });
-      } else if (pageUrl) {
-        uni.navigateTo({
-          url: pageUrl,
-        });
-      }
-    },
     changeMsgState(item) {
       this.msgState.index = item.index;
     },
@@ -180,8 +126,14 @@ export default {
   padding: 17rpx 15rpx 0;
 }
 .time {
-  height: 25rpx;
-  margin: 15rpx;
+  height: 35rpx;
+  font-size: 25rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #afb1b5;
+  line-height: 35rpx;
+  margin: 23rpx;
+  text-align: center;
 }
 .u-list {
   height: calc(100vh - 300rpx) !important;
@@ -192,41 +144,18 @@ export default {
   min-height: 165rpx;
   background: #ffffff;
   border-radius: 17rpx;
-  padding: 10rpx 28rpx;
+  padding: 30rpx 28rpx;
   box-sizing: border-box;
 
-  .title {
-    width: 144px;
-    height: 22px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #333333;
-    padding: 30rpx 0rpx ;
-    line-height: 22px;
-    display: flex;
-    justify-content: space-between;
-    .tag{
-      line-height: 22px;
-    }
-  }
   .account {
     height: 46rpx;
     line-height: 46rpx;
     font-size: 33rpx;
-    color: #333333;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+   color: #333333;
     display: flex;
     justify-content: space-between;
-    .account-box{
-    border: 1px solid #F3F4FB;
-    background: #F3F4FB;
-    }
-    .account-text{
-    font-size: 12px;
-    font-weight: 400;
-    color: #717477;
-    line-height: 18px;
-    display: flex;
-    }
   }
 
   .record {
@@ -236,12 +165,9 @@ export default {
     height: 29rpx;
     font-size: 29rpx;
     font-family: PingFangSC-Regular, PingFang SC;
-    color: #717477;
+    font-weight: 400;
+    color: #878b8f;
     line-height: 29rpx;
-     padding: 0rpx 0rpx 20rpx 0rpx;
-    .record-img{
-      margin-right:10rpx;
-    }
   }
 }
 </style>

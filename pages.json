@@ -51,9 +51,9 @@
 			}
 		},
 		{
-			"path": "pages/list/Havedolist",
+			"path": "pages/list/orderManage",
 			"style": {
-				"navigationBarTitleText": "已办列表",
+				"navigationBarTitleText": "工单管理",
         "navigationStyle": "custom"
 			}
 		},

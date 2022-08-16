@@ -22,7 +22,7 @@
       <u-grid :border="false" col="4">
         <u-grid-item
           class="order-item"
-          @click="loginOrJump('/pages/list/Todolist')"
+          @click="loginOrJump('/pages/list/orderManage?type=0')"
         >
           <u-image
             src="@/static/images/index/todoOrder.png"
@@ -33,7 +33,7 @@
         </u-grid-item>
         <u-grid-item
           class="order-item"
-          @click="loginOrJump('/pages/list/Havedolist')"
+          @click="loginOrJump('/pages/list/orderManage?type=1')"
         >
           <u-image
             src="@/static/images/index/havedoOrder.png"
@@ -42,7 +42,7 @@
           />
           <text class="grid-title">{{ langText.havedoOrder }}</text>
         </u-grid-item>
-        <u-grid-item class="order-item" @click="loginOrJump('')">
+        <u-grid-item class="order-item" @click="loginOrJump('/pages/list/orderManage?type=2')">
           <u-image
             src="@/static/images/index/manageOrder.png"
             width="96rpx"
