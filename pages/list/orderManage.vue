@@ -31,7 +31,7 @@
       </view>
     </u-sticky>
     <u-list>
-      <u-list-item v-for="(item, index) in testData" :key="index">
+      <u-list-item v-for="(item, index) in testData" :key="index" >
         <u-row>
           <u-col span="12">
             <view class="time"></view>

@@ -7,6 +7,7 @@
 			:ref="`u-list-item-${anchor}`"
 			:anchor="`u-list-item-${anchor}`"
 			:class="[`u-list-item-${anchor}`]"
+       @click="onClick"
 		>
 			<slot />
 		</view>
@@ -104,7 +105,12 @@
 					})
 					// #endif
 				})
-			}
+			},
+            onClick() {
+					this.$emit('click', {
+						data: {}
+					});
+			},
 		}
 	}
 </script>

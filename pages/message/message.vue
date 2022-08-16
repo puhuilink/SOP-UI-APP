@@ -31,13 +31,13 @@
       </view>
     </u-sticky>
     <u-list>
-      <u-list-item v-for="(item, index) in listData" :key="index">
+      <u-list-item v-for="(item, index) in listData" :key="index"  @click="loginOrJump('/pages/message/messagedetail')">
         <u-row>
           <u-col span="12">
             <view class="time"> {{ item.published_at }} </view>
           </u-col>
         </u-row>
-        <view class="list-item">
+        <view class="list-item" >
           <view class="account">
             <view>{{item.id}}</view>
           </view>
@@ -104,7 +104,24 @@ export default {
       ],
     };
   },
+     computed: {
+    hasLogin() {
+      return this.$store.getters.hasLogin;
+    },
+  },
   methods: {
+     loginOrJump(pageUrl) {
+      if (!pageUrl) return;
+      if (!this.hasLogin) {
+        uni.navigateTo({
+          url: "/pages/login/login",
+        });
+      } else if (pageUrl) {
+        uni.navigateTo({
+          url: pageUrl,
+        });
+      }
+    },
     changeMsgState(item) {
       this.msgState.index = item.index;
     },

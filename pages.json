@@ -35,6 +35,13 @@
 				"navigationStyle": "custom"
 			}
 		},
+    {
+			"path": "pages/message/messagedetail",
+			"style": {
+				"navigationBarTitleText": "消息详情",
+				"navigationStyle": "custom"
+			}
+		},
 		{
 			"path": "pages/info/formsubmit",
 			"style": {
