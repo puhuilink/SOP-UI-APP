@@ -50,7 +50,7 @@ export default {
     };
   },
   onLoad() {
-    if (!pcFrom) {
+    if (!this.pcFrom) {
       this.getFrom();
     }
   },
