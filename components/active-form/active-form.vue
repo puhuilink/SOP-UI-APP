@@ -522,26 +522,6 @@ export default {
         return this.value.reduce((obj, item) => {
           item.formDataType &&
             (obj[item.formDataType] = item.__config__.defaultValue);
-          // obj.prefix = "S";
-          // obj.processKey = "demo1";
-          // obj.approvalDocument = "";
-          // obj.associateWorkOrder = "";
-          // obj.degreeOfInfluence = "";
-          // obj.expectedCompletionTime = "";
-          // obj.operationRecord = "";
-          // obj.owningModule = "";
-          // obj.owningSystem = "";
-          // obj.priority = "";
-          // obj.recorder = "";
-          // obj.recorderDept = "";
-          // obj.serviceRequestClassification = "";
-          // obj.serviceRequestDetails = "";
-          // obj.serviceRequestSource = "";
-          // obj.title = "";
-          // obj.urgency = "";
-          // obj.userContactDetails = "";
-          // obj.userDept = "";
-          // obj.userName = "";
           return obj;
         }, {});
       },
