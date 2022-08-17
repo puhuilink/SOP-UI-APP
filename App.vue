@@ -17,7 +17,6 @@ export default {
       // 获取用户信息
       this.$store.dispatch("ObtainUserInfo");
     }
-    
   },
   // onShow: function () {
   //   console.log('App Show')
