@@ -1,10 +1,10 @@
 <template>
   <view class="content">
-    <Navbar :title="pageTitle" />
+    <Navbar v-if="!pcFrom" :title="pageTitle" />
     <view class="form-box">
       <active-form ref="activeForm" v-model="fields" />
     </view>
-    <u-button class="subform" type="primary" text="提交表单" @click="sub" />
+    <u-button v-if="!pcFrom"  class="subform" type="primary" text="提交表单" @click="sub" />
   </view>
 </template>
 
@@ -46,10 +46,11 @@ export default {
         userName: "",
         workOrderId: "",
       },
+      pcFrom: this.$route.query.pcFrom,
     };
   },
   onLoad() {
-    if (!this.$route.query.pcFrom) {
+    if (!pcFrom) {
       this.getFrom();
     }
   },
