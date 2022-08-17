@@ -39,7 +39,7 @@ export default {
           pagePath: "",
           iconPath: "/static/images/tabbar/service-tel.png",
           selectedIconPath: "/static/images/tabbar/service-tel-active.png",
-          tel: "4006869091",
+          tel: "400-676-5885",
         },
         // {
         //   name: "problems",

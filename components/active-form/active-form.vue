@@ -204,7 +204,10 @@
               item.__config__.tag == 'el-input' && item.type == 'textarea'
             "
           >
-            <view class="line-left" :class="item.__config__.required ? '' : 'p-l14 '">
+            <view
+              class="line-left"
+              :class="item.__config__.required ? '' : 'p-l14 '"
+            >
               <text class="colorRed" v-if="item.__config__.required">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
               {{ item.__config__.label }}：
@@ -251,7 +254,10 @@
           </view>
 
           <!-- 单选框 -->
-          <view class="line-col" v-else-if="item.__config__.tag === 'el-radio-group'">
+          <view
+            class="line-col"
+            v-else-if="item.__config__.tag === 'el-radio-group'"
+          >
             <view
               :class="
                 item.__config__.required ? 'line-left' : 'p-l14 line-left'
@@ -375,36 +381,62 @@
               </view>
             </view>
           </view>
+          <!-- 富文本解析器  -->
+          <view
+            class="textarea-box"
+            v-else-if="item.__config__.tag == 'tinymce'"
+          >
+            <view
+              class="line-left"
+              :class="item.__config__.required ? '' : 'p-l14 '"
+            >
+              <text class="colorRed" v-if="item.__config__.required">*</text>
+              <text class="num" v-if="num">{{ index + 1 }}.</text>
+              {{ item.__config__.label }}：
+            </view>
+            <view class="line-bottom-textarea">
+              <u-parse :content="item.__config__.defaultValue" />
+            </view>
+          </view>
         </view>
       </block>
       <view>
-		<u-popup :show="isShow" @close="close" @open="open">
-      <view class="content">
-        <mSidebar title="进度详情">
-            <view class="row">
-                <m-steps v-for="(item, index) in wrapRecordList" :item='item' :key="index" :index='index' :activity= 'activity'  date='updateTime'  >
-                    <text slot="status">{{progressStatus[item.progressStatus]}}</text>
+        <u-popup :show="isShow" @close="close" @open="open">
+          <view class="content">
+            <mSidebar title="进度详情">
+              <view class="row">
+                <m-steps
+                  v-for="(item, index) in wrapRecordList"
+                  :item="item"
+                  :key="index"
+                  :index="index"
+                  :activity="activity"
+                  date="updateTime"
+                >
+                  <text slot="status">{{
+                    progressStatus[item.progressStatus]
+                  }}</text>
                 </m-steps>
-            </view>
-        </mSidebar>
-    </view>
-		</u-popup>
-	</view>
+              </view>
+            </mSidebar>
+          </view>
+        </u-popup>
+      </view>
     </view>
   </view>
 </template>
 
 <script>
 import mixins from "./mixins";
-import mSidebar from "@/components/m-sidebar/m-sidebar.vue"
-import mSteps from '@/components/m-steps/m-steps.vue'
+import mSidebar from "@/components/m-sidebar/m-sidebar.vue";
+import mSteps from "@/components/m-steps/m-steps.vue";
 
 export default {
   name: "activeForm",
   components: {
     mSidebar,
-    mSteps
-},
+    mSteps,
+  },
   mixins: [mixins],
   props: {
     //是否展示序号
@@ -437,17 +469,43 @@ export default {
       currentSelectValue: "",
       codeFont: "获取验证码",
       wait: 60,
-    	activity: 0,
-				wrapRecordList: [
-					{updateTime: '2020-11-19 17:04:36',progressStatus: '4', content: '已到达目的地，本次服务结束！'},
-					{updateTime: '2020-11-19 17:04:36',progressStatus: '3',content: '终于到家啦，回去睡觉！'},
-					{updateTime: '2020-11-19 17:04:36',progressStatus: '2',content: '还有一半路程马上结束啦，换人来开！'},
-					{updateTime: '2020-11-19 17:04:36',progressStatus: '1',content: '准备出发啦！一路顺风！'},
-					{updateTime: '2020-11-19 17:04:36',progressStatus: '0',content: '开始啦'},
-				],
-				progressStatus: ['开始','准备出发','到达服务区', '到达目的地', '已送达'] ,
+      activity: 0,
+      wrapRecordList: [
+        {
+          updateTime: "2020-11-19 17:04:36",
+          progressStatus: "4",
+          content: "已到达目的地，本次服务结束！",
+        },
+        {
+          updateTime: "2020-11-19 17:04:36",
+          progressStatus: "3",
+          content: "终于到家啦，回去睡觉！",
+        },
+        {
+          updateTime: "2020-11-19 17:04:36",
+          progressStatus: "2",
+          content: "还有一半路程马上结束啦，换人来开！",
+        },
+        {
+          updateTime: "2020-11-19 17:04:36",
+          progressStatus: "1",
+          content: "准备出发啦！一路顺风！",
+        },
+        {
+          updateTime: "2020-11-19 17:04:36",
+          progressStatus: "0",
+          content: "开始啦",
+        },
+      ],
+      progressStatus: [
+        "开始",
+        "准备出发",
+        "到达服务区",
+        "到达目的地",
+        "已送达",
+      ],
       isSend: false,
-      isShow:false,
+      isShow: false,
     };
   },
   computed: {
@@ -490,13 +548,13 @@ export default {
     },
   },
   methods: {
-      open() {
-          // console.log('open');
-        },
-        close() {
-          this.isShow = false
-          // console.log('close');
-        },
+    open() {
+      // console.log('open');
+    },
+    close() {
+      this.isShow = false;
+      // console.log('close');
+    },
     // 删除图片
     deletePic($event, item) {
       item.__config__.regList.splice($event.index, 1);
@@ -769,7 +827,7 @@ export default {
     height: 100%;
     letter-spacing: 0.5px;
     box-sizing: border-box;
-    white-space:nowrap;
+    white-space: nowrap;
   }
 
   .p-l14 {
