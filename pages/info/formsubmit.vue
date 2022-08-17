@@ -49,7 +49,9 @@ export default {
     };
   },
   onLoad() {
-    this.getFrom();
+    if (!this.$route.query.pcFrom) {
+      this.getFrom();
+    }
   },
   mounted() {
     window.addEventListener("message", (event) => {
