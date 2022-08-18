@@ -18,8 +18,8 @@
             <text>客服电话</text>
             <text>400-676-5885</text>
             <view class="tel-btn">
-              <view @click="callTel">取消</view>
-              <view @click="callTel(item.tel)">拨打</view>
+              <view @click="callTel()">取消</view>
+              <view @click="callTel(true)">拨打</view>
             </view>
           </view>
         </view>
@@ -122,9 +122,11 @@ export default {
         });
       }
     },
-    callTel(tel) {
-      tel && uni.makePhoneCall({ phoneNumber: tel });
+    callTel(call) {
       this.indexBar2 = sessionStorage.getItem("indexBar");
+      if (call) {
+        uni.makePhoneCall({ phoneNumber: "4006765885" });
+      }
     },
   },
 };
