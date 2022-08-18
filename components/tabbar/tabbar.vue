@@ -34,8 +34,7 @@ export default {
   props: ["indexBar"],
   data() {
     return {
-      notTelIndex: "index",
-      indexBar2: "index",
+      indexBar2: "",
       tabbar: [
         {
           name: "index",
@@ -43,12 +42,12 @@ export default {
           iconPath: "/static/images/tabbar/index.png",
           selectedIconPath: "/static/images/tabbar/index-active.png",
         },
-        // {
-        //   name: "customerService",
-        //   pagePath: "",
-        //   iconPath: "/static/images/tabbar/customer-service.png",
-        //   selectedIconPath: "/static/images/tabbar/customer-service-active.png",
-        // },
+        {
+          name: "customerService",
+          pagePath: "/pages/customerService/customerService",
+          iconPath: "/static/images/tabbar/customer-service.png",
+          selectedIconPath: "/static/images/tabbar/customer-service-active.png",
+        },
         {
           name: "serviceTel",
           pagePath: "",
@@ -58,7 +57,7 @@ export default {
         },
         {
           name: "problems",
-          pagePath: "",
+          pagePath: "/pages/problems/problems",
           iconPath: "/static/images/tabbar/problems.png",
           selectedIconPath: "/static/images/tabbar/problems-active.png",
         },
@@ -101,7 +100,10 @@ export default {
     },
     indexBar: {
       handler: function (val) {
-        val && (this.indexBar2 = val);
+        if (val) {
+          this.indexBar2 = val;
+          sessionStorage.setItem("indexBar", this.indexBar2);
+        }
       },
       deep: true,
       immediate: true,
@@ -114,7 +116,7 @@ export default {
       if (item.tel) {
         this.indexBar2 = "serviceTel";
       } else if (item.pagePath) {
-        this.notTelIndex = item.name;
+        sessionStorage.setItem("indexBar", item.name);
         uni.navigateTo({
           url: item.pagePath,
         });
@@ -122,7 +124,7 @@ export default {
     },
     callTel(tel) {
       tel && uni.makePhoneCall({ phoneNumber: tel });
-      this.indexBar2 = this.notTelIndex;
+      this.indexBar2 = sessionStorage.getItem("indexBar");
     },
   },
 };

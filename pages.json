@@ -8,6 +8,13 @@
 			}
 		},
 		{
+			"path": "pages/customerService/customerService",
+			"style": {
+				"navigationBarTitleText": "客服",
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/index/echarts",
 			"style": {
 				"navigationBarTitleText": "报表视图",
@@ -35,7 +42,7 @@
 				"navigationStyle": "custom"
 			}
 		},
-    {
+		{
 			"path": "pages/message/messagedetail",
 			"style": {
 				"navigationBarTitleText": "消息详情",
@@ -54,14 +61,21 @@
 			"path": "pages/list/orderManage",
 			"style": {
 				"navigationBarTitleText": "工单管理",
-        "navigationStyle": "custom"
+				"navigationStyle": "custom"
 			}
 		},
-    {
+		{
 			"path": "pages/list/echartsDetail",
 			"style": {
 				"navigationBarTitleText": "报表详情页",
-        "navigationStyle": "custom"
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/problems/problems",
+			"style": {
+				"navigationBarTitleText": "常见问题",
+				"navigationStyle": "custom"
 			}
 		},
 		// {
