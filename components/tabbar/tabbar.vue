@@ -3,7 +3,6 @@
     :value="tabarList.findIndex((item) => item.name === indexBar2)"
     :fixed="true"
     :placeholder="false"
-    :safeAreaInsetBottom="false"
     @change="change"
   >
     <block v-for="(item, index) in tabarList" :key="index">
