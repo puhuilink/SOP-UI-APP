@@ -31,7 +31,7 @@
       </view>
     </u-sticky>
     <u-list>
-      <u-list-item v-for="(item, index) in testData" :key="index" >
+      <u-list-item v-for="(item, index) in testData" :key="index" @click="loginOrJump('/pages/list/orderDetail?id=6023e21a-1e98-11ed-bb5c-ce3e85835c66')">
         <u-row>
           <u-col span="12">
             <view class="time"></view>
@@ -82,6 +82,7 @@ export default {
       pageNo: 1,
       // 数据总量
       total: 0,
+      typeArr:['sucesss','error','warning','primary'],
       msgState: {
         index: this.$route.query.type || 0,
         list: [
@@ -157,6 +158,9 @@ export default {
     this.getlist();
   },
   methods: {
+    formatDate(date) {
+      return new Date(date).toLocaleDateString();
+    },
   async  getlist() {
     //根据this.$route.query.type获取数据
     let type = this.$route.query.type;
@@ -167,6 +171,8 @@ export default {
           this.listData.forEach((item,index) => {
           // 添加text属性，值为P1依次往后加
           item.text = "P" + (index + 1);
+          // 添加type属性，值为typeArr数组中的随机值
+          item.type = this.typeArr[Math.floor(Math.random() * this.typeArr.length)];
           item.time = this.formatDate(item.createTime);
         });
         this.total = res.data.total;
@@ -177,6 +183,7 @@ export default {
           this.listData.forEach((item,index) => {
           // 添加text属性，值为P1依次往后加
           item.text = "P" + (index + 1);
+          item.type = this.typeArr[Math.floor(Math.random() * this.typeArr.length)];
           item.time = this.formatDate(item.createTime);
         });
         this.total = res.data.total;
@@ -188,6 +195,7 @@ export default {
           this.listData.forEach((item,index) => {
           // 添加text属性，值为P1依次往后加
           item.text = "P" + (index + 1);
+            item.type = this.typeArr[Math.floor(Math.random() * this.typeArr.length)];
           item.time = this.formatDate(item.createTime);
         });
         this.total = res.data.total;
