@@ -1,10 +1,10 @@
 <template>
   <view class="content">
-    <Navbar :title="pageTitle" />
+    <Navbar v-if="!pcFrom" :title="pageTitle" />
     <view class="form-box">
       <active-form ref="activeForm" v-model="fields" />
     </view>
-    <u-button class="subform" type="primary" text="提交表单" @click="sub" />
+    <u-button v-if="!pcFrom"  class="subform" type="primary" text="提交表单" @click="sub" />
   </view>
 </template>
 
@@ -22,10 +22,37 @@ export default {
     return {
       pageTitle: this.$route.query.title || "",
       fields: [],
+      parames: {
+        prefix: this.$route.query.prefix || "",
+        processKey: this.$route.query.processKey || "",
+        formId: this.$route.query.id,
+        approvalDocument: "",
+        associateWorkOrder: "",
+        degreeOfInfluence: "",
+        expectedCompletionTime: "",
+        operationRecord: "",
+        owningModule: "",
+        owningSystem: "",
+        priority: "",
+        recorder: "",
+        recorderDept: "",
+        serviceRequestClassification: "",
+        serviceRequestDetails: "",
+        serviceRequestSource: "",
+        title: "",
+        urgency: "",
+        userContactDetails: "",
+        userDept: "",
+        userName: "",
+        workOrderId: "",
+      },
+      pcFrom: this.$route.query.pcFrom,
     };
   },
   onLoad() {
-    this.getFrom();
+    if (!this.pcFrom) {
+      this.getFrom();
+    }
   },
   mounted() {
     window.addEventListener("message", (event) => {
@@ -45,11 +72,11 @@ export default {
         .$vervify()
         .then(async (form) => {
           //取消obj属性的所有下划线，没有下划线则跳过
-          getCreate(form).then((res) => {
+          getCreate({ ...this.parames, ...form }).then((res) => {
             uni.$u.toast("创建工单成功");
             setTimeout(() => {
               uni.navigateTo({
-                url: "/pages/list/Todolist",
+                url: "/pages/index/index",
               });
             }, 300);
           });
@@ -61,8 +88,14 @@ export default {
     getFrom() {
       getFrom({ id: this.$route.query.id || "" }).then((res) => {
         for (var i = 0; i < res.data.fields.length; i++) {
-          this.fields.push(JSON.parse(res.data.fields[i]));
+          let item = JSON.parse(res.data.fields[i]);
+          // 工单、记录时间、优先级是系统自动生成的所以不用展示
+          let notShow = ["workOrderId", "recordedTime", "priority"];
+          if (!notShow.includes(item.formDataType)) {
+            this.fields.push(item);
+          }
         }
+        // console.log(this.fields);
       });
     },
   },

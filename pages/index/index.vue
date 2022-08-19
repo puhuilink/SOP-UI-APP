@@ -42,7 +42,10 @@
           />
           <text class="grid-title">{{ langText.havedoOrder }}</text>
         </u-grid-item>
-        <u-grid-item class="order-item" @click="loginOrJump('/pages/list/orderManage?type=2')">
+        <u-grid-item
+          class="order-item"
+          @click="loginOrJump('/pages/list/orderManage?type=2')"
+        >
           <u-image
             src="@/static/images/index/manageOrder.png"
             width="96rpx"
@@ -67,45 +70,97 @@
       </u-grid>
     </view>
     <u-gap height="20rpx" />
-    <view class="modular-box" >
+    <view class="modular-box">
       <view class="title">{{ langText.reportManage }}</view>
       <view class="report">
         <view class="report-title">{{ langText.firstTitle }}</view>
-        <view class="report-item"  @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=上线单位工单总量`)">
+        <view
+          class="report-item"
+          @click="
+            loginOrJump(
+              `/pages/list/echartsDetail?type=1&title=上线单位工单总量`
+            )
+          "
+        >
           <text>{{ langText.firstTitleOrderTotal }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
-        <view class="report-item"  @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=上线单位已处理工单总量`)">
+        <view
+          class="report-item"
+          @click="
+            loginOrJump(
+              `/pages/list/echartsDetail?type=1&title=上线单位已处理工单总量`
+            )
+          "
+        >
           <text>{{ langText.firstTitleOrderDone }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
-        <view class="report-item" @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=上线单位未处理工单总量`)">
+        <view
+          class="report-item"
+          @click="
+            loginOrJump(
+              `/pages/list/echartsDetail?type=1&title=上线单位未处理工单总量`
+            )
+          "
+        >
           <text>{{ langText.firstTitleOrderUndone }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
       </view>
-      <view class="report" >
+      <view class="report">
         <view class="report-title">{{ langText.thirdTitle }}</view>
-        <view class="report-item"  @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=超48小时工单总量`)">
+        <view
+          class="report-item"
+          @click="
+            loginOrJump(
+              `/pages/list/echartsDetail?type=1&title=超48小时工单总量`
+            )
+          "
+        >
           <text>{{ langText.thirdTitleOrderTotal }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
-        <view class="report-item"  @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=系统Bug未处理工单总量`)">
+        <view
+          class="report-item"
+          @click="
+            loginOrJump(
+              `/pages/list/echartsDetail?type=1&title=系统Bug未处理工单总量`
+            )
+          "
+        >
           <text>{{ langText.thirdTitleOrderDone }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
-        <view class="report-item" @click="loginOrJump(`/pages/list/echartsDetail?type=1&title=系统需求未处理工单`)">
+        <view
+          class="report-item"
+          @click="
+            loginOrJump(
+              `/pages/list/echartsDetail?type=1&title=系统需求未处理工单`
+            )
+          "
+        >
           <text>{{ langText.thirdTitleOrderUndone }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
       </view>
       <view class="report">
         <view class="report-title">{{ langText.fourthTitle }}</view>
-        <view class="report-item"  @click="loginOrJump(`/pages/list/echartsDetail?type=2&title=固定资产模块`)">
+        <view
+          class="report-item"
+          @click="
+            loginOrJump(`/pages/list/echartsDetail?type=2&title=固定资产模块`)
+          "
+        >
           <text>{{ langText.fourthTitleOrderTotal }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
-        <view class="report-item"  @click="loginOrJump(`/pages/list/echartsDetail?type=2&title=债权债务模块`)">
+        <view
+          class="report-item"
+          @click="
+            loginOrJump(`/pages/list/echartsDetail?type=2&title=债权债务模块`)
+          "
+        >
           <text>{{ langText.fourthTitleOrderDone }}</text>
           <u-icon name="arrow-right" color="#737578" size="25rpx" />
         </view>
@@ -164,12 +219,13 @@ export default {
     },
     click(name) {
       let dirId = this.menuList[name].id || "";
-      let title = this.menuList[name].title || "";
+      let prefix = this.menuList[name].prefix || "";
       getByDir({ dirId }).then((res) => {
         let { code, data = {} } = res;
-        if (data && data.formId) {
+        let item = data && data.list && data.list[0] && data.list[0]
+        if (item.formId) {
           uni.navigateTo({
-            url: `/pages/info/formsubmit?id=${data.formId}&title=${title}`,
+            url: `/pages/info/formsubmit?id=${item.formId}&title=${item.name}&prefix=${prefix}&processKey=${item.key}`,
           });
         }
       });

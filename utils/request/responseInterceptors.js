@@ -28,7 +28,7 @@ module.exports = vm => {
       } else if (code === 401) {
         // 未登录状态跳转到登录页
         let routes = getCurrentPages()
-        let curRoute = routes[routes.length - 1].route
+        let curRoute = routes.length && routes[routes.length - 1].route || ''
         if (curRoute !== '/pages/login/login') {
           uni.navigateTo({
             url: "/pages/login/login",

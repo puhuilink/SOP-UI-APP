@@ -12,9 +12,11 @@ export default {
       sessionStorage.setItem('store', JSON.stringify(this.$store.state))
     })
     // #endif
-    
-    // 获取用户信息
-    this.$store.dispatch("ObtainUserInfo");
+    // pcFrom，pc端演示页面
+    if (!this.$route.query.pcFrom) {
+      // 获取用户信息
+      this.$store.dispatch("ObtainUserInfo");
+    }
   },
   // onShow: function () {
   //   console.log('App Show')
