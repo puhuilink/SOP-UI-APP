@@ -58,6 +58,13 @@
 			}
 		},
     {
+			"path": "pages/list/orderDetail",
+			"style": {
+				"navigationBarTitleText": "工单详情",
+        "navigationStyle": "custom"
+			}
+		},
+    {
 			"path": "pages/list/echartsDetail",
 			"style": {
 				"navigationBarTitleText": "报表详情页",

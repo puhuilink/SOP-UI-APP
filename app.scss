@@ -7,11 +7,16 @@
 	height: 100%;
 }
 //卡片样式
-.fui-card__title{
-  width: 100%;
-  padding: 50rpx;
-  box-sizing: border-box;
-  font-weight: 500;
+.box-card{
+ 
+  margin: 0 auto;
+  margin-top: 20rpx;
+width: 719rpx;
+min-height: 165rpx;
+background: #ffffff;
+border-radius: 17rpx;
+padding: 10rpx 28rpx;
+box-sizing: border-box;
 }
 
 html, body {
