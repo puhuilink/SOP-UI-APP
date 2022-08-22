@@ -20,7 +20,7 @@
         </view>
       </template>
     </view>
-    <u-gap height="110rpx" />
+    <u-gap height="20rpx" />
     <Tabbar indexBar="problems" />
   </view>
 </template>
