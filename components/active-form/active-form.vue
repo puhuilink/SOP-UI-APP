@@ -32,7 +32,8 @@
               <input
                 type="text"
                 class="input"
-                :disabled="item.disabled"
+                 :readonly="readonly"
+                 :disabled="item.disabled"
                 placeholder-class="plaClass"
                 :placeholder="item.placeholder"
                 v-model="form[item.formDataType]"
@@ -42,6 +43,7 @@
                 <u-button
                   size="mini"
                   type="primary"
+                    :readonly="readonly"
                   :disabled="item.disabled || isSend"
                   @click="sendCode(item)"
                 >
@@ -51,9 +53,10 @@
             </view>
             <!-- 普通输入框 -->
             <view class="line-right" v-else>
-              <input
+              <u-input
                 type="text"
                 class="input"
+                :readonly="readonly"
                 :disabled="item.disabled"
                 placeholder-class="plaClass"
                 :placeholder="item.placeholder"
@@ -80,6 +83,7 @@
                 placeholder-class="plaClass text-right"
                 :placeholder="item.placeholder"
                 v-model="form[item.formDataType]"
+                  :readonly="readonly"
                 :disabled="item.disabled"
                 @click="showSelect(item)"
               />
@@ -109,6 +113,7 @@
             <view class="line-right">
               <u-switch
                 :disabled="item.disabled"
+                :readonly="readonly"
                 v-model="form[item.formDataType]"
                 @change="switchChange(index, $event)"
               ></u-switch>
@@ -138,6 +143,7 @@
                 type="text"
                 class="input text-right"
                 placeholder-class="plaClass text-right"
+                :readonly="readonly"
                 v-model="form[item.formDataType]"
                 :placeholder="item.placeholder"
                 :disabled="item.disabled"
@@ -170,6 +176,7 @@
             <view class="line-right">
               <u-button
                 type="primary"
+                :readonly="readonly"
                 :disabled="item.disabled"
                 @click="buttonClick(item)"
               >
@@ -191,6 +198,7 @@
             <view class="line-right pr20">
               <u-rate
                 :count="item.max"
+                :readonly="readonly"
                 v-model="form[item.formDataType]"
                 active-icon="heart-fill"
                 inactive-icon="heart"
@@ -216,6 +224,7 @@
               <textarea
                 auto-height
                 :maxlength="-1"
+                :readonly="readonly"
                 :disabled="item.disabled"
                 :placeholder="item.placeholder"
                 v-model="form[item.formDataType]"
@@ -240,6 +249,7 @@
             </view>
             <view class="img-upload p30">
               <u-upload
+              :readonly="readonly"
                 :uploadList="item.__config__.regList"
                 :disabled="item.disabled"
                 :accept="item.accept"
@@ -282,6 +292,7 @@
             >
               <u-radio-group
                 v-model="form[item.formDataType]"
+                :readonly="readonly"
                 @change="radioChange($event, index)"
                 placement="row"
               >
@@ -330,6 +341,7 @@
             >
               <u-checkbox-group
                 v-model="form[item.formDataType]"
+                :readonly="readonly"
                 @change="checkboxGroupChange($event, item)"
               >
                 <u-checkbox
@@ -361,6 +373,7 @@
             <view class="line-right pr20">
               <input
                 type="number"
+                :readonly="readonly"
                 v-model="form[item.formDataType]"
                 :placeholder="item.placeholder"
                 @input="inputVal(index)"
@@ -395,13 +408,13 @@
               {{ item.__config__.label }}：
             </view>
             <view class="line-bottom-textarea">
-              <u-parse :content="item.__config__.defaultValue" />
+              <u-parse :readonly="readonly" :content="item.__config__.defaultValue" />
             </view>
           </view>
         </view>
       </block>
       <view>
-        <u-popup :show="isShow" @close="close" @open="open">
+        <u-popup :readonly="readonly" :show="isShow" @close="close" @open="open">
           <view class="content">
             <mSidebar title="进度详情">
               <view class="row">
@@ -450,8 +463,8 @@ export default {
         return [];
       },
     },
-    //是否编辑表单
-    isEdit: {
+    //是否只读
+    readonly: {
       type: Boolean,
       default: false,
     },
