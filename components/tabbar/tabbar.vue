@@ -1,30 +1,35 @@
 <template>
-  <u-tabbar
-    :value="tabarList.findIndex((item) => item.name === indexBar2)"
-    :fixed="true"
-    :placeholder="false"
-    @change="change"
-  >
-    <block v-for="(item, index) in tabarList" :key="index">
-      <u-tabbar-item
-        :text="item.text"
-        :icon="item.name === indexBar2 ? item.selectedIconPath : item.iconPath"
-      ></u-tabbar-item>
-      <!-- 拨打电话 -->
-      <u-overlay :opacity="0.3" :show="!!(indexBar2 === 'serviceTel')">
-        <view class="tel-Box">
-          <view class="tel">
-            <text>客服电话</text>
-            <text>400-676-5885</text>
-            <view class="tel-btn">
-              <view @click="callTel()">取消</view>
-              <view @click="callTel(true)">拨打</view>
+  <view>
+    <u-tabbar
+      :value="tabarList.findIndex((item) => item.name === indexBar2)"
+      :fixed="true"
+      :placeholder="false"
+      @change="change"
+    >
+      <block v-for="(item, index) in tabarList" :key="index">
+        <u-tabbar-item
+          :text="item.text"
+          :icon="
+            item.name === indexBar2 ? item.selectedIconPath : item.iconPath
+          "
+        ></u-tabbar-item>
+        <!-- 拨打电话 -->
+        <u-overlay :opacity="0.3" :show="!!(indexBar2 === 'serviceTel')">
+          <view class="tel-Box">
+            <view class="tel">
+              <text>客服电话</text>
+              <text>400-676-5885</text>
+              <view class="tel-btn">
+                <view @click="callTel()">取消</view>
+                <view @click="callTel(true)">拨打</view>
+              </view>
             </view>
           </view>
-        </view>
-      </u-overlay>
-    </block>
-  </u-tabbar>
+        </u-overlay>
+      </block>
+    </u-tabbar>
+    <u-gap :height="`${tabbarH}px`" />
+  </view>
 </template>
 
 <script>
@@ -33,6 +38,7 @@ export default {
   props: ["indexBar"],
   data() {
     return {
+      tabbarH: 0,
       indexBar2: "",
       tabbar: [
         {
@@ -109,6 +115,14 @@ export default {
     },
   },
   created() {},
+  mounted() {
+    this.$nextTick(() => {
+      let tabbar = document.getElementsByClassName("u-tabbar--fixed");
+      if (tabbar && tabbar[0]) {
+        this.tabbarH = tabbar[0].offsetHeight;
+      }
+    });
+  },
   methods: {
     change(i) {
       let item = this.tabarList[i];

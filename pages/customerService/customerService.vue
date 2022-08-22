@@ -1,9 +1,6 @@
 <template>
   <view class="container">
     <Navbar title="客服" />
-
-    <u-gap height="110rpx" />
-    <Tabbar indexBar="customerService" />
   </view>
 </template>
 
