@@ -3,7 +3,7 @@
     <view class="head">
       <view class="head-title">{{ langText.systemName }}</view>
       <view class="msg-set">
-        <view class="msg-num" @click="loginOrJump('/pages/message/message')">
+        <view class="msg-num" @click="loginOrJump('/pages/message/message?unread=1')">
           <u-icon name="bell-fill" color="#fff" size="48rpx" />
           <view class="num" v-if="msgNum > 0">{{
             msgNum > 9 ? "···" : msgNum
