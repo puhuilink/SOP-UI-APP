@@ -15,6 +15,20 @@
 			}
 		},
 		{
+			"path": "pages/customerService/transfer",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/customerService/selectOrder",
+			"style": {
+				"navigationBarTitleText": "自助工单",
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/index/echarts",
 			"style": {
 				"navigationBarTitleText": "报表视图",

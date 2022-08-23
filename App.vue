@@ -13,7 +13,7 @@ export default {
     })
     // #endif
     // pcFrom，pc端演示页面
-    if (!this.$route.query.pcFrom) {
+    if (!this.$route.query.pcFrom && !this.$route.query.iframe) {
       // 获取用户信息
       this.$store.dispatch("ObtainUserInfo");
     }

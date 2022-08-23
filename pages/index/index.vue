@@ -183,8 +183,6 @@ export default {
   data() {
     return {
       msgNum: 0,
-      isScrolltolower: false,
-      pageNo: 1,
       menuList: [],
       lastMsg: {
         show: true,
@@ -231,7 +229,7 @@ export default {
       });
     },
     async getList() {
-      await getList({ pageNo: this.pageNo, pageSize: 24 }).then((res) => {
+      await getList({ pageNo: 1, pageSize: 100 }).then((res) => {
         let { code, data = {}, msg } = res;
         // label替换为title
         if (parseInt(code) !== 0 && !data.list) {
@@ -246,18 +244,6 @@ export default {
         });
         this.menuList = [...this.menuList, ...data.list];
       });
-      this.pageNo += 1;
-      if (this.isScrolltolower) {
-        this.isScrolltolower = false;
-      }
-    },
-    msgDel() {
-      this.lastMsg.show = false;
-    },
-    scrolltolower() {
-      if (this.isScrolltolower) return;
-      this.isScrolltolower = true;
-      this.getList();
     },
   },
 };
