@@ -31,30 +31,30 @@
       </view>
     </u-sticky>
     <u-list>
-      <u-list-item v-for="(item, index) in testData" :key="index" @click="loginOrJump('/pages/list/orderDetail?id=6023e21a-1e98-11ed-bb5c-ce3e85835c66')">
+      <u-list-item v-for="(item, index) in listData" :key="index" @click="linkto(item)">
         <u-row>
           <u-col span="12">
             <view class="time"></view>
           </u-col>
         </u-row>
         <view class="list-item">
-            <view class="title">
+            <view class="title-box">
             <u-tag :text="item.messageType" :type="item.type" plain size="mini" > </u-tag>
-            <view>{{item.title}}</view>
+            <view  class="title">{{item.title}}</view>
           </view>
           <view class="account">
             <view class="account-box">
-              <view class="account-text">{{item.author_name}}</view>
+              <view class="account-text">{{item.handler}}</view>
             </view>
           </view>
           <view class="record">  
            <view>
             <img src="/static/images/icon/icon_dingdan.png" class="record-img"/>
-             {{item.id}}
+             {{item.workOrderId}}
              </view>  
           <view>
             <img src="/static/images/icon/icon_time.png" class="record-img"/>
-            {{item.time}}
+            {{formatDate(item.createTime)}}
             </view>
           </view>
         </view>
@@ -66,18 +66,27 @@
 <script>
 import uTabs from "../../uni_modules/uview-ui/components/u-tabs/u-tabs.vue";
 import Navbar from "@/components/navbar/navbar";
+import {getUnreadPage,getReadPage,getUpdate} from "@/api/list.js"
 export default {
   components: { uTabs,Navbar },
   data() {
     return {
       keyword: "",
        loading: false,
-          // 每页数据量
+       typeArr:['sucesss','error','warning','primary'],
+       orderArr:['待办','审批','升级','不通过'],
+       form:{
+     // 每页数据量
       pageSize: 10,
       // 当前页
       pageNo: 1,
+       }, 
       // 数据总量
       total: 0,
+      userInformationVo:{
+        id:'',
+        state:''
+      },
       msgState: {
         index: this.$route.query.unread || 0,
         list: [
@@ -90,47 +99,6 @@ export default {
         ],
       },
       listData:[],
-      testData: [
-        {
-          id: "S20220531199",
-          title: "财务账号问题",
-          author_name: "二线人员王明已处理",
-          name: "记录人：高得",
-          published_at: "2022-07-22 08:19",
-          time:'2022-08-10',
-          messageType: "审批",
-        },
-        {
-          id: "S20220531199",
-          title: "财务账号问题",
-          author_name: "二线人员王明已处理",
-          name: "记录人：李雷",
-          published_at: "2022-07-23 08:19",
-           time:'2022-08-10',
-                   type: "warning",
-           messageType: "升级",
-        },
-        {
-          id: "S20220531199",
-          title: "财务账号问题",
-          author_name: "二线人员王明已处理",
-          name: "记录人：王露",
-          published_at: "2022-07-24 08:19",
-           time:'2022-08-10',
-           type: "success",
-           messageType: "签收",
-        },
-        {
-          id: "S20220531199",
-          title: "财务账号问题",
-          author_name: "二线人员王明已处理",
-          name: "记录人：高得",
-          published_at: "2022-07-25 08:19",
-           time:'2022-08-10',
-            type: "error",
-           messageType: "不通过",
-        },
-      ],
     };
   },
     computed: {
@@ -151,6 +119,28 @@ export default {
     formatDate(date) {
       return new Date(date).toLocaleDateString();
     },
+      getlist(index){
+        if(index==0){
+            getReadPage( this.form ).then((res) => {
+            this.listData = res.data.list
+            this.listData.forEach((item,index) => {
+          // 添加type属性，值为typeArr数组中的随机值
+          item.type = this.typeArr[Math.floor(Math.random() * this.typeArr.length)];
+           item.messageType = this.orderArr[Math.floor(Math.random() * this.orderArr.length)];
+        });
+      });  
+        }else{
+  getUnreadPage( this.form ).then((res) => {
+            this.listData = res.data.list
+            this.listData.forEach((item,index) => {
+          // 添加type属性，值为typeArr数组中的随机值
+          item.type = this.typeArr[Math.floor(Math.random() * this.typeArr.length)];
+           item.messageType = this.orderArr[Math.floor(Math.random() * this.orderArr.length)];
+        });
+      });  
+        }
+       
+      }, 
       loginOrJump(pageUrl) {
       if (!this.hasLogin) {
         uni.navigateTo({
@@ -162,8 +152,21 @@ export default {
         });
       }
     },
+    linkto(item){
+      if(item.id){
+       this.userInformationVo.id = item.id
+        this.userInformationVo.state = true
+        uni.navigateTo({
+            url:`/pages/message/messagedetail?id=${item.id}`,
+          });
+            getUpdate(this.userInformationVo).then((res) => {
+              console.log(res);
+      });
+      } 
+    },
     changeMsgState(item) {
       this.msgState.index = item.index;
+      this.getlist(this.msgState.index)
     },
     search() {
       console.log(this.keyword)
@@ -198,8 +201,7 @@ export default {
   padding: 10rpx 28rpx;
   box-sizing: border-box;
 
-  .title {
-    width: 154px;
+  .title-box {
     height: 22px;
     font-size: 16px;
     font-weight: bold;
@@ -207,7 +209,9 @@ export default {
     padding: 30rpx 0rpx ;
     line-height: 22px;
     display: flex;
-    justify-content: space-between;
+    .title{
+      margin-left:40rpx
+    }
     .tag{
       line-height: 22px;
     }

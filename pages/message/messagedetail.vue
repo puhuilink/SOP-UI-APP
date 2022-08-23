@@ -3,19 +3,19 @@
        <Navbar title="消息详情" />
    <u-row>
           <u-col span="12">
-            <view class="time"> {{ listData.published_at }} </view>
+            <view class="time"> {{ formatDate(listData.createTime) }} </view>
           </u-col>
         </u-row>
         <view class="list-item">
           <view class="account">
-            <view>{{listData.id}}</view>
+            <view>{{listData.workOrderId}}</view>
           </view>
           <view class="record">
-            <view>{{listData.author_name}}</view>
-            <view>{{listData.name}}</view>
+            <view>{{listData.handler}}</view>
+            <view>{{listData.updater}}</view>
           </view>
           <u-divider ></u-divider>
-         <u--text :text="listData.value"></u--text>
+         <u--text :text="listData.message"></u--text>
         </view>
   </view>
 </template>
@@ -23,23 +23,31 @@
 <script>
 import uTabs from "../../uni_modules/uview-ui/components/u-tabs/u-tabs.vue";
 import Navbar from "@/components/navbar/navbar";
+import {getInformation} from "@/api/list.js"
+
 export default {
+  name:'messagedetail',
   components: { uTabs, Navbar },
   data() {
-    return {
-      listData: {
-          id: "S20220531199",
-          title: "01-财务账号问题",
-          author_name: "二线人员王明已处理",
-          name: "记录人高得",
-          published_at: "2022-07-22 08:19",
-          value: "这是一个财务账号问题，希望可以进行相关申请。。。。",
-        }, 
+    return {    
+      listData:{},
+      form:{
+        id:this.$route.query.id
+      }
     };
   },
-
+   onLoad() {
+    this.getlist();
+  },
   methods: {
-   
+     formatDate(date) {
+      return new Date(date).toLocaleDateString();
+    },
+   getlist(){
+         getInformation( this.form).then((res) => {
+           this.listData = res.data
+      }); 
+   }
   },
 };
 </script>
