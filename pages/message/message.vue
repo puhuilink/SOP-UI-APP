@@ -79,7 +79,7 @@ export default {
       // 数据总量
       total: 0,
       msgState: {
-        index: this.$route.query.type || 0,
+        index: this.$route.query.unread || 0,
         list: [
           {
             name: "已读",
