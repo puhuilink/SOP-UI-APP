@@ -13,3 +13,5 @@ export const getByDir = params => http.get('so/model/get-by-dir', { params })
 export const getFrom = params => http.get('/bpm/form/get', { params })
 //根据表单创建工单
 export const getCreate = params => http.post('/so/work-order/create',  params )
+//获得未读消息数量
+export const getUnreadNum = params => http.get('/so/information/getUnreadNum')

@@ -1,9 +1,13 @@
 <template>
   <view class="container">
+    <!-- 头部 -->
     <view class="head">
       <view class="head-title">{{ langText.systemName }}</view>
       <view class="msg-set">
-        <view class="msg-num" @click="loginOrJump('/pages/message/message?unread=1')">
+        <view
+          class="msg-num"
+          @click="loginOrJump('/pages/message/message?unread=1')"
+        >
           <u-icon name="bell-fill" color="#fff" size="48rpx" />
           <view class="num" v-if="msgNum > 0">{{
             msgNum > 9 ? "···" : msgNum
@@ -17,6 +21,7 @@
         />
       </view>
     </view>
+    <!-- 工单管理 -->
     <view class="modular-box work-order">
       <view class="title">{{ langText.myWorkOder }}</view>
       <u-grid :border="false" col="4">
@@ -56,6 +61,7 @@
       </u-grid>
     </view>
     <u-gap height="20rpx" />
+    <!-- 自助工单 -->
     <view class="modular-box work-order">
       <view class="title">{{ langText.customOrder }}</view>
       <u-grid :border="false" col="4" @click="click">
@@ -70,6 +76,7 @@
       </u-grid>
     </view>
     <u-gap height="20rpx" />
+    <!-- 报表 -->
     <view class="modular-box">
       <view class="title">{{ langText.reportManage }}</view>
       <view class="report">
@@ -167,13 +174,28 @@
       </view>
     </view>
     <u-gap height="20rpx" />
-
+    <!-- 获取最新消息 -->
+    <template v-if="newestMsg.length > 0">
+      <view class="msg-box">
+        <u-transition
+          show
+          :duration="500"
+          v-for="(item, i) in newestMsg"
+          :key="`newestMsg${i}`"
+        >
+          <view class="msg-item">
+            <img src="@/static/images/icon/消息.png" />
+            <view>{{ item }}</view>
+          </view>
+        </u-transition>
+      </view>
+    </template>
     <Tabbar indexBar="index" />
   </view>
 </template>
 
 <script>
-import { getList, getByDir } from "@/api/index.js";
+import { getList, getByDir, getUnreadNum } from "@/api/index.js";
 import Tabbar from "@/components/tabbar/tabbar";
 export default {
   name: "index",
@@ -184,15 +206,26 @@ export default {
     return {
       msgNum: 0,
       menuList: [],
-      lastMsg: {
-        show: true,
-      },
+      newestMsg: [],
+      a: 1,
     };
   },
   onLoad() {
     this.getList();
     // 获取用户信息
     this.$store.dispatch("ObtainUserInfo");
+    // 获取未读消息数
+    this.getUnreadNum();
+    // 获取最新消息
+    this.getNewestMsg();
+  },
+  onHide() {
+    // 清除计时器
+    clearTimeout(this.unreadTime);
+    // 清除WebSocket
+    if (this.newestMsgsocket) {
+      this.newestMsgsocket.close();
+    }
   },
   computed: {
     hasLogin() {
@@ -203,6 +236,55 @@ export default {
     },
   },
   methods: {
+    getNewestMsg() {
+      if (!this.newestMsgsocket) {
+        this.newestMsgsocket = new WebSocket(
+          `ws://122.9.133.170:48080/?accessToken=${this.$store.getters.accessToken}`
+        );
+      }
+      this.newestMsgsocket.onclose = () => {
+        this.newestMsgsocket = null;
+        this.getNewestMsg();
+      };
+      this.newestMsgsocket.onerror = () => {
+        this.newestMsgsocket = null;
+        this.getNewestMsg();
+      };
+      this.newestMsgsocket.onmessage = (msg) => {
+        let msgJson =
+          typeof msg.data === "string" ? JSON.parse(msg.data) : msg.data;
+        if (
+          parseInt(msgJson.type) === 200 &&
+          msgJson.body &&
+          msgJson.body.message
+        ) {
+          this.newestMsg.push(msgJson.body.message);
+          setTimeout(() => {
+            this.newestMsg.splice(0, 1);
+          }, 5000);
+        }
+      };
+    },
+    // 获取未读消息数
+    getUnreadNum() {
+      if (this.unreadTime) {
+        clearTimeout(this.unreadTime);
+      } else {
+        getUnreadNum().then((res) => {
+          if (res.data) {
+            this.msgNum = res.data;
+          }
+        });
+      }
+      this.unreadTime = setTimeout(() => {
+        getUnreadNum().then((res) => {
+          if (res.data) {
+            this.msgNum = res.data;
+          }
+        });
+        this.getUnreadNum();
+      }, 5000);
+    },
     loginOrJump(pageUrl) {
       if (!pageUrl) return;
       if (!this.hasLogin) {
@@ -379,5 +461,41 @@ export default {
 
 .report:first-child {
   margin-top: 8rpx;
+}
+
+.msg-box {
+  position: fixed;
+  top: 20rpx;
+  left: 50%;
+  margin-left: -359rpx;
+  width: 719rpx;
+  .msg-item {
+    margin-bottom: 10rpx;
+    background: #ffffff;
+    padding: 20rpx;
+    box-sizing: border-box;
+    border-radius: 21rpx;
+    z-index: 9999;
+    border: 1rpx solid #68696d;
+    display: flex;
+    align-items: center;
+    img {
+      display: block;
+      width: 90rpx;
+      height: 90rpx;
+      margin-right: 20rpx;
+    }
+    view {
+      flex: 1;
+      font-size: 29rpx;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: #68696d;
+      line-height: 29rpx;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
 }
 </style>
