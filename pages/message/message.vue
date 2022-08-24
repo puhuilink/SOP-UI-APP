@@ -75,12 +75,6 @@ export default {
        loading: false,
        typeArr:['sucesss','error','warning','primary'],
        orderArr:['待办','审批','升级','不通过'],
-       form:{
-     // 每页数据量
-      pageSize: 10,
-      // 当前页
-      pageNo: 1,
-       }, 
       // 数据总量
       total: 0,
       userInformationVo:{
@@ -121,7 +115,7 @@ export default {
     },
       getlist(index){
         if(index==0){
-            getReadPage( this.form ).then((res) => {
+            getReadPage( ).then((res) => {
             this.listData = res.data.list
             this.listData.forEach((item,index) => {
           // 添加type属性，值为typeArr数组中的随机值
@@ -130,7 +124,7 @@ export default {
         });
       });  
         }else{
-  getUnreadPage( this.form ).then((res) => {
+  getUnreadPage( ).then((res) => {
             this.listData = res.data.list
             this.listData.forEach((item,index) => {
           // 添加type属性，值为typeArr数组中的随机值

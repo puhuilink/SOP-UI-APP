@@ -234,7 +234,7 @@
               </textarea>
             </view>
           </view>
-          <!-- 上传图片 -->
+          <!-- 上传-->
           <view
             class="img-box pt30 flex-col-l"
             v-else-if="item.__config__.tag == 'el-upload'"
