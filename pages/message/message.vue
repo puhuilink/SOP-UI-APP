@@ -39,7 +39,7 @@
         </u-row>
         <view class="list-item">
             <view class="title-box">
-            <u-tag :text="item.messageType" :type="item.type" plain size="mini" > </u-tag>
+            <u-tag :text="item.handler" :type="item.type" plain size="mini" > </u-tag>
             <view  class="title">{{item.title}}</view>
           </view>
           <view class="account">
@@ -120,7 +120,6 @@ export default {
             this.listData.forEach((item,index) => {
           // 添加type属性，值为typeArr数组中的随机值
           item.type = this.typeArr[Math.floor(Math.random() * this.typeArr.length)];
-           item.messageType = this.orderArr[Math.floor(Math.random() * this.orderArr.length)];
         });
       });  
         }else{
@@ -129,7 +128,6 @@ export default {
             this.listData.forEach((item,index) => {
           // 添加type属性，值为typeArr数组中的随机值
           item.type = this.typeArr[Math.floor(Math.random() * this.typeArr.length)];
-           item.messageType = this.orderArr[Math.floor(Math.random() * this.orderArr.length)];
         });
       });  
         }

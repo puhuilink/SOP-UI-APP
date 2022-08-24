@@ -31,33 +31,36 @@
       </view>
     </u-sticky>
     <u-list>
-      <u-list-item v-for="(item, index) in testData" :key="index" @click="loginOrJump('/pages/list/orderDetail?id=6023e21a-1e98-11ed-bb5c-ce3e85835c66')">
+      <u-list-item v-for="(item, index) in listData" :key="index" @click="loginOrJump('/pages/list/orderDetail?id=6023e21a-1e98-11ed-bb5c-ce3e85835c66')">
         <u-row>
           <u-col span="12">
             <view class="time"></view>
           </u-col>
         </u-row>
         <view class="list-item">
-            <view class="title">
-            <u-tag :text="item.text" :type="item.type" plain size="mini" class="tag"> </u-tag>
-            <view>{{item.title}}</view>
+            <view class="title-box">
+              <view v-if="item.priority">
+                 <u-tag :text="item.priority" :type="item.type" plain size="mini" class="tag"> </u-tag>
+              </view>
+           
+            <view class="title">{{item.name}}</view>
           </view>
           <view class="account">
             <view class="account-box">
-              <view class="account-text">{{item.author_name}}</view>
+              <view class="account-text">{{item.handler}}</view>
             </view>
             <view class="account-box">
-              <view class="account-text">{{item.name}}</view>
+              <view class="account-text">{{item.processInstance.startUserNickname}}</view>
             </view>
           </view>
           <view class="record">  
            <view>
             <img src="/static/images/icon/icon_dingdan.png" class="record-img"/>
-             {{item.id}}
+             {{item.workOrderId}}
              </view>  
           <view>
             <img src="/static/images/icon/icon_time.png" class="record-img"/>
-            {{item.time}}
+            {{formatDate(item.createTime)}}
             </view>
           </view>
         </view>
@@ -76,71 +79,33 @@ export default {
     return {
       keyword: "",
        loading: false,
-          // 每页数据量
-      pageSize: 10,
-      // 当前页
-      pageNo: 1,
       // 数据总量
       total: 0,
-      typeArr:['sucesss','error','warning','primary'],
+      typeArr:['error','warning','primary','sucesss'],
       msgState: {
         index: this.$route.query.type || 0,
         list: [
           {
             name: "待办",
              badge: {
-                        value: 5,
+                        value: '',
                     }
           },
           {
             name: "已办",
+             badge: {
+                        value: '',
+                    }
           },
             {
             name: "我管理的",
+             badge: {
+                        value: '',
+                    }
           },
         ],
       },
       listData:[],
-      testData: [
-        {
-          id: "S20220531199",
-          title: "财务账号问题",
-          author_name: "二线人员王明已处理",
-          name: "记录人：高得",
-          published_at: "2022-07-22 08:19",
-          time:'2022-08-10',
-          type: "error",
-          text:'P1'
-        },
-        {
-          id: "S20220531199",
-          title: "财务账号问题",
-          author_name: "二线人员王明已处理",
-          name: "记录人：李雷",
-          published_at: "2022-07-23 08:19",
-           time:'2022-08-10',
-          text:'P2'
-        },
-        {
-          id: "S20220531199",
-          title: "财务账号问题",
-          author_name: "二线人员王明已处理",
-          name: "记录人：王露",
-          published_at: "2022-07-24 08:19",
-           time:'2022-08-10',
-           type: "success",
-          text:'P3'
-        },
-        {
-          id: "S20220531199",
-          title: "财务账号问题",
-          author_name: "二线人员王明已处理",
-          name: "记录人：高得",
-          published_at: "2022-07-25 08:19",
-           time:'2022-08-10',
-          text:'P2'
-        },
-      ],
     };
   },
     computed: {
@@ -161,44 +126,35 @@ export default {
     formatDate(date) {
       return new Date(date).toLocaleDateString();
     },
-  async  getlist() {
-    //根据this.$route.query.type获取数据
-    let type = this.$route.query.type;
-    
-    if (type == 0) {
-      await getToDoList(this.pageNo, this.pageSize).then(res => {
+  async  getlist() { 
+    if (this.msgState.index == 0) {
+      await getToDoList().then(res => {
         this.listData = res.data.list;
-          this.listData.forEach((item,index) => {
-          // 添加text属性，值为P1依次往后加
-          item.text = "P" + (index + 1);
-          // 添加type属性，值为typeArr数组中的随机值
-          item.type = this.typeArr[Math.floor(Math.random() * this.typeArr.length)];
-          item.time = this.formatDate(item.createTime);
-        });
-        this.total = res.data.total;
+        console.log(this.listData);
+        //   this.listData.forEach((item,index) => {
+        //   // 添加type属性，值为typeArr数组中的随机值
+        //   item.type = this.typeArr[item.priority];
+        // });
+        this.msgState.list[this.msgState.index].badge.value = res.data.total;
       });
-    } else if (type == 1) {
-      await getHaveDoList(this.pageNo, this.pageSize).then(res => {
+    } else if (this.msgState.index == 1) {
+      await getHaveDoList().then(res => {
         this.listData = res.data.list;
-          this.listData.forEach((item,index) => {
-          // 添加text属性，值为P1依次往后加
-          item.text = "P" + (index + 1);
-          item.type = this.typeArr[Math.floor(Math.random() * this.typeArr.length)];
-          item.time = this.formatDate(item.createTime);
-        });
-        this.total = res.data.total;
+         //   this.listData.forEach((item,index) => {
+        //   // 添加type属性，值为typeArr数组中的随机值
+        //   item.type = this.typeArr[item.priority];
+        // });
+        this.msgState.list[this.msgState.index].badge.value = res.data.total;
       });
     } else {
       //我管理的暂无接口，使用已办接口
-      await getHaveDoList(this.pageNo, this.pageSize).then(res => {
+      await getHaveDoList().then(res => {
         this.listData = res.data.list;
-          this.listData.forEach((item,index) => {
-          // 添加text属性，值为P1依次往后加
-          item.text = "P" + (index + 1);
-            item.type = this.typeArr[Math.floor(Math.random() * this.typeArr.length)];
-          item.time = this.formatDate(item.createTime);
-        });
-        this.total = res.data.total;
+         //   this.listData.forEach((item,index) => {
+        //   // 添加type属性，值为typeArr数组中的随机值
+        //   item.type = this.typeArr[item.priority];
+        // });
+         this.msgState.list[this.msgState.index].badge.value = res.data.total;
       });
     }
     },
@@ -215,6 +171,7 @@ export default {
     },
     changeMsgState(item) {
       this.msgState.index = item.index;
+      this.getlist()
     },
     search() {
       console.log(this.keyword)
@@ -249,8 +206,7 @@ export default {
   padding: 10rpx 28rpx;
   box-sizing: border-box;
 
-  .title {
-    width: 144px;
+  .title-box {
     height: 22px;
     font-size: 16px;
     font-weight: bold;
@@ -258,7 +214,9 @@ export default {
     padding: 30rpx 0rpx ;
     line-height: 22px;
     display: flex;
-    justify-content: space-between;
+    .title{
+      margin-left:40rpx
+    }
     .tag{
       line-height: 22px;
     }

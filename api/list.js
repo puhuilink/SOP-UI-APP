@@ -2,7 +2,7 @@
 const { http } = uni.$u
 
 //获取用户待办列表
-export const getToDoList = params => http.get('/so/bpm/task/todo-page', { params })
+export const getToDoList = params => http.get('/so/bpm/task/todo-page-app', { params })
 
 //获取用户待办列表详情
 export const getToDoListDetail = params => http.get('/so/bpm/task/get-by-id', { params })
@@ -11,7 +11,7 @@ export const getToDoListDetail = params => http.get('/so/bpm/task/get-by-id', { 
 export const getClaim = params => http.put('/so/bpm/task/claim',  params )
 
 //获取用户已办列表
-export const getHaveDoList = params => http.get('/so/bpm/task/done-page', { params })
+export const getHaveDoList = params => http.get('/so/bpm/task/done-page-app', { params })
 
 //获得消息管理
 export const getInformation = params => http.get('/so/information/get', { params })
