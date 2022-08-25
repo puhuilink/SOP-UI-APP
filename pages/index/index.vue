@@ -217,7 +217,7 @@ export default {
     // 获取未读消息数
     this.getUnreadNum();
     // 获取最新消息
-    this.getNewestMsg();
+    // this.getNewestMsg();
   },
   onHide() {
     // 清除计时器

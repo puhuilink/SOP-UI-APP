@@ -1,14 +1,21 @@
 <template>
   <view class="container">
      <Navbar :title="langText.pageTitle" />
+
   <view class="box-card">
+    <view>工单详情</view>
+     <view class="form-box">
+      <active-form ref="activeForm" v-model="fields" :readonly="true" />
+    </view>
+  </view>
+    <view class="box-card">
     <u--form
 				labelPosition="left"
 				:model="form"
 				:rules="rules"
 				ref="form1"
 		>
-    <u-form-item
+    <!-- <u-form-item
 					label="工单编号："
 					prop="form.id"
           labelWidth="80"
@@ -17,7 +24,7 @@
 						v-model="form.name"
 						border="none"
 				></u--input>
-			</u-form-item>
+			</u-form-item> -->
       <u-form-item
 						label="用户验证："
         :required=true
@@ -57,20 +64,18 @@
 			</u-form-item>
     </u--form>
   </view>
-  <view class="box-card">
-    <view>工单详情</view>
-     <view class="form-box">
-      <active-form ref="activeForm" v-model="fields" />
-    </view>
-  </view>
+    <u-button  class="subform" type="primary" text="提交" @click="sub" />
   </view >
 </template>
 
 <script>
 import { getToDoListDetail } from "@/api/list.js";
+import { getFrom } from "@/api/index.js";
+
 import Navbar from "@/components/navbar/navbar";
 import ActiveForm from "@/components/active-form/active-form";
 export default {
+    name: "Order",
  components: { Navbar,ActiveForm },
  data() {
    return {
@@ -85,6 +90,7 @@ export default {
       value:'',
       why:''
       },
+      dataForm:{},
    radiolist: [{
 						name: '已解决',
 						disabled: false
@@ -113,16 +119,42 @@ export default {
    methods:{
         getFrom() {
       getToDoListDetail({ id: this.$route.query.id || "" }).then((res) => {
-        console.log(res);
-        // for (var i = 0; i < res.data.fields.length; i++) {
-        //   this.fields.push(JSON.parse(res.data.fields[i]));
-        // }
+             if(res.data){
+				 this.getFormData(res.data.soWorkOrderDO)
+				 this.dataForm = res.data
+			 }else{
+				 return
+			 }
+       
       });
     },
+	getFormData(data){
+		getFrom({id:data.formId}).then((res) => {
+		  for (var i = 0; i < res.data.fields.length; i++) {
+                let item = JSON.parse(res.data.fields[i]);
+		    // 工单、记录时间、优先级是系统自动生成的所以不用展示
+		    let notShow = ["workOrderId", "recordedTime", "priority"];
+		    if (!notShow.includes(item.formDataType)) {
+		      this.fields.push(item);
+          this.filter()
+		    }
+		  } 
+		})
+	},
+  filter(){
+        this.fields.reduce((obj, item) => {
+          console.log();
+          item.formDataType &&
+            (item.__config__.defaultValue =this.dataForm.soWorkOrderDO[item.formDataType]);
+          return obj;
+        }, {});
+  }
    }
 }
 </script>
 
-<style>
-
+<style lang="less">
+.subform {
+  width: 719rpx;
+}
 </style>
