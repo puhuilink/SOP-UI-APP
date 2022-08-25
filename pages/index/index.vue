@@ -207,7 +207,8 @@ export default {
       msgNum: 0,
       menuList: [],
       newestMsg: [],
-      a: 1,
+      // 是否重连中
+      reconnect: false,
     };
   },
   onLoad() {
@@ -236,20 +237,15 @@ export default {
     },
   },
   methods: {
+    // 获取最新消息
     getNewestMsg() {
       if (!this.newestMsgsocket) {
         this.newestMsgsocket = new WebSocket(
           `ws://122.9.133.170:48080/?accessToken=${this.$store.getters.accessToken}`
         );
       }
-      this.newestMsgsocket.onclose = () => {
-        this.newestMsgsocket = null;
-        this.getNewestMsg();
-      };
-      this.newestMsgsocket.onerror = () => {
-        this.newestMsgsocket = null;
-        this.getNewestMsg();
-      };
+      this.newestMsgsocket.onclose = this.reconnectFn;
+      this.newestMsgsocket.onerror = this.reconnectFn;
       this.newestMsgsocket.onmessage = (msg) => {
         let msgJson =
           typeof msg.data === "string" ? JSON.parse(msg.data) : msg.data;
@@ -264,6 +260,17 @@ export default {
           }, 5000);
         }
       };
+    },
+    // 获取最新消息重连
+    reconnectFn() {
+      // 正在重连中不往下执行
+      if (this.reconnect) return;
+      this.newestMsgsocket = null;
+      this.getNewestMsg();
+      this.reconnect = true;
+      setTimeout(() => {
+        this.reconnect = false;
+      }, 5000);
     },
     // 获取未读消息数
     getUnreadNum() {

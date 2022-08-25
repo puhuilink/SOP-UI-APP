@@ -1,5 +1,5 @@
 <template>
-  <view class="navbar-box">
+  <view v-if="!isWx" class="navbar-box">
     <view class="navbar">
       <u-icon name="arrow-left" color="#fff" size="38rpx" @click="goBack" />
       <view class="navbar-title">{{ title || "" }}</view>
@@ -12,9 +12,24 @@ export default {
   name: "navbar",
   props: ["title", "back"],
   data() {
-    return {};
+    return {
+      isWx: true,
+    };
   },
   computed: {},
+  created() {
+    let ua = window.navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+      //微信环境
+      this.isWx = true;
+    } else if (ua.match(/wxwork/i) == "wxwork") {
+      //企业微信环境
+      this.isWx = true;
+    } else {
+      //其他环境
+      this.isWx = false;
+    }
+  },
   methods: {
     goBack() {
       if (this.back) {
