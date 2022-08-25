@@ -1,7 +1,7 @@
 <template>
   <view class="container">
      <Navbar :title="langText.pageTitle" />
-    <u-sticky bgColor="#fff">
+    <u-sticky bgColor="#fff" customNavHeight="0">
       <u-tabs
         :list="msgState.list"
         :scrollable="false"
