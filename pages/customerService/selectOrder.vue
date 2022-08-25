@@ -40,7 +40,7 @@ export default {
       let prefix = this.menuList[name].prefix || "";
       getByDir({ dirId }).then((res) => {
         let { code, data = {} } = res;
-        let item = data && data.list && data.list[0] && data.list[0];
+        let item = data && data.list && data.list[0] && data.list[0] || {};
         if (item.formId) {
           uni.navigateTo({
             url: `/pages/info/formsubmit?id=${item.formId}&title=${item.name}&prefix=${prefix}&processKey=${item.key}`,

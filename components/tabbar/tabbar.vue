@@ -119,7 +119,7 @@ export default {
     this.$nextTick(() => {
       let tabbar = document.getElementsByClassName("u-tabbar--fixed");
       if (tabbar && tabbar[0]) {
-        this.tabbarH = tabbar[0].offsetHeight;
+        this.tabbarH = tabbar[0].clientHeight;
       }
     });
   },
