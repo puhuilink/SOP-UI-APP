@@ -220,6 +220,14 @@ export default {
     // 获取最新消息
     this.getNewestMsg();
   },
+  onUnload() {
+    // 清除计时器
+    clearTimeout(this.unreadTime);
+    // 清除WebSocket
+    if (this.newestMsgsocket) {
+      this.newestMsgsocket.close();
+    }
+  },
   onHide() {
     // 清除计时器
     clearTimeout(this.unreadTime);
