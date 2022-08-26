@@ -220,6 +220,13 @@ export default {
     // 获取最新消息
     this.getNewestMsg();
   },
+  onShow() {
+    this.getList();
+    // 获取未读消息数
+    this.getUnreadNum();
+    // 获取最新消息
+    this.getNewestMsg();
+  },
   onUnload() {
     // 清除计时器
     clearTimeout(this.unreadTime);
