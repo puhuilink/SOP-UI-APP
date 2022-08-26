@@ -81,7 +81,7 @@
 <script>
 import uTabs from "../../uni_modules/uview-ui/components/u-tabs/u-tabs.vue";
 import Navbar from "@/components/navbar/navbar";
-import { getToDoList,getHaveDoList,getClaim } from "@/api/list.js";
+import { getToDoList,getHaveDoList,getClaim,getManageList } from "@/api/list.js";
 export default {
   components: { uTabs,Navbar },
   data() {
@@ -156,8 +156,7 @@ export default {
         this.msgState.list[this.msgState.index].badge.value = res.data.total;
       });
     } else {
-      //我管理的暂无接口，使用已办接口
-      await getHaveDoList().then(res => {
+      await getManageList().then(res => {
         this.listData = res.data.list;
          //   this.listData.forEach((item,index) => {
         //   // 添加type属性，值为typeArr数组中的随机值

@@ -645,7 +645,7 @@ export default {
     $vervify() {
       return new Promise((resolve, reject) => {
         this.fields.forEach((item) => {
-          if (item.__config__.required&& readonly == false) {
+          if (item.__config__.required) {
             switch (item.tag) {
               case "el-checkbox":
                 if (this.form[item.formDataType].length === 0) {
