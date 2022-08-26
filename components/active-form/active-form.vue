@@ -22,7 +22,9 @@
             >
               <text class="colorRed" v-if="item.__config__.required">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
-              {{ item.__config__.label }}：
+            <view  :class="
+                readonly ? 'plaClass' : ''
+              ">{{ item.__config__.label }}：</view>
             </view>
             <!-- 发送验证码 -->
             <view
@@ -74,8 +76,10 @@
             >
               <text class="colorRed" v-if="item.__config__.required">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
-              {{ item.__config__.label }}：
-            </view>
+             <view  :class="
+                readonly ? 'plaClass' : ''
+              ">{{ item.__config__.label }}：</view>
+           </view>
             <view class="line-right pr20">
               <input
                 type="button"
@@ -93,7 +97,7 @@
                 :title="item.placeholder"
                 safeAreaInsetBottom
                 cancelText="取消"
-                :show="item.__config__.show"
+                :show="readonly ? false : item.__config__.show"
                 @select="selectConfirm($event, item)"
                 @close="selectClose(item)"
               ></u-action-sheet>
@@ -108,7 +112,9 @@
             >
               <text class="colorRed" v-if="item.__config__.required">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
-              {{ item.__config__.label }}：
+              <view  :class="
+                readonly ? 'plaClass' : ''
+              ">{{ item.__config__.label }}：</view>
             </view>
             <view class="line-right">
               <u-switch
@@ -136,7 +142,9 @@
             >
               <text class="colorRed" v-if="item.__config__.required">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
-              {{ item.__config__.label }}：
+            <view  :class="
+                readonly ? 'plaClass' : ''
+              ">{{ item.__config__.label }}：</view>
             </view>
             <view class="line-right pr20">
               <input
@@ -151,7 +159,7 @@
               />
               <view class="select-icon"></view>
               <w-picker
-                :visible.sync="item.__config__.show"
+                :visible.sync="readonly ? false : item.__config__.show"
                 :mode="item.type"
                 :options="item.options"
                 :current="true"
@@ -171,13 +179,14 @@
             >
               <text class="colorRed" v-if="item.__config__.required">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
-              {{ item.__config__.label }}：
+               <view  :class="
+                readonly ? 'plaClass' : ''
+              ">{{ item.__config__.label }}：</view>
             </view>
             <view class="line-right">
               <u-button
                 type="primary"
-                :readonly="readonly"
-                :disabled="item.disabled"
+                :disabled="readonly ? true : item.disabled"
                 @click="buttonClick(item)"
               >
                 {{ item.__config__.label }}
@@ -193,7 +202,9 @@
             >
               <text class="colorRed" v-if="item.__config__.required">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
-              {{ item.__config__.label }}：
+               <view  :class="
+                readonly ? 'plaClass' : ''
+              ">{{ item.__config__.label }}：</view>
             </view>
             <view class="line-right pr20">
               <u-rate
@@ -218,14 +229,15 @@
             >
               <text class="colorRed" v-if="item.__config__.required">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
-              {{ item.__config__.label }}：
+               <view  :class="
+                readonly ? 'plaClass' : ''
+              ">{{ item.__config__.label }}：</view>
             </view>
             <view class="line-bottom-textarea">
-              <textarea
+              <textarea 
                 auto-height
                 :maxlength="-1"
-                :readonly="readonly"
-                :disabled="item.disabled"
+                :disabled="readonly"
                 :placeholder="item.placeholder"
                 v-model="form[item.formDataType]"
                 @input="inputVal(index)"
@@ -245,13 +257,14 @@
             >
               <text class="colorRed" v-if="item.__config__.required">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
-              {{ item.__config__.label }}：
+               <view  :class="
+                readonly ? 'plaClass' : ''
+              ">{{ item.__config__.label }}：</view>
             </view>
             <view class="img-upload p30">
               <u-upload
-              :readonly="readonly"
                 :uploadList="item.__config__.regList"
-                :disabled="item.disabled"
+                :disabled="readonly ? true : item.disabled"
                 :accept="item.accept"
                 :maxCount="item.maxCount"
                 :maxSize="item.maxSize"
@@ -275,7 +288,9 @@
             >
               <text class="colorRed" v-if="item.__config__.required">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
-              {{ item.__config__.label }}：
+               <view  :class="
+                readonly ? 'plaClass' : ''
+              ">{{ item.__config__.label }}：</view>
               <text
                 style="
                   font-size: 20rpx;
@@ -292,7 +307,6 @@
             >
               <u-radio-group
                 v-model="form[item.formDataType]"
-                :readonly="readonly"
                 @change="radioChange($event, index)"
                 placement="row"
               >
@@ -305,7 +319,7 @@
                   :key="radioIndex"
                   :label="info.label"
                   :name="info.label"
-                  :disabled="info.disabled"
+                  :disabled="readonly? true :info.disabled"
                   >{{ info.label }}
                 </u-radio>
               </u-radio-group>
@@ -324,7 +338,9 @@
             >
               <text class="colorRed" v-if="item.__config__.required">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
-              {{ item.__config__.label }}：
+               <view  :class="
+                readonly ? 'plaClass' : ''
+              ">{{ item.__config__.label }}：</view>
               <text
                 style="
                   font-size: 20rpx;
@@ -341,7 +357,6 @@
             >
               <u-checkbox-group
                 v-model="form[item.formDataType]"
-                :readonly="readonly"
                 @change="checkboxGroupChange($event, item)"
               >
                 <u-checkbox
@@ -351,7 +366,7 @@
                   v-for="(checkboxItem, checkboxIndex) in item.__slot__.options"
                   :key="checkboxIndex"
                   :label="checkboxItem.label"
-                  :disabled="checkboxItem.disabled"
+                  :disabled="readonly ? true : checkboxItem.disabled"
                   :name="checkboxItem.label"
                 >
                 </u-checkbox>
@@ -368,30 +383,21 @@
             >
               <text class="colorRed" v-if="item.__config__.required">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
-              {{ item.__config__.label }}：
+               <view  :class="
+                readonly ? 'plaClass' : ''
+              ">{{ item.__config__.label }}：</view>
             </view>
             <view class="line-right pr20">
               <input
                 type="number"
-                :readonly="readonly"
                 v-model="form[item.formDataType]"
                 :placeholder="item.placeholder"
                 @input="inputVal(index)"
                 class="input"
-                :disabled="item.disabled"
+                :disabled="readonly? true:item.disabled"
                 :maxlength="11"
                 placeholder-class="plaClass"
               />
-              <view style="width: 200rpx" v-if="item.oneKeyPhone">
-                <u-button
-                  size="mini"
-                  type="primary"
-                  open-type="getPhoneNumber"
-                  @getphonenumber="getphonenumber"
-                  :disabled="item.disabled"
-                  >一键获取
-                </u-button>
-              </view>
             </view>
           </view>
           <!-- 富文本解析器  -->
@@ -405,7 +411,9 @@
             >
               <text class="colorRed" v-if="item.__config__.required">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
-              {{ item.__config__.label }}：
+               <view  :class="
+                readonly ? 'plaClass' : ''
+              ">{{ item.__config__.label }}：</view>
             </view>
             <view class="line-bottom-textarea">
               <u-parse :readonly="readonly" :content="item.__config__.defaultValue" />
@@ -414,7 +422,7 @@
         </view>
       </block>
       <view>
-        <u-popup :readonly="readonly" :show="isShow" @close="close" @open="open">
+        <u-popup :show="isShow" @close="close" @open="open">
           <view class="content">
             <mSidebar title="进度详情">
               <view class="row">
