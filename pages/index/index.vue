@@ -218,7 +218,7 @@ export default {
     // 获取未读消息数
     this.getUnreadNum();
     // 获取最新消息
-    // this.getNewestMsg();
+    this.getNewestMsg();
   },
   onHide() {
     // 清除计时器
@@ -309,7 +309,7 @@ export default {
       let prefix = this.menuList[name].prefix || "";
       getByDir({ dirId }).then((res) => {
         let { code, data = {} } = res;
-        let item = data && data.list && data.list[0] && data.list[0];
+        let item = data && data.list && data.list[0] && data.list[0] || {};
         if (item.formId) {
           uni.navigateTo({
             url: `/pages/info/formsubmit?id=${item.formId}&title=${item.name}&prefix=${prefix}&processKey=${item.key}`,
