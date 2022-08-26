@@ -1,6 +1,7 @@
 <template>
   <view class="container">
      <Navbar :title="langText.pageTitle" />
+      <u-toast ref="uToast"></u-toast>
   <view class="box-card">
     <view>工单信息</view>
      <view class="form-box">
