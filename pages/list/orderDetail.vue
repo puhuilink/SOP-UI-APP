@@ -28,7 +28,7 @@
       <u-form-item
 						label="用户验证："
         :required=true
-						prop="form.user"
+						prop="user"
             labelWidth="80"
 					>
 						<u-radio-group v-model="form.user">
@@ -43,9 +43,10 @@
 						</u-radio-group>
 					</u-form-item>
             <u-form-item
+            v-if="form.user == '未解决'"
 					label="未解决原因："
            :required=true
-					prop="form.why"
+					prop="why"
           labelWidth="100"
 			>
 				<u--input
@@ -148,7 +149,10 @@ export default {
             (item.__config__.defaultValue =this.dataForm.soWorkOrderDO[item.formDataType]);
           return obj;
         }, {});
-  }
+  },
+  sub() {
+        console.log('等待接口');
+    },
    }
 }
 </script>
