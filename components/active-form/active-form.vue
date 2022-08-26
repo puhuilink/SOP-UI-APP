@@ -16,11 +16,9 @@
             "
           >
             <view
-              :class="
-                item.__config__.required ? 'line-left' : 'p-l14 line-left'
-              "
+            class='line-left'
             >
-              <text class="colorRed" v-if="item.__config__.required">*</text>
+              <text class="colorRed" v-if="item.__config__.required&& readonly == false  && readonly == false">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
             <view  :class="
                 readonly ? 'plaClass' : ''
@@ -70,11 +68,9 @@
           <!-- 下拉选择-->
           <view class="line" v-else-if="item.__config__.tag == 'el-select'">
             <view
-              :class="
-                item.__config__.required ? 'line-left' : 'p-l14 line-left'
-              "
+             class='line-left'
             >
-              <text class="colorRed" v-if="item.__config__.required">*</text>
+              <text class="colorRed" v-if="item.__config__.required&& readonly == false">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
              <view  :class="
                 readonly ? 'plaClass' : ''
@@ -106,11 +102,9 @@
           <!-- 开关-->
           <view class="line" v-else-if="item.__config__.tag == 'el-switch'">
             <view
-              :class="
-                item.__config__.required ? 'line-left' : 'p-l14 line-left'
-              "
+              class='line-left'
             >
-              <text class="colorRed" v-if="item.__config__.required">*</text>
+              <text class="colorRed" v-if="item.__config__.required&& readonly == false">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
               <view  :class="
                 readonly ? 'plaClass' : ''
@@ -136,11 +130,9 @@
             "
           >
             <view
-              :class="
-                item.__config__.required ? 'line-left' : 'p-l14 line-left'
-              "
+             class='line-left'
             >
-              <text class="colorRed" v-if="item.__config__.required">*</text>
+              <text class="colorRed" v-if="item.__config__.required&& readonly == false">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
             <view  :class="
                 readonly ? 'plaClass' : ''
@@ -173,11 +165,9 @@
           <!-- 按钮 -->
           <view class="line" v-else-if="item.__config__.tag == 'el-button'">
             <view
-              :class="
-                item.__config__.required ? 'line-left' : 'p-l14 line-left'
-              "
+              class='line-left'
             >
-              <text class="colorRed" v-if="item.__config__.required">*</text>
+              <text class="colorRed" v-if="item.__config__.required&& readonly == false">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
                <view  :class="
                 readonly ? 'plaClass' : ''
@@ -196,11 +186,9 @@
           <!-- 评分-->
           <view class="line" v-else-if="item.__config__.tag == 'el-rate'">
             <view
-              :class="
-                item.__config__.required ? 'line-left' : 'p-l14 line-left'
-              "
+               class='line-left'
             >
-              <text class="colorRed" v-if="item.__config__.required">*</text>
+              <text class="colorRed" v-if="item.__config__.required&& readonly == false">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
                <view  :class="
                 readonly ? 'plaClass' : ''
@@ -225,9 +213,8 @@
           >
             <view
               class="line-left"
-              :class="item.__config__.required ? '' : 'p-l14 '"
             >
-              <text class="colorRed" v-if="item.__config__.required">*</text>
+              <text class="colorRed" v-if="item.__config__.required&& readonly == false">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
                <view  :class="
                 readonly ? 'plaClass' : ''
@@ -252,10 +239,9 @@
             v-else-if="item.__config__.tag == 'el-upload'"
           >
             <view
-              class="font26"
-              :class="item.__config__.required ? '' : 'p-l14 '"
+              class='line-left'
             >
-              <text class="colorRed" v-if="item.__config__.required">*</text>
+              <text class="colorRed" v-if="item.__config__.required&& readonly == false">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
                <view  :class="
                 readonly ? 'plaClass' : ''
@@ -282,11 +268,9 @@
             v-else-if="item.__config__.tag === 'el-radio-group'"
           >
             <view
-              :class="
-                item.__config__.required ? 'line-left' : 'p-l14 line-left'
-              "
+               class='line-left'
             >
-              <text class="colorRed" v-if="item.__config__.required">*</text>
+              <text class="colorRed" v-if="item.__config__.required&& readonly == false">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
                <view  :class="
                 readonly ? 'plaClass' : ''
@@ -332,11 +316,9 @@
             v-else-if="item.__config__.tag == 'el-checkbox-group'"
           >
             <view
-              :class="
-                item.__config__.required ? 'line-left' : 'p-l14 line-left'
-              "
+              class='line-left'
             >
-              <text class="colorRed" v-if="item.__config__.required">*</text>
+              <text class="colorRed" v-if="item.__config__.required&& readonly == false">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
                <view  :class="
                 readonly ? 'plaClass' : ''
@@ -377,11 +359,9 @@
           <!-- 手机输入框 -->
           <view class="line" v-else-if="item.__config__.tag == 'el-mobile'">
             <view
-              :class="
-                item.__config__.required ? 'line-left' : 'p-l14 line-left'
-              "
+               class='line-left'
             >
-              <text class="colorRed" v-if="item.__config__.required">*</text>
+              <text class="colorRed" v-if="item.__config__.required&& readonly == false">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
                <view  :class="
                 readonly ? 'plaClass' : ''
@@ -406,10 +386,9 @@
             v-else-if="item.__config__.tag == 'tinymce'"
           >
             <view
-              class="line-left"
-              :class="item.__config__.required ? '' : 'p-l14 '"
+               class='line-left'
             >
-              <text class="colorRed" v-if="item.__config__.required">*</text>
+              <text class="colorRed" v-if="item.__config__.required&& readonly == false">*</text>
               <text class="num" v-if="num">{{ index + 1 }}.</text>
                <view  :class="
                 readonly ? 'plaClass' : ''
@@ -666,7 +645,7 @@ export default {
     $vervify() {
       return new Promise((resolve, reject) => {
         this.fields.forEach((item) => {
-          if (item.__config__.required) {
+          if (item.__config__.required&& readonly == false) {
             switch (item.tag) {
               case "el-checkbox":
                 if (this.form[item.formDataType].length === 0) {
