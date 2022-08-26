@@ -1,6 +1,7 @@
 <template>
   <view class="container">
      <Navbar :title="langText.pageTitle" />
+     <u-toast ref="uToast"></u-toast>
     <u-sticky bgColor="#fff" customNavHeight="0">
       <u-tabs
         :list="msgState.list"
@@ -38,13 +39,21 @@
           </u-col>
         </u-row>
         <view class="list-item">
+           <u-row customStyle="margin-bottom: 10px">
+            <u-col span="10">
             <view class="title-box">
               <view v-if="item.priority">
                  <u-tag :text="item.priority" :type="item.type" plain size="mini" class="tag"> </u-tag>
               </view>
            
             <view class="title">{{item.name}}</view>
+             
           </view>
+          </u-col>
+          <u-col span="2">
+<u-button type="primary" v-if="msgState.index == 0" :plain="true" :hairline="true" shape="circle" text="签收" size="mini" @click="sign(item)"></u-button>
+          </u-col>
+          </u-row>
           <view class="account">
             <view class="account-box">
               <view class="account-text">{{item.handler}}</view>
@@ -72,7 +81,7 @@
 <script>
 import uTabs from "../../uni_modules/uview-ui/components/u-tabs/u-tabs.vue";
 import Navbar from "@/components/navbar/navbar";
-import { getToDoList,getHaveDoList } from "@/api/list.js";
+import { getToDoList,getHaveDoList,getClaim } from "@/api/list.js";
 export default {
   components: { uTabs,Navbar },
   data() {
@@ -98,7 +107,7 @@ export default {
                     }
           },
             {
-            name: "我管理的",
+            name: "我的工单",
              badge: {
                         value: '',
                     }
@@ -172,6 +181,19 @@ export default {
     changeMsgState(item) {
       this.msgState.index = item.index;
       this.getlist()
+    },
+   async sign(item){
+       await getClaim({taskId:item.id}).then(res => {
+        if(res){
+         this.$refs.uToast.show({
+            type: 'success',
+            message: "签收成功",
+                  });
+                  setTimeout(() => {
+							 this.loginOrJump(`/pages/list/orderDetail?id=${item.id}`)
+							}, 3000)  
+        }
+      }); 
     },
     search() {
       console.log(this.keyword)
