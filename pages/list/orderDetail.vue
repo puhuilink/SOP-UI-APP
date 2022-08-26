@@ -70,10 +70,24 @@
       </u-row>
     </u--form>
   </view>
+  <u-overlay :opacity="0.3" :show="showCancel">
+          <view class="text-Box">
+           
+            <view class="text">
+               <text class="text-item">提示</text>
+              <text>此操作将取消签收该工单</text>
+              <text>是否继续？</text>
+              <view class="text-btn">
+                <view @click="calltext()">取消</view>
+                <view @click="calltext(true)">确定</view>
+              </view>
+            </view>
+          </view>
+        </u-overlay>
     <u-row  justify="space-between"
         gutter="10">
       <u-col span="4">
-        <u-button  type="primary" shape="circle" text="取消签收" @click="cancel"></u-button>
+        <u-button  type="primary" shape="circle" text="取消签收" @click="showCancel=true"></u-button>
       </u-col>
        <u-col span="4">
         <u-button type="warning" shape="circle" @click="notsub" text="不通过"></u-button>
@@ -101,6 +115,7 @@ export default {
        pageTitle: "工单详情",
      },
      count: 5,
+     showCancel:false,
       fields: [],
       fileList:[],
      form:{
@@ -202,8 +217,9 @@ export default {
 							}, 1000)
         })
       },
-  cancel(){
-     getUnClaim({ taskId: this.$route.query.id  }).then((res) => {
+        calltext(call) {
+      if (call) {
+          getUnClaim({ taskId: this.$route.query.id  }).then((res) => {
          this.$refs.uToast.show({
             type: 'success',
             message: "取消签收成功",
@@ -212,7 +228,10 @@ export default {
 							 this.loginOrJump('/pages/list/orderManage')
 							}, 3000)   
       });
-  },
+      }else{
+        this.showCancel = false
+      }
+    },
    notsub(){
      getReject(this.form).then((res) => {
           this.$refs.uToast.show({
@@ -239,8 +258,53 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="scss" scoped>
 .subform {
   width: 719rpx;
+}
+.text-Box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  .text {
+    width: 638rpx;
+    background: #ffffff;
+    border-radius: 21rpx;
+    padding-top: 23rpx;
+    font-size: 38rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: #333333;
+    line-height: 52rpx;
+    text-align: center;
+    overflow: hidden;
+    text {
+      display: block;
+      margin-top: 23rpx;
+    }
+    .text-item{
+      margin-bottom: 60rpx;
+    }
+    .text-btn {
+      margin-top: 65rpx;
+      background: #e0e0e0;
+      font-size: 33rpx;
+      font-family: MicrosoftYaHei;
+      color: #333333;
+      display: flex;
+      height: 87rpx;
+      view {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      view:last-child {
+        background: #007efd;
+        color: #ffffff;
+      }
+    }
+  }
 }
 </style>
