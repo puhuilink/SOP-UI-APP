@@ -31,7 +31,7 @@
       </view>
     </u-sticky>
     <u-list>
-      <u-list-item v-for="(item, index) in listData" :key="index" @click="loginOrJump('/pages/list/orderDetail?id=6023e21a-1e98-11ed-bb5c-ce3e85835c66')">
+      <u-list-item v-for="(item, index) in listData" :key="index" @click="loginOrJump(`/pages/list/orderDetail?id=${item.id}`)">
         <u-row>
           <u-col span="12">
             <view class="time"></view>
