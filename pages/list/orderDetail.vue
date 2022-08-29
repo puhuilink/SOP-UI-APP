@@ -182,11 +182,11 @@ export default {
           return obj;
         }, {});
   },
-  	// 删除图片
+  	// 删除文件
 			deletePic(event) {
 				this[`fileList${event.name}`].splice(event.index, 1)
 			},
-			// 新增图片
+			// 新增文件
       afterRead(file){
         this.file = file.file
           const fileSuffix = this.file.name.substring(this.file.name.lastIndexOf('.') + 1)
@@ -212,6 +212,7 @@ export default {
       },
       uploadFile(){
         uploadFile( this.file ).then((res) => {
+          //上传文件待处理接口返回数据，接口好像有问题
           	setTimeout(() => {
 							console.log(res);
 							}, 1000)
