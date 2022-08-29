@@ -10,8 +10,16 @@ export const getToDoListDetail = params => http.get('/so/bpm/task/get-app-by-id'
 //认领待办
 export const getClaim = params => http.put('/so/bpm/task/claim',  params )
 
+//取消认领
+export const getUnClaim = params => http.put('/bpm/task/unClaim',  params )
+
+
 //获取用户已办列表
 export const getHaveDoList = params => http.get('/so/bpm/task/done-page-app', { params })
+
+//获取用户管理列表
+export const getManageList = params => http.get('/so/work-order/get-manage-page', { params })
+
 
 //获得消息管理
 export const getInformation = params => http.get('/so/information/get', { params })
