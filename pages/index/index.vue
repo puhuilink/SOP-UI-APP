@@ -209,23 +209,16 @@ export default {
       newestMsg: [],
       // 是否重连中
       reconnect: false,
+      isInit: false,
     };
   },
   onLoad() {
-    this.getList();
     // 获取用户信息
     this.$store.dispatch("ObtainUserInfo");
-    // 获取未读消息数
-    this.getUnreadNum();
-    // 获取最新消息
-    this.getNewestMsg();
+    this.init();
   },
   onShow() {
-    this.getList();
-    // 获取未读消息数
-    this.getUnreadNum();
-    // 获取最新消息
-    this.getNewestMsg();
+    this.init();
   },
   onUnload() {
     // 清除计时器
@@ -252,6 +245,18 @@ export default {
     },
   },
   methods: {
+    init() {
+      if (!this.isInit) {
+        this.isInit = true;
+      } else {
+        return;
+      }
+      this.getList();
+      // 获取未读消息数
+      this.getUnreadNum();
+      // 获取最新消息
+      this.getNewestMsg();
+    },
     // 获取最新消息
     getNewestMsg() {
       if (!this.newestMsgsocket) {
@@ -269,9 +274,12 @@ export default {
           msgJson.body &&
           msgJson.body.message
         ) {
-          this.newestMsg.push(msgJson.body.message);
+          this.newestMsg.unshift(msgJson.body.message);
           setTimeout(() => {
-            this.newestMsg.splice(0, 1);
+            this.newestMsg.splice(
+              this.newestMsg.length && this.newestMsg.length - 1,
+              1
+            );
           }, 5000);
         }
       };
@@ -324,7 +332,7 @@ export default {
       let prefix = this.menuList[name].prefix || "";
       getByDir({ dirId }).then((res) => {
         let { code, data = {} } = res;
-        let item = data && data.list && data.list[0] && data.list[0] || {};
+        let item = (data && data.list && data.list[0] && data.list[0]) || {};
         if (item.formId) {
           uni.navigateTo({
             url: `/pages/info/formsubmit?id=${item.formId}&title=${item.name}&prefix=${prefix}&processKey=${item.key}`,
