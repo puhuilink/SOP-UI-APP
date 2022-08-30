@@ -246,14 +246,15 @@ export default {
   },
   methods: {
     init() {
+      // 获取工单列表
+      this.getList();
+      // 获取未读消息数
+      this.getUnreadNum();
       if (!this.isInit) {
         this.isInit = true;
       } else {
         return;
       }
-      this.getList();
-      // 获取未读消息数
-      this.getUnreadNum();
       // 获取最新消息
       this.getNewestMsg();
     },
