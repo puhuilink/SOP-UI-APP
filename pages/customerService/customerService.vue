@@ -1,8 +1,8 @@
 <template>
   <view class="container">
     <Navbar title="客服" />
-    <!-- 对接im机器人url此链接暂时使用 -->
-    <iframe src="/#/pages/customerService/transfer?iframe=1" />
+    <!-- 对接im机器人url -->
+    <iframe src="//jzjt.emotibot.com/vca/h5/#/robotchat?appId=8a69fef482c485b00182c4a1010b003c&accountId=c4995563324040f4aefd73a9dc00089b" />
   </view>
 </template>
 
@@ -33,11 +33,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-iframe {
+.container {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
-  width: 100vw;
-  margin: 0;
-  padding: 0;
-  border: none;
+  iframe {
+    flex: 1;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
 }
 </style>

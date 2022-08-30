@@ -9,7 +9,7 @@ export default {
     return {};
   },
   onLoad() {
-    window.parent.postMessage({ goToOrder: 1 });
+    top.postMessage({ goToOrder: 1 });
   },
   computed: {},
   methods: {},
