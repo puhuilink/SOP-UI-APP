@@ -46,8 +46,7 @@
                  <u-tag :text="item.priority" :type="item.type" plain size="mini" class="tag"> </u-tag>
               </view>
            
-            <view class="title">{{item.name}}</view>
-             
+            <view class="title">{{msgState.index == 2 ? item.title: item.name}}</view>    
           </view>
           </u-col>
           <u-col span="2">
@@ -59,7 +58,7 @@
               <view class="account-text">{{item.handler}}</view>
             </view>
             <view class="account-box">
-              <view class="account-text">{{item.processInstance.startUserNickname}}</view>
+              <view class="account-text">{{ msgState.index == 2 ? item.recorder :item.processInstance.startUserNickname}}</view>
             </view>
           </view>
           <view class="record">  
