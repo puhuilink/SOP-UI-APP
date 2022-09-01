@@ -94,8 +94,7 @@ export default {
   mounted() {},
   methods: {
     confirm(e) {
-      console.log(e);
-      this.form.val = e;
+      this.form.val = e.value;
       this.show = false;
       this.$emit("input", this.form.val);
     },
