@@ -11,6 +11,7 @@
       type="primary"
       text="提交表单"
       @click="sub"
+      :loading="loading"
     />
   </view>
 </template>
@@ -29,6 +30,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       pageTitle: this.$route.query.title || "",
       fields: [],
       parames: {
@@ -94,14 +96,19 @@ export default {
       //     console.log("err", err);
       //   });
       this.$refs.workOrderForm.vervify((form) => {
+        this.loading = true
         form &&
           getCreate({ ...this.parames, ...form }).then((res) => {
+            this.loading = false
             uni.$u.toast("创建工单成功");
             setTimeout(() => {
               uni.navigateTo({
                 url: "/pages/index/index",
               });
             }, 300);
+          }).catch(() => {
+            uni.$u.toast("创建工单失败");
+            this.loading = false
           });
       });
     },
