@@ -104,7 +104,7 @@ export default {
             this.loading = false;
             uni.$u.toast("创建工单成功");
             setTimeout(() => {
-              uni.navigateTo({
+              uni.redirectTo({
                 url: "/pages/index/index",
               });
             }, 300);
