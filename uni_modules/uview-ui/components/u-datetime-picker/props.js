@@ -57,6 +57,16 @@ export default {
             type: Number,
             default: uni.$u.props.datetimePicker.maxMinute
         },
+        // 可选的最小秒数，仅mode=time有效
+        minSecond: {
+            type: Number,
+            default: uni.$u.props.datetimePicker.minSecond
+        },
+        // 可选的最大秒数，仅mode=time有效
+        maxSecond: {
+            type: Number,
+            default: uni.$u.props.datetimePicker.maxSecond
+        },
         // 选项过滤函数
         filter: {
             type: [Function, null],

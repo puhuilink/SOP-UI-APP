@@ -355,7 +355,7 @@ export default {
             title: item.label,
           };
         });
-        this.menuList = [...this.menuList, ...data.list];
+        this.menuList = data.list;
       });
     },
   },

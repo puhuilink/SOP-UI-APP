@@ -30,7 +30,7 @@ export default {
 <style lang="scss">
 /* 引入uView基础样式 */
 @import '@/uni_modules/uview-ui/index.scss';
-@import "@/components/active-form/css/active-form.scss";//注入active-form样式
+// @import "@/components/active-form/css/active-form.scss";//注入active-form样式
 /*每个页面公共scss */
 @import 'app.scss';
 </style>
