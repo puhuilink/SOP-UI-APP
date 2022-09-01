@@ -4,7 +4,7 @@
       <text class="colorRed" v-if="config.required">*</text>
       <text>{{ `${config.label}：` }}</text>
     </view>
-    <u--form :model="form" :rules="rules" ref="selects">
+    <u--form :model="form" :rules="rules" ref="checkboxs">
       <u-form-item prop="val">
         <u-checkbox-group
           placement="row"
@@ -98,7 +98,7 @@ export default {
     },
     radioChange() {},
     vervify(callBack) {
-      this.$refs.selects
+      this.$refs.checkboxs
         .validate()
         .then((res) => {
           callBack(true);

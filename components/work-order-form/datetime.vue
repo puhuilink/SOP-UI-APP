@@ -4,7 +4,7 @@
       <text class="colorRed" v-if="config.required">*</text>
       <text>{{ `${config.label}：` }}</text>
     </view>
-    <u--form :model="form" :rules="rules" ref="selects">
+    <u--form :model="form" :rules="rules" ref="datetime">
       <u-form-item prop="val" @click="!config.disabled && (show = true)">
         <u--input
           inputAlign="right"
@@ -95,7 +95,7 @@ export default {
       this.$emit("input", this.form.val);
     },
     vervify(callBack) {
-      this.$refs.selects
+      this.$refs.datetime
         .validate()
         .then((res) => {
           callBack(true);
