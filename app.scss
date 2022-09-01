@@ -28,10 +28,17 @@ html, body {
   .u-textarea {
     padding-top: 0 !important;
     padding-left: 0 !important;
-    min-height: 100rpx !important;
+    min-height: 110rpx !important;
     .uni-textarea-textarea {
-      height: auto;
-      min-height: 100rpx !important;
+      height: auto !important;
+      min-height: 110rpx !important;
+    }
+    .uni-textarea-placeholder {
+      display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 3;
+			overflow: hidden;
+      min-height: 110rpx !important;
     }
   }
   .u-radio-group--row,

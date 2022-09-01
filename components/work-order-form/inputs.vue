@@ -120,8 +120,4 @@ export default {
   flex: 1;
   min-width: 400rpx;
 }
-
-.u-form-item__body__right__message {
-  margin: 0 !important;
-}
 </style>
