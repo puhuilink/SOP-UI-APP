@@ -22,3 +22,8 @@ box-sizing: border-box;
 html, body {
   background: #F1F4F5;
 }
+
+// 表单组件样式修改
+.u-form-item__body__right__message {
+  margin: 0 !important;
+}
