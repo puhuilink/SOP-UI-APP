@@ -70,7 +70,7 @@
 <script>
 import { getToDoListDetail, getUnClaim } from "@/api/list.js";
 import { getFrom } from "@/api/index.js";
-import { getApprove, getBack, getInstanceId } from "@/api/approval.js";
+import { getApprove, getBack, getReject, getInstanceId } from "@/api/approval.js";
 import { uploadFile } from "@/api/file.js"
 import Navbar from "@/components/navbar/navbar";
 import ActiveForm from "@/components/active-form/active-form";
@@ -202,17 +202,40 @@ export default {
     },
     notsub () {
       getInstanceId({ processInstanceId: this.dataForm.processInstanceId }).then((res) => {
-        console.log(res);
+        if (res.data.length == 1) {
+          getReject(this.form).then((res) => {
+            this.$refs.uToast.show({
+              type: 'success',
+              message: "不通过成功",
+            });
+            setTimeout(() => {
+              this.form = {
+                id: this.$route.query.id,
+                user: '',
+                value: '',
+                reason: ''
+              }
+              this.loginOrJump('/pages/list/orderManage')
+            }, 3000)
+          });
+        } else {
+          this.form.processInstanceId = this.dataForm.processInstanceId
+          this.form.currentDefinitionKey = res.data[0].definitionKey
+          this.form.targetDefinitionKey = res.data[1].definitionKey
+          this.form.taskId = res.data[1].id
+          this.form.targetName = res.data[1].name
+          getBack(this.form).then((res) => {
+            this.$refs.uToast.show({
+              type: 'success',
+              message: "不通过成功",
+            });
+            setTimeout(() => {
+              this.loginOrJump('/pages/list/orderManage')
+            }, 3000)
+          });
+        }
       })
-      getBack(this.form).then((res) => {
-        this.$refs.uToast.show({
-          type: 'success',
-          message: "不通过成功",
-        });
-        setTimeout(() => {
-          this.loginOrJump('/pages/list/orderManage')
-        }, 3000)
-      });
+
     },
     sub () {
       getApprove(this.form).then((res) => {

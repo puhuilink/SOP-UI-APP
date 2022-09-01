@@ -29,35 +29,36 @@
                 </view>
 
                 <view class="title">{{
-                   msgState.index == 2 ? item.title : item.name 
-                  }}</view>
+                    msgState.index == 2 ? item.title : item.name
+                }}</view>
               </view>
             </u-col>
             <u-col span="2">
               <u-button type="primary" v-if="msgState.index == 0 && item.claimTime == null" :plain="true"
                 :hairline="true" shape="circle" text="签收" size="mini" @click="sign(item)"></u-button>
-              <u-button type="success" v-else :plain="true" :hairline="true" shape="circle" text="已签收" size="mini">
+              <u-button type="success" v-if="msgState.index == 0 && item.claimTime !== null" :plain="true"
+                :hairline="true" shape="circle" text="已签收" size="mini">
               </u-button>
             </u-col>
           </u-row>
           <view class="account">
             <view class="account-box">
-              <view class="account-text">{{  item.handler  }}</view>
+              <view class="account-text">{{ item.handler }}</view>
             </view>
             <view class="account-box">
               <view class="account-text">{{
-                 msgState.index == 2 ? item.recorder : item.processInstance.startUserNickname 
-                }}</view>
+                  msgState.index == 2 ? item.recorder : item.processInstance.startUserNickname
+              }}</view>
             </view>
           </view>
           <view class="record">
             <view>
               <img src="/static/images/icon/icon_dingdan.png" class="record-img" />
-              {{  item.workOrderId  }}
+              {{ item.workOrderId }}
             </view>
             <view>
               <img src="/static/images/icon/icon_time.png" class="record-img" />
-              {{  formatDate(item.createTime)  }}
+              {{ formatDate(item.createTime) }}
             </view>
           </view>
         </view>
@@ -183,7 +184,7 @@ export default {
           });
           setTimeout(() => {
             this.loginOrJump(`/pages/list/orderDetail?id=${item.id}`);
-          }, 3000);
+          }, 2000);
         }
       });
     },
