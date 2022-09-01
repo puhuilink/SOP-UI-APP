@@ -1,8 +1,30 @@
 const { http } = uni.$u
-
+import config from '@/common/config'
 //上传文件
-export const uploadFile = params => http.post('/infra/file/upload', { params })
-
+export function uploadFile(params) {
+  return new Promise((resolve, reject) => {
+		//上传图片
+    uni.uploadFile({
+      header : config.header,
+      url: config.baseUrl+ '/infra/file/upload',
+      filePath: params.url,
+      name: 'file',
+      formData: {
+        path: params.path
+      },
+      success: (res) => {
+				//返回的是字符需要转json
+				resolve(JSON.parse(res.data))
+			},
+			fail: (res) => {
+				reject
+			}
+     })
+	})
+ 
+}
+//上传文件
+// export const uploadFile = params => http.post('/infra/file/upload', { params })
 //删除文件
 export const deleteFile = params => http.delete('/infra/file/delete', { params })
 
