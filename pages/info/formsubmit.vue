@@ -2,21 +2,30 @@
   <view class="content">
     <Navbar v-if="!pcFrom" :title="pageTitle" />
     <view class="form-box">
-      <active-form ref="activeForm" v-model="fields" />
+      <!-- <active-form ref="activeForm" v-model="fields" /> -->
+      <work-order-form ref="workOrderForm" :fields="fields" />
     </view>
-    <u-button v-if="!pcFrom"  class="subform" type="primary" text="提交表单" @click="sub" />
+    <u-button
+      v-if="!pcFrom"
+      class="subform"
+      type="primary"
+      text="提交表单"
+      @click="sub"
+    />
   </view>
 </template>
 
 <script>
 import Navbar from "@/components/navbar/navbar";
-import ActiveForm from "@/components/active-form/active-form";
+// import ActiveForm from "@/components/active-form/active-form";
+import workOrderForm from "@/components/work-order-form/index";
 import { getFrom, getCreate } from "@/api/index.js";
 export default {
   name: "Form",
   components: {
     Navbar,
-    ActiveForm,
+    // ActiveForm,
+    workOrderForm,
   },
   data() {
     return {
@@ -68,10 +77,24 @@ export default {
   methods: {
     // 提交表单
     sub() {
-      this.$refs.activeForm
-        .$vervify()
-        .then(async (form) => {
-          //取消obj属性的所有下划线，没有下划线则跳过
+      // this.$refs.activeForm
+      //   .$vervify()
+      //   .then(async (form) => {
+      //     //取消obj属性的所有下划线，没有下划线则跳过
+      //     getCreate({ ...this.parames, ...form }).then((res) => {
+      //       uni.$u.toast("创建工单成功");
+      //       setTimeout(() => {
+      //         uni.navigateTo({
+      //           url: "/pages/index/index",
+      //         });
+      //       }, 300);
+      //     });
+      //   })
+      //   .catch((err) => {
+      //     console.log("err", err);
+      //   });
+      this.$refs.workOrderForm.vervify((form) => {
+        form &&
           getCreate({ ...this.parames, ...form }).then((res) => {
             uni.$u.toast("创建工单成功");
             setTimeout(() => {
@@ -80,10 +103,7 @@ export default {
               });
             }, 300);
           });
-        })
-        .catch((err) => {
-          console.log("err", err);
-        });
+      });
     },
     getFrom() {
       getFrom({ id: this.$route.query.id || "" }).then((res) => {
@@ -95,7 +115,6 @@ export default {
             this.fields.push(item);
           }
         }
-        // console.log(this.fields);
       });
     },
   },
