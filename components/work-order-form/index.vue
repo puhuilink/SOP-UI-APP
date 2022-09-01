@@ -99,10 +99,7 @@
         />
       </view>
       <!-- 时间 -->
-      <view
-        class="item"
-        v-else-if="item.__config__.tag === 'el-time-picker'"
-      >
+      <view class="item" v-else-if="item.__config__.tag === 'el-time-picker'">
         <Datetime
           :ref="`form${index}`"
           :config="{
@@ -116,6 +113,19 @@
           v-model="form[item.formDataType]"
         />
       </view>
+      <!-- 上传 -->
+      <!-- <view class="item" v-else-if="item.__config__.tag === 'el-upload'">
+        <Upload
+          :ref="`form${index}`"
+          :config="{
+            label: item.__config__.label,
+            required: item.__config__.required,
+            disabled: item.disabled,
+            item
+          }"
+          v-model="form[item.formDataType]"
+        />
+      </view> -->
     </block>
   </view>
 </template>
@@ -128,6 +138,7 @@ import Cascader from "./cascader.vue";
 import Radios from "./radios.vue";
 import Checkboxs from "./checkboxs.vue";
 import Datetime from "./datetime.vue";
+import Upload from "./upload.vue";
 export default {
   components: {
     Inputs,
@@ -137,6 +148,7 @@ export default {
     Radios,
     Checkboxs,
     Datetime,
+    Upload,
   },
   name: "workOrderForm",
   props: ["fields"],
@@ -157,7 +169,7 @@ export default {
   watch: {
     fields: {
       handler: function (val) {
-        console.log(val);
+        // console.log(val);
         this.form = val.reduce((obj, item) => {
           if (item.formDataType) {
             obj[item.formDataType] = item.__config__.defaultValue;

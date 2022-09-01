@@ -33,7 +33,7 @@ export default {
   name: "datetime",
   props: {
     value: {
-      type: String | Array,
+      type: String,
       default: "",
     },
     config: {
@@ -65,11 +65,7 @@ export default {
     value: {
       handler: function (val) {
         if (!val) return;
-        if (typeof val === "string") {
-          this.form.val = val;
-        } else if (val.length > 0) {
-          this.form.val = val.join("");
-        }
+        this.form.val = val;
       },
       immediate: true,
     },

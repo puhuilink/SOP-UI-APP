@@ -24,6 +24,22 @@ html, body {
 }
 
 // 表单组件样式修改
-.u-form-item__body__right__message {
-  margin: 0 !important;
+.work-order-form {
+  .u-textarea {
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+    min-height: 100rpx !important;
+    .uni-textarea-textarea {
+      height: auto;
+      min-height: 100rpx !important;
+    }
+  }
+  .u-radio-group--row,
+  .u-checkbox-group--row {
+    flex-wrap: wrap !important;
+    flex-shrink: initial !important;
+  }
+  .u-form-item__body__right__message {
+    margin: 0 !important;
+  }
 }

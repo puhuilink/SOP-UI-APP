@@ -132,7 +132,4 @@ export default {
 .u-form {
   margin-left: 20rpx;
 }
-.u-radio-group--row {
-  flex-wrap: wrap;
-}
 </style>

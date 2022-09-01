@@ -1,6 +1,12 @@
 <template>
   <view class="container">
-    <u-icon v-if="(config.clearable || true) && clearable" name="close-circle-fill" color="#C9C9C9" size="36rpx" @click="clear" />
+    <u-icon
+      v-if="(config.clearable || true) && clearable && form.val"
+      name="close-circle-fill"
+      color="#C9C9C9"
+      size="36rpx"
+      @click="clear"
+    />
     <view class="label">
       <text class="colorRed" v-if="config.required">*</text>
       <text>{{ `${config.label}：` }}</text>
@@ -89,13 +95,13 @@ export default {
     },
     blur() {
       setTimeout(() => {
-        this.clearable = false
-      }, 100)
+        this.clearable = false;
+      }, 100);
     },
     clear() {
-      this.form.val = ""
+      this.form.val = "";
       this.$emit("input", "");
-      console.log(this.form.val)
+      console.log(this.form.val);
     },
     vervify(callBack) {
       this.$refs.textareas
@@ -142,10 +148,5 @@ export default {
   bottom: 16rpx;
   right: 4rpx;
   z-index: 99;
-}
-.u-textarea {
-  padding-top: 0;
-  padding-left: 0;
-  min-height: 150rpx;
 }
 </style>

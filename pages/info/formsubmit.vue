@@ -13,6 +13,7 @@
       @click="sub"
       :loading="loading"
     />
+    <u-gap height="80rpx" />
   </view>
 </template>
 
@@ -96,19 +97,21 @@ export default {
       //     console.log("err", err);
       //   });
       this.$refs.workOrderForm.vervify((form) => {
-        this.loading = true
-        form &&
-          getCreate({ ...this.parames, ...form }).then((res) => {
-            this.loading = false
+        if (!form) return;
+        this.loading = true;
+        getCreate({ ...this.parames, ...form })
+          .then((res) => {
+            this.loading = false;
             uni.$u.toast("创建工单成功");
             setTimeout(() => {
               uni.navigateTo({
                 url: "/pages/index/index",
               });
             }, 300);
-          }).catch(() => {
+          })
+          .catch(() => {
             uni.$u.toast("创建工单失败");
-            this.loading = false
+            this.loading = false;
           });
       });
     },

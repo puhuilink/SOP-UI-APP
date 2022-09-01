@@ -51,7 +51,7 @@ export default {
       rules: {
         val: [
           {
-            type: "string",
+            type: "array",
             required: false,
             message: "",
           },
@@ -137,9 +137,5 @@ export default {
 }
 .u-form {
   margin-left: 20rpx;
-}
-.u-checkbox-group--row {
-  flex-wrap: wrap;
-  flex-shrink: initial;
 }
 </style>
