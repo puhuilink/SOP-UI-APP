@@ -99,7 +99,7 @@
         />
       </view>
       <!-- 时间 -->
-      <view class="item" v-else-if="item.__config__.tag === 'el-time-picker'">
+      <view class="item" v-else-if="item.__config__.tag === 'el-date-picker'">
         <Datetime
           :ref="`form${index}`"
           :config="{
@@ -109,6 +109,7 @@
             placeholder: item.placeholder,
             options: item.options,
             format: item.format,
+            type: item.type
           }"
           v-model="form[item.formDataType]"
         />
@@ -164,7 +165,7 @@ export default {
   watch: {
     fields: {
       handler: function (val) {
-        // console.log(val);
+        console.log(val);
         this.form = val.reduce((obj, item) => {
           if (item.formDataType) {
             obj[item.formDataType] = item.__config__.defaultValue;

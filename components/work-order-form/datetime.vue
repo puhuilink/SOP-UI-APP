@@ -9,7 +9,7 @@
         <u--input
           inputAlign="right"
           border="none"
-          v-model="form.val"
+          :value="form.val"
           disabled
           disabledColor="#ffffff"
           placeholderClass="placeholderClass"
@@ -19,8 +19,8 @@
       </u-form-item>
       <u-datetime-picker
         :show="show"
-        v-model="form.val"
-        mode="time"
+        :value="form.val"
+        :mode="type"
         @cancel="show = false"
         @confirm="confirm"
       />
@@ -45,6 +45,9 @@ export default {
   },
   data() {
     return {
+      type: "date",
+      // isRange: false,
+      // format: "",
       form: {
         val: "",
       },
@@ -80,7 +83,18 @@ export default {
         if (val.options) {
           this.columns[0] = val.options;
         }
-        // console.log(val.format);
+        // if (val.format) {
+        //   this.format = val.format;
+        // }
+        if (val.type) {
+          if (val.type === "date") {
+            this.type = "date";
+          } else if (val.type === "datetime") {
+            this.type = "datetime";
+          } else if (val.type === "time") {
+            this.type = "time";
+          }
+        }
       },
       deep: true,
       immediate: true,
