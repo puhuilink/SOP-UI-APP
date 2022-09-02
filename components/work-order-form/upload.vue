@@ -6,17 +6,9 @@
     </view>
     <u--form :model="form" :rules="rules" ref="upload">
       <u-form-item prop="val">
-        <uni-file-picker
-          ref="upFile"
-          :disabled="config.disabled"
-          :value="form.val"
-          :file-mediatype="'config.accept' || all"
-          @delete="deletePic"
-          @select="select"
-          auto-upload
-          @fail="fail"
-          mode="grid"
-        >
+        <uni-file-picker ref="upFile" :disabled="config.disabled" :value="form.val"
+          :file-mediatype="'config.accept' || all" @delete="deletePic" @select="select" auto-upload @fail="fail"
+          mode="grid">
           <view class="upBox">
             <view class="btn">
               <img src="/static/images/icon/icon_download.png" />
@@ -48,7 +40,7 @@ export default {
       },
     },
   },
-  data() {
+  data () {
     return {
       form: {
         val: [],
@@ -81,17 +73,17 @@ export default {
       immediate: true,
     },
   },
-  created() {},
-  mounted() {},
+  created () { },
+  mounted () { },
   methods: {
     // 获取上传状态
-    select(e) {
+    select (e) {
       this.uploadFile(e.tempFiles, 0);
       let index = this.form.val.length > 0 ? this.form.val.length - 1 : 0;
       let long = this.$refs.upFile.files.length - this.form.val.length;
       this.$refs.upFile.files.splice(index, long);
     },
-    uploadFile(files, i) {
+    uploadFile (files, i) {
       if (!files[i]) return;
       let file = files[i];
       let { size, extname, name, url } = file;
@@ -121,14 +113,14 @@ export default {
           this.uploadFile(files, ++i);
         });
     },
-    deletePic(e) {
+    deletePic (e) {
       let index = this.form.val.findIndex((item) => {
         return (item.path = e.tempFilePath);
       });
       this.form.val.splice(index, 1);
       console.log(this.form.val);
     },
-    vervify(callBack) {
+    vervify (callBack) {
       this.$refs.upload
         .validate()
         .then((res) => {
@@ -152,9 +144,11 @@ export default {
   color: #333333;
   display: flex;
 }
+
 .label {
   line-height: 90rpx;
 }
+
 .colorRed {
   min-width: 15rpx;
   font-size: 25rpx;
@@ -162,15 +156,19 @@ export default {
   color: #e40a0a;
   margin-right: 5rpx;
 }
+
 .u-icon {
   margin-left: 20rpx;
 }
+
 .u-form {
   flex: 1;
 }
+
 .upBox {
   line-height: 63rpx;
   display: flex;
+
   .btn {
     width: 246rpx;
     height: 63rpx;
@@ -185,6 +183,7 @@ export default {
     font-weight: 400;
     color: #227fe6;
     margin-right: 17rpx;
+
     img {
       width: 25rpx;
       height: 25rpx;
@@ -192,6 +191,7 @@ export default {
       margin-right: 13rpx;
     }
   }
+
   .fileSize {
     font-size: 25rpx;
     font-family: PingFangSC-Regular, PingFang SC;
