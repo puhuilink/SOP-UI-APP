@@ -3,9 +3,15 @@
     <Navbar :title="langText.pageTitle" />
     <u-toast ref="uToast"></u-toast>
     <view class="box-card">
-      <view>工单信息</view>
-      <view class="form-box">
-        <active-form ref="activeForm" v-model="fields" :readonly="true" />
+      <view class="title1">工单信息</view>
+      <view v-for="(item, i) in fields" :key="`fields${i}`" class="item">
+        <view :class="item.__config__.tag === 'el-upload' ? 'title2' : 'title3'">{{ item.__config__.label ?  `${item.__config__.label}：` :"" }}</view>
+        <!-- 上传样式 -->
+        <view v-if="item.__config__.tag === 'el-upload'" class="upload">S20220531119操作问题界面1.</view>
+        <view v-if="item.__config__.tag === 'el-upload'" class="upload">S20220531119操作问题界面1.</view>
+        <view v-if="item.__config__.tag === 'el-upload'" class="upload">S20220531119操作问题界面1.</view>
+        <view v-if="item.__config__.tag === 'el-upload'" class="upload">S20220531119操作问题界面1.</view>
+        <view v-else class="textCentent">{{ item.__config__.defaultValue }}</view>
       </view>
     </view>
     <view class="box-card">
@@ -73,10 +79,9 @@ import { getFrom } from "@/api/index.js";
 import { getApprove, getBack, getReject, getInstanceId } from "@/api/approval.js";
 import { uploadFile } from "@/api/file.js"
 import Navbar from "@/components/navbar/navbar";
-import ActiveForm from "@/components/active-form/active-form";
 export default {
   name: "Order",
-  components: { Navbar, ActiveForm },
+  components: { Navbar },
   data () {
     return {
       langText: {
@@ -253,6 +258,62 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.box-card {
+  padding: 30rpx;
+  box-sizing: border-box;
+  font-family: PingFangSC-Regular, PingFang SC;
+  .title1 {
+    font-size: 31rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: #272727;
+    line-height: 31rpx;
+    margin-bottom: 23rpx;
+  }
+  .title2,
+  .title3,
+  .textCentent {
+    font-size: 29rpx;
+    font-weight: 400;
+    color: #333333;
+    line-height: 29rpx;
+  }
+  .title3 {
+    color: #999999;
+  }
+  .item {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 23rpx 0;
+    align-items: center;
+    .title2 {
+      margin-right: 15rpx;
+      white-space: nowrap;
+    }
+    .textCentent {
+      min-width: 400rpx;
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .upload {
+      width: 100%;
+      padding: 10rpx 0;font-size: 25rpx;
+      font-weight: 400;
+      color: #007EFD;
+      line-height: 35rpx;
+    }
+    .upload:nth-child(2) {
+      margin-top: 23rpx;
+    }
+    .upload:last-child {
+      padding-bottom: 0;
+    }
+  }
+  .item:last-child {
+    padding-bottom: 0;
+  }
+}
 .subform {
   width: 719rpx;
 }
