@@ -58,17 +58,12 @@
         </view>
       </view>
     </u-overlay>
-    <u-row justify="space-between" gutter="10" v-if="this.$route.query.index == 0">
-      <u-col span="4">
-        <u-button type="primary" shape="circle" text="取消签收" @click="showCancel = true"></u-button>
-      </u-col>
-      <u-col span="4">
-        <u-button type="warning" shape="circle" @click="notsub" text="不通过"></u-button>
-      </u-col>
-      <u-col span="4">
-        <u-button type="primary" shape="circle" @click="sub" text="通过"></u-button>
-      </u-col>
-    </u-row>
+    <view class="btns" v-if="this.$route.query.index == 0">
+      <view class="btn" @click="showCancel = true">取消签收</view>
+      <view class="btn" @click="notsub">不通过</view>
+      <view class="btn" @click="sub">通过</view>
+    </view>
+    <u-gap height="20rpx" />
   </view>
 </template>
 
@@ -373,6 +368,32 @@ export default {
         color: #ffffff;
       }
     }
+  }
+}
+.btns {
+  width: 719rpx;
+  margin: 21rpx auto 0 !important;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  .btn {
+    line-height: 83rpx;
+    border-radius: 8rpx;
+    font-size: 33rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #FFFFFF;
+    text-align: center;
+    width: 229rpx;
+  }
+  .btn:nth-child(1) {
+    background: #007EFD;
+  }
+  .btn:nth-child(2) {
+    background: #FD7700;
+  }
+  .btn:nth-child(3) {
+    background: #007EFD;
   }
 }
 </style>
