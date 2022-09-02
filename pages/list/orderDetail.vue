@@ -100,6 +100,7 @@ export default {
         reason: ''
       },
       file: {},
+      formData: {},
       dataForm: {},
       rules: {
       }
