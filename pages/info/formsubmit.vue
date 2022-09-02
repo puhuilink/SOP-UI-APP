@@ -2,7 +2,6 @@
   <view class="content">
     <Navbar v-if="!pcFrom" :title="pageTitle" />
     <view class="form-box">
-      <!-- <active-form ref="activeForm" v-model="fields" /> -->
       <work-order-form ref="workOrderForm" :fields="fields" />
     </view>
     <u-button
@@ -19,7 +18,6 @@
 
 <script>
 import Navbar from "@/components/navbar/navbar";
-// import ActiveForm from "@/components/active-form/active-form";
 import workOrderForm from "@/components/work-order-form/index";
 import { getFrom, getCreate } from "@/api/index.js";
 export default {
@@ -80,22 +78,6 @@ export default {
   methods: {
     // 提交表单
     sub() {
-      // this.$refs.activeForm
-      //   .$vervify()
-      //   .then(async (form) => {
-      //     //取消obj属性的所有下划线，没有下划线则跳过
-      //     getCreate({ ...this.parames, ...form }).then((res) => {
-      //       uni.$u.toast("创建工单成功");
-      //       setTimeout(() => {
-      //         uni.navigateTo({
-      //           url: "/pages/index/index",
-      //         });
-      //       }, 300);
-      //     });
-      //   })
-      //   .catch((err) => {
-      //     console.log("err", err);
-      //   });
       this.$refs.workOrderForm.vervify((form) => {
         if (!form) return;
         this.loading = true;
@@ -119,11 +101,7 @@ export default {
       getFrom({ id: this.$route.query.id || "" }).then((res) => {
         for (var i = 0; i < res.data.fields.length; i++) {
           let item = JSON.parse(res.data.fields[i]);
-          // 工单、记录时间、优先级是系统自动生成的所以不用展示
-          let notShow = ["workOrderId", "recordedTime", "priority"];
-          if (!notShow.includes(item.formDataType)) {
-            this.fields.push(item);
-          }
+          item.formDataType && this.fields.push(item);
         }
       });
     },
