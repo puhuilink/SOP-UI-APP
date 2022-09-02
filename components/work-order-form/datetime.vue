@@ -47,7 +47,6 @@ export default {
     return {
       type: "date",
       // isRange: false,
-      // format: "",
       form: {
         val: "",
       },
@@ -83,9 +82,6 @@ export default {
         if (val.options) {
           this.columns[0] = val.options;
         }
-        // if (val.format) {
-        //   this.format = val.format;
-        // }
         if (val.type) {
           if (val.type === "date") {
             this.type = "date";
@@ -103,8 +99,35 @@ export default {
   created() {},
   mounted() {},
   methods: {
+    format(usedDay, fmt) {
+      let usedDate = new Date(usedDay);
+      let o = {
+        "M+": usedDate.getMonth() + 1, //月份
+        "d+": usedDate.getDate(), //日
+        "H+": usedDate.getHours(), //小时
+        "m+": usedDate.getMinutes(), //分
+        "s+": usedDate.getSeconds(), //秒
+        "q+": Math.floor((usedDate.getMonth() + 3) / 3), //季度
+        S: usedDate.getMilliseconds(), //毫秒
+      };
+      if (/(y+)/.test(fmt))
+        fmt = fmt.replace(
+          RegExp.$1,
+          (usedDate.getFullYear() + "").substr(4 - RegExp.$1.length)
+        );
+      for (let k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length == 1
+              ? o[k]
+              : ("00" + o[k]).substr(("" + o[k]).length)
+          );
+      return fmt;
+    },
     confirm(e) {
-      this.form.val = e.value;
+      console.log(this.config.format)
+      this.form.val = this.format(e.value, this.config.format);
       this.show = false;
       this.$emit("input", this.form.val);
     },

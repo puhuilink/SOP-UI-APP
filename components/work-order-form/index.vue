@@ -165,7 +165,7 @@ export default {
   watch: {
     fields: {
       handler: function (val) {
-        console.log(val);
+        // console.log(val);
         this.form = val.reduce((obj, item) => {
           if (item.formDataType) {
             obj[item.formDataType] = item.__config__.defaultValue;

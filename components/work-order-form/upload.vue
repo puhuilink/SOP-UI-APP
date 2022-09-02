@@ -113,9 +113,9 @@ export default {
             extname,
             name,
           });
-          this.$refs.upFile.push(file)
           this.$emit("input", this.form.val);
           this.uploadFile(files, ++i);
+          this.$refs.upFile.push(file)
         })
         .catch(() => {
           this.uploadFile(files, ++i);

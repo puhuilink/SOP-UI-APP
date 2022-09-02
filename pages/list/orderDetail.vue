@@ -5,9 +5,7 @@
     <view class="box-card">
       <view class="title1">工单信息</view>
       <view v-for="(item, i) in fields" :key="`fields${i}`" class="item">
-        <view :class="item.__config__.tag === 'el-upload' ? 'title2' : 'title3'">{{ item.__config__.label ?
-            `${item.__config__.label}：` : ""
-        }}</view>
+        <view :class="item.__config__.tag === 'el-upload' ? 'title2' : 'title3'">{{ item.__config__.label ?  `${item.__config__.label}：` :"" }}</view>
         <!-- 上传样式 -->
         <view v-if="item.__config__.tag === 'el-upload'" class="upload">S20220531119操作问题界面1.</view>
         <view v-if="item.__config__.tag === 'el-upload'" class="upload">S20220531119操作问题界面1.</view>
@@ -216,17 +214,22 @@ export default {
               message: "不通过成功",
             });
             setTimeout(() => {
+              this.form = {
+                id: this.$route.query.id,
+                user: '',
+                value: '',
+                reason: ''
+              }
               this.loginOrJump('/pages/list/orderManage')
             }, 3000)
           });
         } else {
-          this.formData.reason = this.form.reason
-          this.formData.processInstanceId = res.data[0].processInstance.id
-          this.formData.currentDefinitionKey = res.data[0].definitionKey
-          this.formData.targetDefinitionKey = res.data[1].definitionKey
-          this.formData.taskId = res.data[0].id
-          this.formData.targetName = res.data[0].processInstance.name
-          getBack(this.formData).then((res) => {
+          this.form.processInstanceId = this.dataForm.processInstanceId
+          this.form.currentDefinitionKey = res.data[0].definitionKey
+          this.form.targetDefinitionKey = res.data[1].definitionKey
+          this.form.taskId = res.data[1].id
+          this.form.targetName = res.data[1].name
+          getBack(this.form).then((res) => {
             this.$refs.uToast.show({
               type: 'success',
               message: "不通过成功",
@@ -259,7 +262,6 @@ export default {
   padding: 30rpx;
   box-sizing: border-box;
   font-family: PingFangSC-Regular, PingFang SC;
-
   .title1 {
     font-size: 31rpx;
     font-family: PingFangSC-Medium, PingFang SC;
@@ -268,7 +270,6 @@ export default {
     line-height: 31rpx;
     margin-bottom: 23rpx;
   }
-
   .title2,
   .title3,
   .textCentent {
@@ -277,52 +278,42 @@ export default {
     color: #333333;
     line-height: 29rpx;
   }
-
   .title3 {
     color: #999999;
   }
-
   .item {
     display: flex;
     flex-wrap: wrap;
     padding: 23rpx 0;
     align-items: center;
-
     .title2 {
       margin-right: 15rpx;
       white-space: nowrap;
     }
-
     .textCentent {
       min-width: 400rpx;
       flex: 1;
       display: flex;
       justify-content: flex-end;
     }
-
     .upload {
       width: 100%;
-      padding: 10rpx 0;
-      font-size: 25rpx;
+      padding: 10rpx 0;font-size: 25rpx;
       font-weight: 400;
       color: #007EFD;
       line-height: 35rpx;
     }
-
     .upload:nth-child(2) {
       margin-top: 23rpx;
     }
-
     .upload:last-child {
       padding-bottom: 0;
     }
   }
-
   .item:last-child {
     padding-bottom: 0;
   }
 }
-
 .subform {
   width: 719rpx;
 }
