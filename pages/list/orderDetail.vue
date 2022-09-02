@@ -5,10 +5,10 @@
     <view class="box-card">
       <view class="title1">工单信息</view>
       <view v-for="(item, i) in fields" :key="`fields${i}`" class="item">
-        <view :class="item.__config__.tag === 'el-upload' ? 'title2' : 'title3'">{{ item.__config__.label ?  `${item.__config__.label}：` :"" }}</view>
+        <view :class="item.tag === 'el-upload' ? 'title2' : 'title3'">{{ item.label }}</view>
         <!-- 上传样式 -->
-        <template v-if="item.__config__.tag === 'el-upload'">
-          <view v-for="(file, x) in fields"  class="upload" :key="`upload${x}`">{{file.url}}</view>
+        <template v-if="item.tag === 'el-upload'">
+          <view v-for="(file, x) in item.value"  class="upload" :key="`upload${x}`">{{file.url}}</view>
         </template>
         <view v-else class="textCentent">{{ item.value }}</view>
       </view>
@@ -138,14 +138,14 @@ export default {
       getFrom({ id: order.formId }).then((res) => {
         if (!res.data || !res.data.fields) return
         res.data.fields.map(item => {
-          if (item.formDataType && order[item.formDataType]) {
-            this.fields.push({
-              label: item.__config__ && item.__config__.label ? `${item.__config__.label}：` :  "",
-              value: order[item.formDataType]
-            }) 
-          }
+          item = JSON.parse(item)
+          this.fields.push({
+            tag: item.__config__ && item.__config__.tag,
+            label: item.__config__ && item.__config__.label ? `${item.__config__.label}：` :  "",
+            value: order[item.formDataType]
+          })
         });
-        console.log(this.fields)
+        // console.log(this.fields)
       })
     },
     //删除图片
