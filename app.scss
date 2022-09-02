@@ -49,4 +49,25 @@ html, body {
   .u-form-item__body__right__message {
     margin: 0 !important;
   }
+
+  .uni-file-picker__lists {
+    border: none !important;
+    .uni-file-picker__lists-box {
+      border: none !important;
+    }
+    .uni-file-picker__item {
+      padding: 10rpx 0;
+      .files__name {
+        font-size: 25rpx;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #007EFD;
+        line-height: 35rpx;
+      }
+      .icon-del {
+        background-color: #007EFD;
+      }
+    }
+    
+  }
 }

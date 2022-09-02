@@ -87,14 +87,15 @@ export default {
     // 获取上传状态
     select(e) {
       this.uploadFile(e.tempFiles, 0);
+      let index = this.form.val.length > 0 ? this.form.val.length - 1 : 0;
+      let long = this.$refs.upFile.files.length - this.form.val.length;
+      this.$refs.upFile.files.splice(index, long);
     },
     uploadFile(files, i) {
       if (!files[i]) return;
       let file = files[i];
       let { size, extname, name, url } = file;
       if (size > 1024 * 1024) {
-        let index = this.form.val.length;
-        this.$refs.upFile.clearFiles(index);
         uni.$u.toast(`${name}文件超出${this.config.__config__.fileSize}mb`);
         setTimeout(() => {
           this.uploadFile(files, ++i);
@@ -112,8 +113,8 @@ export default {
             extname,
             name,
           });
-          // this.$emit("input", this.form.val);
-          console.log(this.form.val);
+          this.$refs.upFile.push(file)
+          this.$emit("input", this.form.val);
           this.uploadFile(files, ++i);
         })
         .catch(() => {
