@@ -233,7 +233,7 @@ export default {
           this.formData.targetDefinitionKey = res.data[1].definitionKey
           this.formData.taskId = res.data[0].id
           this.formData.targetName = res.data[0].processInstance.name
-          getBack(this.form).then((res) => {
+          getBack(this.formData).then((res) => {
             this.$refs.uToast.show({
               type: 'success',
               message: "不通过成功",
