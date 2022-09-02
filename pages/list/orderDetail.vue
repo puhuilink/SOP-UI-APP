@@ -5,13 +5,12 @@
     <view class="box-card">
       <view class="title1">工单信息</view>
       <view v-for="(item, i) in fields" :key="`fields${i}`" class="item">
-        <view :class="item.__config__.tag === 'el-upload' ? 'title2' : 'title3'">{{ item.__config__.label ?  `${item.__config__.label}：` :"" }}</view>
+        <view :class="item.__config__.tag === 'el-upload' ? 'title2' : 'title3'">{{ item.label || "" }}</view>
         <!-- 上传样式 -->
-        <view v-if="item.__config__.tag === 'el-upload'" class="upload">S20220531119操作问题界面1.</view>
-        <view v-if="item.__config__.tag === 'el-upload'" class="upload">S20220531119操作问题界面1.</view>
-        <view v-if="item.__config__.tag === 'el-upload'" class="upload">S20220531119操作问题界面1.</view>
-        <view v-if="item.__config__.tag === 'el-upload'" class="upload">S20220531119操作问题界面1.</view>
-        <view v-else class="textCentent">{{ item.__config__.defaultValue }}</view>
+        <template v-if="item.__config__.tag === 'el-upload'">
+          <view v-for="(file, x) in fields"  class="upload" :key="`upload${x}`">{{file.url}}</view>
+        </template>
+        <view v-else class="textCentent">{{ item.value }}</view>
       </view>
     </view>
     <view class="box-card">
@@ -134,26 +133,19 @@ export default {
 
       });
     },
-    getFormData (data) {
-      getFrom({ id: data.formId }).then((res) => {
-        for (var i = 0; i < res.data.fields.length; i++) {
-          let item = JSON.parse(res.data.fields[i]);
-          // 工单、记录时间、优先级是系统自动生成的所以不用展示
-          let notShow = ["workOrderId", "recordedTime", "priority"];
-          if (!notShow.includes(item.formDataType)) {
-            this.fields.push(item);
-            this.filter()
+    getFormData (order) {
+      getFrom({ id: order.formId }).then((res) => {
+        if (!res.data || !res.data.fields) return
+        res.data.fields.map(item => {
+          if (item.formDataType && order[item.formDataType]) {
+            this.fields.push({
+              label: item.__config__ && item.__config__.label ? `${item.__config__.label}：` :  "",
+              value: order[item.formDataType]
+            }) 
           }
-        }
+        });
+        console.log(this.fields)
       })
-    },
-    filter () {
-      this.fields.reduce((obj, item) => {
-        console.log();
-        item.formDataType &&
-          (item.__config__.defaultValue = this.dataForm.soWorkOrderDO[item.formDataType]);
-        return obj;
-      }, {});
     },
     //删除图片
     deletePic (event) {
