@@ -114,18 +114,13 @@
         />
       </view>
       <!-- 上传 -->
-      <!-- <view class="item" v-else-if="item.__config__.tag === 'el-upload'">
+      <view class="item" v-else-if="item.__config__.tag === 'el-upload'">
         <Upload
           :ref="`form${index}`"
-          :config="{
-            label: item.__config__.label,
-            required: item.__config__.required,
-            disabled: item.disabled,
-            item
-          }"
+          :config="item"
           v-model="form[item.formDataType]"
         />
-      </view> -->
+      </view>
     </block>
   </view>
 </template>
