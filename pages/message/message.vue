@@ -152,7 +152,7 @@ export default {
             url:`/pages/message/messagedetail?id=${item.id}`,
           });
             getUpdate(this.userInformationVo).then((res) => {
-              console.log(res);
+            this.getlist();
       });
       } 
     },
