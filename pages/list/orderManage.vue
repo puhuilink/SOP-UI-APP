@@ -183,14 +183,14 @@ export default {
             message: "签收成功",
           });
           setTimeout(() => {
-            this.loginOrJump(`/pages/list/orderDetail?id=${item.id}`);
+            this.loginOrJump(`/pages/list/orderDetail?id=${item.id}&index=${this.msgState.index}`);
           }, 2000);
         }
       });
     },
     godetail (item) {
       if (item.claimTime !== null) {
-        this.loginOrJump(`/pages/list/orderDetail?id=${item.id}`);
+        this.loginOrJump(`/pages/list/orderDetail?id=${item.id}&index=${this.msgState.index}`);
       } else {
         this.$refs.uToast.show({
           type: "warning",

@@ -16,7 +16,7 @@
         <view v-else class="textCentent">{{ item.__config__.defaultValue }}</view>
       </view>
     </view>
-    <view class="box-card">
+    <view class="box-card" v-if="this.$route.query.index == 0">
       <u--form labelPosition="left" :model="form" :rules="rules" ref="form1">
         <!-- <u-form-item
 					label="工单编号："
@@ -61,7 +61,7 @@
         </view>
       </view>
     </u-overlay>
-    <u-row justify="space-between" gutter="10">
+    <u-row justify="space-between" gutter="10" v-if="this.$route.query.index == 0">
       <u-col span="4">
         <u-button type="primary" shape="circle" text="取消签收" @click="showCancel = true"></u-button>
       </u-col>
