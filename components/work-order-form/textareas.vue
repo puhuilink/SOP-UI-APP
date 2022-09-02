@@ -134,6 +134,7 @@ export default {
   margin-right: 20rpx;
 }
 .colorRed {
+  min-width: 15rpx;
   font-size: 25rpx;
   font-weight: 400;
   color: #e40a0a;
