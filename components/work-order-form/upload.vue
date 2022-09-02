@@ -6,9 +6,16 @@
     </view>
     <u--form :model="form" :rules="rules" ref="upload">
       <u-form-item prop="val">
-        <uni-file-picker ref="upFile" :disabled="config.disabled" :value="form.val"
-          :file-mediatype="'config.accept' || all" @delete="deletePic" @select="select" auto-upload @fail="fail"
-          mode="grid">
+        <uni-file-picker
+          ref="upFile"
+          :disabled="config.disabled"
+          :value="form.val"
+          :file-mediatype="'config.accept' || all"
+          @delete="deletePic"
+          @select="select"
+          auto-upload
+          @fail="fail"
+        >
           <view class="upBox">
             <view class="btn">
               <img src="/static/images/icon/icon_download.png" />
@@ -40,7 +47,7 @@ export default {
       },
     },
   },
-  data () {
+  data() {
     return {
       form: {
         val: [],
@@ -73,17 +80,17 @@ export default {
       immediate: true,
     },
   },
-  created () { },
-  mounted () { },
+  created() {},
+  mounted() {},
   methods: {
     // 获取上传状态
-    select (e) {
+    select(e) {
       this.uploadFile(e.tempFiles, 0);
       let index = this.form.val.length > 0 ? this.form.val.length - 1 : 0;
       let long = this.$refs.upFile.files.length - this.form.val.length;
       this.$refs.upFile.files.splice(index, long);
     },
-    uploadFile (files, i) {
+    uploadFile(files, i) {
       if (!files[i]) return;
       let file = files[i];
       let { size, extname, name, url } = file;
@@ -107,20 +114,20 @@ export default {
           });
           this.$emit("input", this.form.val);
           this.uploadFile(files, ++i);
-          this.$refs.upFile.push(file)
+          this.$refs.upFile.push(file);
         })
         .catch(() => {
           this.uploadFile(files, ++i);
         });
     },
-    deletePic (e) {
+    deletePic(e) {
       let index = this.form.val.findIndex((item) => {
         return (item.path = e.tempFilePath);
       });
       this.form.val.splice(index, 1);
       console.log(this.form.val);
     },
-    vervify (callBack) {
+    vervify(callBack) {
       this.$refs.upload
         .validate()
         .then((res) => {
