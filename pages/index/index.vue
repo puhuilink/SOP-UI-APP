@@ -63,17 +63,34 @@
     <u-gap height="20rpx" />
     <!-- 自助工单 -->
     <view class="modular-box work-order">
-      <view class="title">{{ langText.customOrder }}</view>
-      <u-grid :border="false" col="4" @click="click">
-        <u-grid-item
+      <view class="title">
+        {{ langText.customOrder }}
+        <view class="order-array">
+          <u-icon
+            name="grid"
+            :color="orderarray === 'grid' ? '#007EFD' : '#999999'"
+            size="40rpx"
+            @click="orderarray = 'grid'"
+          />
+          <u-icon
+            name="list-dot"
+            :color="orderarray === 'list' ? '#007EFD' : '#999999'"
+            size="40rpx"
+            @click="orderarray = 'list'"
+          />
+        </view>
+      </view>
+      <view :class="orderarray === 'grid' ? 'order-grid' : 'order-list'">
+        <view
           v-for="(item, index) in menuList"
           :key="index"
           class="order-item"
+          @click="toOrder(index)"
         >
           <u-image :src="item.icon" width="96rpx" height="96rpx" />
-          <text class="grid-title">{{ item.title }}</text>
-        </u-grid-item>
-      </u-grid>
+          <view class="order-title">{{ item.title }}</view>
+        </view>
+      </view>
     </view>
     <u-gap height="20rpx" />
     <!-- 报表 -->
@@ -210,6 +227,7 @@ export default {
       // 是否重连中
       reconnect: false,
       isInit: false,
+      orderarray: "grid",
     };
   },
   onLoad() {
@@ -328,9 +346,10 @@ export default {
         });
       }
     },
-    click(name) {
-      let dirId = this.menuList[name].id || "";
-      let prefix = this.menuList[name].prefix || "";
+    toOrder(index) {
+      console.log(index)
+      let dirId = this.menuList[index].id || "";
+      let prefix = this.menuList[index].prefix || "";
       getByDir({ dirId }).then((res) => {
         let { code, data = {} } = res;
         let item = (data && data.list && data.list[0] && data.list[0]) || {};
@@ -436,26 +455,56 @@ export default {
     font-weight: 600;
     color: #333333;
     line-height: 44rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 
 .work-order {
-  .u-grid {
-    align-items: flex-start;
+  .order-array {
+    display: flex;
+    .u-icon:last-child {
+      margin-left: 20rpx;
+    }
   }
-
-  .order-item {
-    padding-top: 38rpx;
-
-    .grid-title {
-      margin-top: 10rpx;
-      font-size: 25rpx;
-      font-family: PingFangSC-Regular, PingFang SC;
-      font-weight: 400;
-      color: #737578;
-      line-height: 35rpx;
-      width: 100rpx;
-      text-align: center;
+  .order-grid {
+    display: flex;
+    flex-wrap: wrap;
+    .order-item {
+      padding-top: 38rpx;
+      width: 25%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .order-title {
+        margin-top: 10rpx;
+        font-size: 25rpx;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #737578;
+        line-height: 35rpx;
+        width: 100rpx;
+        text-align: center;
+      }
+    }
+  }
+  .order-list {
+    margin-top: 18rpx;
+    .order-item {
+      padding: 20rpx 36rpx;
+      display: flex;
+      align-items: center;
+      .order-title {
+        flex: 1;
+        margin-left: 30rpx;
+        font-size: 30rpx;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #737578;
+        line-height: 40rpx;
+        width: 100rpx;
+      }
     }
   }
 }
